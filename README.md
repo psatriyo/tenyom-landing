@@ -5,7 +5,7 @@ It implements the Phase 0 goal from the *2027 Project Plan v2.0*: collect foundi
 
 - Static HTML, CSS and JavaScript. No framework and no build step.
 - Interface in Bahasa Indonesia (plan decision D-17), mobile-first, tested at 390 px and 1440 px.
-- The JavaScript is about 9 KB and has no dependencies. The only external request is the Google Font, Plus Jakarta Sans.
+- The JavaScript is about 10 KB and has no dependencies. The only external request is the Google Font, Plus Jakarta Sans.
 
 ## What's on the page
 
