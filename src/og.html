@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "PJS"; src: url("{{ fontUrl }}") format("woff2"); font-weight: 200 800; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; font-family: "PJS", sans-serif; color: #fff;
+    background: radial-gradient(900px 500px at 85% -10%, #1d3466 0%, transparent 60%), radial-gradient(500px 400px at -5% 110%, rgba(31,168,101,.3), transparent 70%), #0f1a33; }
+  .copy { position: absolute; left: 72px; top: 0; bottom: 0; width: 560px; display: flex; flex-direction: column; justify-content: center; }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 30px; letter-spacing: -.02em; }
+  .brand svg { width: 40px; height: 40px; }
+  h1 { margin-top: 30px; font-size: 72px; line-height: 1.02; letter-spacing: -.045em; font-weight: 800; }
+  h1 span { color: #f5a524; }
+  p { margin-top: 24px; font-size: 24px; line-height: 1.45; color: #c3cde3; max-width: 500px; }
+  .url { margin-top: 30px; display: inline-flex; align-self: flex-start; padding: 12px 22px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); font-size: 22px; font-weight: 600; color: #dbe2f0; }
+  .url b { color: #f5a524; }
+  .phone { position: absolute; right: 92px; top: 70px; width: 330px; height: 660px; padding: 13px; border-radius: 50px; background: linear-gradient(160deg, #2b3d68, #111c36); box-shadow: 0 40px 80px -20px rgba(0,0,0,.6), inset 0 0 0 2px rgba(255,255,255,.08); }
+  .screen { height: 100%; border-radius: 38px; overflow: hidden; background: #f6f7fb; color: #14203a; }
+  .cover { height: 92px; background: linear-gradient(120deg, #f6c35b, #f26b3a 60%, #c94a7a); }
+  .head { text-align: center; margin-top: -32px; }
+  .av { width: 62px; height: 62px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center; background: #f26b3a; color: #fff; font-weight: 800; font-size: 26px; border: 3px solid #f6f7fb; }
+  .name { margin-top: 6px; font-weight: 800; font-size: 19px; }
+  .sub { font-size: 13px; color: #4a5672; }
+  .soc { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+  .soc i { width: 30px; height: 30px; border-radius: 50%; background: #14203a; }
+  .items { display: grid; gap: 8px; padding: 14px 14px 0; }
+  .it { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 14px; background: #fff; box-shadow: 0 0 0 1px #edf0f6; }
+  .th { width: 42px; height: 42px; border-radius: 10px; flex: none; }
+  .it b { display: block; font-size: 14px; }
+  .it small { font-size: 12px; color: #4a5672; }
+  .g1 { background: linear-gradient(135deg, #f8c64b, #f0a019); } .g2 { background: linear-gradient(135deg, #4bcf96, #1f9f63); } .g3 { background: linear-gradient(135deg, #f59ab8, #d95a87); }
+  .lab { margin: 14px 16px 6px; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #4a5672; }
+  .lk { margin: 0 14px 8px; display: flex; align-items: center; gap: 10px; padding: 9px; border-radius: 14px; background: #fff; box-shadow: 0 0 0 1px #edf0f6; font-size: 14px; font-weight: 700; }
+  .lk i { width: 30px; height: 30px; border-radius: 8px; }
+  .order { position: absolute; left: 598px; top: 372px; width: 226px; padding: 16px 18px; border-radius: 18px; background: #fff; color: #14203a; box-shadow: 0 30px 60px -20px rgba(5,12,30,.6); font-size: 15px; line-height: 1.5; }
+  .order .top { display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
+  .chip { padding: 2px 10px; border-radius: 999px; background: #fff1e9; color: #c2441d; font-size: 12px; font-weight: 700; }
+  .order ul { list-style: none; margin-top: 6px; color: #4a5672; }
+  .tot { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #e6e1d8; color: #4a5672; }
+  .tot b { color: #178a52; font-size: 18px; }
+</style>
+</head>
+<body>
+  <div class="copy">
+    <div class="brand">
+      <svg viewBox="0 0 32 32"><path d="M6 3h20a4 4 0 0 1 4 4v13.5a4 4 0 0 1-4 4H13.5L7 30v-5.5H6a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z" fill="#F26B3A"/><path d="M7.5 9.6c2.8-1 5.6-.6 8 1.1v9.1c-2.4-1.6-5.2-2-8-1.1zM24.5 9.6c-2.8-1-5.6-.6-8 1.1v9.1c2.4-1.6 5.2-2 8-1.1z" fill="#fff"/></svg>
+      {{ brand }}
+    </div>
+    <h1>Halaman bisnismu, <span>cukup satu link.</span></h1>
+    <p>Katalog, link dan pesanan WhatsApp dalam satu halaman. Gratis, siap dalam 15 menit dari HP.</p>
+    <div class="url">{{ domain }}/<b>kueburina</b></div>
+  </div>
+  <div class="phone"><div class="screen">
+    <div class="cover"></div>
+    <div class="head"><div class="av">R</div><div class="name">Kue Bu Rina</div><div class="sub">Hampers &amp; kue kering · Bekasi</div>
+      <div class="soc"><i></i><i></i><i></i></div></div>
+    <div class="items">
+      <div class="it"><span class="th g1"></span><span><b>Nastar premium</b><small>Rp95.000 · 500 g</small></span></div>
+      <div class="it"><span class="th g2"></span><span><b>Hampers Lebaran A</b><small>Rp250.000 · 4 toples</small></span></div>
+      <div class="it"><span class="th g3"></span><span><b>Hampers custom</b><small style="color:#c2441d;font-weight:700">Tanya harga</small></span></div>
+    </div>
+    <div class="lab">Belanja juga di</div>
+    <div class="lk"><i style="background:#1aa260"></i>Pesan lewat GoFood</div>
+    <div class="lk"><i style="background:#f05a28"></i>Belanja di Shopee</div>
+  </div></div>
+  <div class="order">
+    <div class="top">Pesanan #12 <span class="chip">Baru</span></div>
+    <ul><li>2× Nastar premium</li><li>1× Hampers Lebaran A</li></ul>
+    <div class="tot">Total <b>Rp440.000</b></div>
+  </div>
+</body>
+</html>

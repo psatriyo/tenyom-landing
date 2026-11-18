@@ -1,0 +1,95 @@
+<section class="section founding" id="daftar">
+  <div class="wrap founding__grid">
+    <div class="founding__copy reveal">
+      {{#if founding.enabled}}
+      <div class="if-founding">
+        <p class="eyebrow">Founding member</p>
+        <h2 class="h2">Ganti link bio kamu sebelum Ramadan.</h2>
+        <p class="lede">Isi form singkat ini. Kami hubungi kamu lewat WhatsApp untuk ngobrol 15 menit tentang tokomu. Deposit {{ founding.priceText }} dibayar hanya kalau kamu sudah yakin, dan tidak ada pembayaran di halaman ini.</p>
+
+        <div class="countdown" data-countdown="{{ founding.deadline }}">
+          <p class="countdown__label">Pendaftaran founding member ditutup dalam</p>
+          <div class="countdown__grid" aria-hidden="true">
+            <div><b data-d>--</b><span>hari</span></div>
+            <div><b data-h>--</b><span>jam</span></div>
+            <div><b data-m>--</b><span>menit</span></div>
+            <div><b data-s>--</b><span>detik</span></div>
+          </div>
+          <p class="sr-only">Batas pendaftaran: {{ founding.deadlineText }}, pukul 23.59 WIB.</p>
+        </div>
+
+        <ol class="timeline" role="list">
+          <li><b>Sampai {{ founding.deadlineText }}</b><span>Pendaftaran founding member</span></li>
+          <li><b>{{ dates.conciergeWindow }}</b><span>Halamanmu kami buatkan dan tayangkan, sebelum puncak Ramadan</span></li>
+          <li><b>{{ dates.betaOpensText }}</b><span>Beta dibuka untuk umum</span></li>
+          <li class="is-goal"><b>{{ dates.lebaran }}</b><span>Pesanan Lebaran rapi, tidak ada yang terlewat</span></li>
+        </ol>
+      </div>
+      {{/if}}
+      <div class="if-no-founding">
+        <p class="eyebrow">Antrean beta</p>
+        <h2 class="h2">Jadi yang pertama mencoba saat beta dibuka.</h2>
+        <p class="lede">Beta dibuka {{ dates.betaOpensText }}. Isi form singkat ini dan kami kabari lewat WhatsApp begitu kamu bisa mulai membuat halamanmu.</p>
+        <ul class="checks" role="list">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Gratis untuk mulai, tanpa kartu kredit</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Kami bantu pasang link di bio Instagram dan TikTok</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Masukanmu ikut membentuk produk</li>
+        </ul>
+      </div>
+    </div>
+
+    <form class="form reveal" data-form novalidate>
+      <h3 class="form__title">{{#if founding.enabled}}<span class="if-founding">Daftar founding member</span>{{/if}}<span class="if-no-founding">Daftar antrean beta</span></h3>
+      <p class="form__sub">Gratis untuk mendaftar. Tidak ada pembayaran di halaman ini.</p>
+
+      <label class="field">
+        <span>Nama kamu</span>
+        <input name="nama" type="text" autocomplete="name" placeholder="cth. Rina" required>
+      </label>
+      <label class="field">
+        <span>Nama usaha</span>
+        <input name="usaha" type="text" autocomplete="organization" placeholder="cth. Kue Bu Rina" required>
+      </label>
+      <div class="field-row">
+        <label class="field">
+          <span>Jualan apa?</span>
+          <select name="jenis" required>
+            <option value="" selected disabled>Pilih</option>
+            <option>Kue kering &amp; hampers</option>
+            <option>Makanan rumahan</option>
+            <option>Fashion &amp; thrift</option>
+            <option>Handmade &amp; kerajinan</option>
+            <option>Lainnya</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Kota</span>
+          <input name="kota" type="text" autocomplete="address-level2" placeholder="cth. Bekasi" required>
+        </label>
+      </div>
+      <label class="field">
+        <span>Link di bio kamu sekarang <small>(opsional)</small></span>
+        <input name="bio" type="text" inputmode="url" autocomplete="off" placeholder="cth. link Shopee, atau belum ada">
+      </label>
+      <label class="field">
+        <span>Tahu {{ brand }} dari mana? <small>(opsional)</small></span>
+        <select name="sumber">
+          <option value="" selected>Pilih</option>
+          <option>Teman atau keluarga</option>
+          <option>Instagram</option>
+          <option>TikTok</option>
+          <option>Grup atau komunitas penjual</option>
+          <option>Lihat halaman toko lain</option>
+          <option>Lainnya</option>
+        </select>
+      </label>
+
+      <button class="btn btn--wa btn--block btn--lg" type="submit">
+        <svg aria-hidden="true"><use href="#i-wa"/></svg>
+        Kirim via WhatsApp
+      </button>
+      <p class="form__error" data-form-error role="alert" hidden>Mohon lengkapi nama, nama usaha, jenis usaha dan kota.</p>
+      <p class="form__fine">Tombol ini membuka WhatsApp dengan pesan yang sudah terisi, persis seperti cara pembeli memesan di {{ brand }}. Isi form tidak dikirim ke server kami. Lihat <a href="{{ base }}privacy/">kebijakan privasi</a>.</p>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,104 @@
+---
+{
+  "title": "Bantuan · {{ brand }}",
+  "description": "Panduan {{ brand }}: cara pasang link di bio Instagram dan TikTok, bagikan ke status WhatsApp, cetak QR, dan jawaban pertanyaan yang sering muncul."
+}
+---
+    <section class="page-hero">
+      <div class="wrap"><div class="page-hero__inner">
+        <p class="eyebrow eyebrow--gold">Bantuan</p>
+        <h1 class="page-hero__title">Ada yang bisa kami bantu, kak?</h1>
+        <p class="page-hero__lede">Panduan singkat untuk memasang dan memakai halaman {{ brand }}. Tidak ketemu jawabannya? Chat kami, kami balas {{ support.responseTime }}.</p>
+        <div class="page-hero__cta">
+          {{#if support.hasWhatsapp}}
+          <a class="btn btn--wa btn--lg" href="{{ support.waLink }}" data-wa-support><svg aria-hidden="true"><use href="#i-wa"/></svg>Chat WhatsApp kami</a>
+          {{/if}}
+          {{#if support.hasEmail}}
+          <a class="btn btn--ghost btn--lg" href="mailto:{{ support.email }}">{{ support.email }}</a>
+          {{/if}}
+        </div>
+        {{#unless hasSignup}}
+        <p class="notice notice--dark"><b>{{ brand }} sedang disiapkan.</b> Beta dibuka {{ dates.betaOpensText }}. Panduan ini menjelaskan cara kerjanya saat halamanmu sudah aktif.</p>
+        {{/unless}}
+      </div></div>
+    </section>
+
+    <section class="section section--tight-top">
+      <div class="wrap help">
+        <nav class="help__toc" aria-label="Daftar isi">
+          <p class="help__toc-title">Isi halaman ini</p>
+          <ol role="list">
+            <li><a href="#bio-instagram">Pasang link di bio Instagram</a></li>
+            <li><a href="#bio-tiktok">Pasang link di bio TikTok</a></li>
+            <li><a href="#status-whatsapp">Bagikan ke status WhatsApp</a></li>
+            <li><a href="#qr">Cetak QR code</a></li>
+            <li><a href="#tanya-harga">Produk tanpa harga tetap</a></li>
+            <li><a href="#ditinjau">Kenapa halamanku belum tayang?</a></li>
+            <li><a href="#ganti-link">Mengganti link toko</a></li>
+            <li><a href="#laporkan">Melaporkan halaman mencurigakan</a></li>
+            <li><a href="#data">Ekspor dan hapus data</a></li>
+          </ol>
+        </nav>
+
+        <div class="help__body">
+          <article class="guide" id="bio-instagram">
+            <h2>Pasang link di bio Instagram</h2>
+            <ol class="guide__steps">
+              <li>Salin link halamanmu, misalnya <code>{{ exampleUrl }}</code>.</li>
+              <li>Buka aplikasi Instagram, masuk ke profilmu, lalu tap <b>Edit profil</b>.</li>
+              <li>Tap <b>Tautan</b>, lalu <b>Tambahkan tautan eksternal</b>.</li>
+              <li>Tempel link-mu di kolom URL. Isi judul, misalnya “Katalog &amp; pesan”.</li>
+              <li>Tap <b>Selesai</b> atau tanda centang. Link langsung muncul di bio.</li>
+            </ol>
+            <p class="guide__tip"><b>Tips:</b> taruh link {{ brand }} di urutan pertama, lalu tulis ajakan di bio seperti “Pricelist &amp; order 👇”. Langkah di aplikasi bisa sedikit berbeda tergantung versinya.</p>
+          </article>
+
+          <article class="guide" id="bio-tiktok">
+            <h2>Pasang link di bio TikTok</h2>
+            <ol class="guide__steps">
+              <li>Salin link halamanmu.</li>
+              <li>Buka TikTok, masuk ke profil, lalu tap <b>Edit profil</b>.</li>
+              <li>Tap kolom <b>Situs web</b>, tempel link-mu, lalu simpan.</li>
+            </ol>
+            <p class="guide__tip"><b>Kolom Situs web tidak muncul?</b> TikTok tidak menampilkan kolom ini untuk semua akun. Sementara itu, tulis link-mu di bio sebagai teks, dan bagikan lewat status WhatsApp dan QR.</p>
+          </article>
+
+          <article class="guide" id="status-whatsapp">
+            <h2>Bagikan ke status WhatsApp</h2>
+            <p>Dari dashboard, tap tombol bagikan, lalu pilih WhatsApp. Atau salin link-mu dan tempel di status. Pratinjau halaman (foto, nama toko dan deskripsi) muncul otomatis, jadi pembeli tahu apa yang mereka buka.</p>
+            <p class="guide__tip"><b>Tips:</b> simpan link-mu juga sebagai <i>pesan cepat</i> di WhatsApp Business, supaya bisa dikirim saat ada yang tanya “pricelist dong kak”.</p>
+          </article>
+
+          <article class="guide" id="qr">
+            <h2>Cetak QR code</h2>
+            <p>Unduh QR halamanmu dari dashboard dalam format gambar yang siap cetak. Tempel di kemasan, stiker hampers, banner lapak, meja bazar atau kartu nama. Pembeli cukup memindai dengan kamera HP.</p>
+          </article>
+
+          <article class="guide" id="tanya-harga">
+            <h2>Produk tanpa harga tetap</h2>
+            <p>Untuk pesanan custom, kosongkan kolom harga. Produk akan tampil dengan tulisan <b>“Tanya harga”</b>, dan pembeli bisa langsung tanya lewat tombol <b>Tanya via WhatsApp</b>, lengkap dengan nama produknya.</p>
+          </article>
+
+          <article class="guide" id="ditinjau">
+            <h2>Kenapa halamanku belum tayang?</h2>
+            <p>Selama beta, setiap halaman baru ditinjau dulu sebelum tayang. Ini menjaga {{ domain }} bebas dari halaman judi dan penipuan, sehingga link-mu tetap dipercaya pembeli. Kamu bisa melihat status peninjauannya di dashboard.</p>
+            <p>Link baru ke situs yang belum kami kenal juga bisa menunggu peninjauan sebentar. Bagian lain halamanmu tetap tayang seperti biasa.</p>
+          </article>
+
+          <article class="guide" id="ganti-link">
+            <h2>Mengganti link toko</h2>
+            <p>Link toko (misalnya <code>{{ domain }}/kueburina</code>) bisa diganti hingga 2 kali dalam 30 hari. Link lama otomatis diarahkan ke link baru, jadi QR yang sudah tercetak tetap berfungsi.</p>
+          </article>
+
+          <article class="guide" id="laporkan">
+            <h2>Melaporkan halaman mencurigakan</h2>
+            <p>Setiap halaman {{ brand }} punya tombol <b>Laporkan</b> di bagian bawah. Pilih alasannya (judi, penipuan atau lainnya). Halaman yang melanggar akan kami tangguhkan.</p>
+          </article>
+
+          <article class="guide" id="data">
+            <h2>Ekspor dan hapus data</h2>
+            <p>Kamu bisa meminta salinan data atau penghapusan akun kapan saja dengan menghubungi kami{{#if support.hasWhatsapp}} lewat <a href="{{ support.waLink }}" data-wa-support>WhatsApp</a>{{/if}}{{#if support.hasEmail}} atau email <a href="mailto:{{ support.email }}">{{ support.email }}</a>{{/if}}. Ekspor dan hapus akun langsung dari dashboard <em class="soon">Segera hadir</em>. Detailnya ada di <a href="{{ base }}privacy/">kebijakan privasi</a>.</p>
+          </article>
+        </div>
+      </div>
+    </section>

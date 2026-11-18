@@ -1,0 +1,58 @@
+---
+{
+  "title": "Kebijakan Privasi · {{ brand }}",
+  "description": "Ringkasan kebijakan privasi {{ brand }}: data yang kami kumpulkan, statistik tanpa pelacakan, lokasi penyimpanan, lama penyimpanan dan hakmu."
+}
+---
+    <section class="page-hero page-hero--compact">
+      <div class="wrap"><div class="page-hero__inner">
+        <p class="eyebrow eyebrow--gold">Legal</p>
+        <h1 class="page-hero__title">Kebijakan Privasi</h1>
+        <p class="page-hero__lede">Terakhir diperbarui {{ legalUpdatedText }}.</p>
+      </div></div>
+    </section>
+
+    <section class="section section--tight-top">
+      <div class="wrap"><div class="prose">
+        <p class="notice"><b>Ringkasan sementara.</b> {{ brand }} belum diluncurkan. Halaman ini merangkum cara kami menangani data. Kebijakan privasi lengkap (tujuan, dasar hukum, penyimpanan, sub-pemroses, transfer ke luar negeri dan hakmu) disusun bersama penasihat hukum mengacu pada UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi dan peraturan pelaksanaannya, dan terbit sebelum beta dibuka pada {{ dates.betaOpensText }}.</p>
+
+        <h2>1. Siapa kami</h2>
+        <p>{{ brand }} (nama kerja) dikelola oleh {{ operatorName }}. Untuk data akun penjual, kami adalah pengendali data. Untuk data pesanan pembeli di halaman tokomu, kamu sebagai penjual adalah pengendali data dan kami pemrosesnya.</p>
+
+        <h2>2. Di situs ini</h2>
+        <ul>
+          <li><b>Form pendaftaran</b> tidak dikirim ke server kami. Tombolnya membuka WhatsApp dengan pesan yang sudah terisi. Kami hanya menerima apa yang kamu kirim di chat itu, dan memakainya untuk menghubungimu soal pendaftaran dan beta.</li>
+          {{#if analytics.enabled}}
+          <li><b>Analitik.</b> Kami memakai PostHog untuk menghitung kunjungan ke situs ini dan dari mana kunjungan datang (misalnya parameter <code>utm</code> atau kode rujukan). PostHog dapat menyimpan cookie atau data di browsermu untuk itu. PostHog tidak pernah dipasang di halaman toko.</li>
+          {{else}}
+          <li><b>Tanpa cookie.</b> Situs ini tidak memasang cookie dan tidak memuat alat analitik pihak ketiga. Huruf dan gambar dimuat dari server kami sendiri.</li>
+          {{/if}}
+        </ul>
+
+        <h2>3. Saat kamu memakai {{ brand }}</h2>
+        <ul>
+          <li><b>Data akun:</b> nama, email dan nomor WhatsApp usaha, ditambah isi halamanmu (profil, produk, link, foto).</li>
+          <li><b>Pesanan:</b> produk, jumlah dan total, serta nama dan catatan pembeli yang sifatnya opsional. <b>Nomor HP pembeli tidak disimpan.</b></li>
+          <li><b>Statistik halaman:</b> hanya hitungan harian yang anonim, misalnya jumlah kunjungan, klik WhatsApp dan klik per link. Tidak ada alamat IP, identitas browser, atau penanda pengunjung yang disimpan. Halaman toko tidak memakai cookie dan tidak memuat skrip pihak ketiga.</li>
+          <li><b>Pembayaran langganan</b> dicatat (jumlah, metode, tanggal). Kami tidak menyimpan data kartu.</li>
+        </ul>
+
+        <h2>4. Di mana data disimpan</h2>
+        <p>Data akun disimpan di layanan basis data Supabase di wilayah Singapura, sehingga termasuk transfer data ke luar negeri. Lokasi ini sedang kami kaji bersama penasihat hukum. Jika berubah, halaman ini akan diperbarui sebelum beta.</p>
+
+        <h2>5. Berapa lama</h2>
+        <ul>
+          <li>Data akun dihapus 90 hari setelah akun ditutup. Cadangan otomatis terhapus dalam 7 hari berikutnya.</li>
+          <li>Pesanan disimpan selama akunmu aktif.</li>
+        </ul>
+
+        <h2>6. Hakmu</h2>
+        <p>Kamu bisa meminta salinan data, memperbaiki data, atau menghapus akun kapan saja dengan menghubungi kami. Ekspor dan hapus akun langsung dari dashboard <em class="soon">Segera hadir</em>.</p>
+
+        <h2>7. Jika terjadi insiden</h2>
+        <p>Jika terjadi kegagalan pelindungan data, kami memberi tahu pihak yang terdampak dan otoritas dalam waktu 3×24 jam, sesuai ketentuan UU PDP.</p>
+
+        <h2>8. Kontak</h2>
+        <p>Pertanyaan atau permintaan soal data bisa dikirim{{#if support.hasWhatsapp}} lewat <a href="{{ support.waLink }}" data-wa-support>WhatsApp</a>{{/if}}{{#if support.hasEmail}} atau ke <a href="mailto:{{ support.email }}">{{ support.email }}</a>{{/if}}{{#unless support.hasWhatsapp}}{{#unless support.hasEmail}} lewat <a href="{{ base }}help/">pusat bantuan</a>{{/unless}}{{/unless}}.</p>
+      </div></div>
+    </section>

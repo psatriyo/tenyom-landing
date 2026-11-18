@@ -1,0 +1,51 @@
+<div class="plans{{#if founding.enabled}} plans--with-founding{{/if}}">
+  <article class="plan reveal">
+    <h3 class="plan__name">Gratis</h3>
+    <p class="plan__price">Rp0 <span>selamanya</span></p>
+    <p class="plan__desc">Halaman bisnis lengkap untuk mulai dan dipasang di bio.</p>
+    <ul class="plan__list" role="list">
+      <li>Halaman, QR code &amp; tombol bagikan</li>
+      <li>Hingga {{ free.items }} produk</li>
+      <li>Hingga {{ free.links }} link + {{ free.socialIcons }} ikon media sosial</li>
+      <li>Tombol “Tanya via WhatsApp” di tiap produk</li>
+      <li>Statistik &amp; klik per link, {{ free.statsDays }} hari terakhir</li>
+      <li>Tema dasar, dengan badge “Dibuat dengan {{ brand }}”</li>
+    </ul>
+    <a class="btn btn--ghost btn--block" href="{{ ctaHref }}" data-cta="plan-free">{{#if hasSignup}}Mulai gratis{{else}}Ganti link bio kamu{{/if}}</a>
+  </article>
+
+  <article class="plan plan--pro reveal">
+    <h3 class="plan__name">Pro</h3>
+    {{#if pro.hasPrice}}
+    <p class="plan__price">{{ pro.priceText }} <span>per bulan</span></p>
+    {{else}}
+    <p class="plan__price plan__price--tbd">Segera diumumkan <span>Harga final diumumkan saat beta</span></p>
+    {{/if}}
+    <p class="plan__desc">Untuk penjual yang pesanannya mulai ramai.</p>
+    <ul class="plan__list" role="list">
+      <li><strong>Pesanan via WhatsApp</strong>: keranjang → pesan pesanan yang rapi</li>
+      <li><strong>Daftar pesanan</strong> dengan status Baru, Dikonfirmasi, Selesai</li>
+      <li>Produk &amp; link tanpa batas (pemakaian wajar)</li>
+      <li>Statistik &amp; klik per link, {{ pro.statsDays }} hari terakhir</li>
+      <li><strong>Insights</strong>: dari mana pembelimu datang <em class="soon">Segera hadir</em></li>
+      <li>Semua tema + warna sendiri, badge bisa dihapus</li>
+    </ul>
+    <p class="plan__note">Bayar pakai QRIS atau transfer, tanpa kartu kredit. {{#if pro.annualAvailable}}Paket tahunan: 12 bulan, cukup bayar {{ pro.annualMonthsPaid }}.{{else}}Paket tahunan 12 bulan bayar {{ pro.annualMonthsPaid }}: <em class="soon">Segera hadir</em>{{/if}}</p>
+  </article>
+
+  {{#if founding.enabled}}
+  <article class="plan plan--founding reveal if-founding" id="offer">
+    <span class="plan__ribbon">Sampai {{ founding.deadlineShort }}</span>
+    <h3 class="plan__name">Founding member</h3>
+    <p class="plan__price">{{ founding.priceText }} <span>deposit, sekali bayar</span></p>
+    <p class="plan__desc">Untuk penjual yang mau halamannya siap sebelum Ramadan.</p>
+    <ul class="plan__list" role="list">
+      <li><strong>{{ founding.proMonths }} bulan Pro</strong>, mulai saat halamanmu tayang</li>
+      <li><strong>Halamanmu kami buatkan</strong>, siap sebelum Ramadan</li>
+      <li>Masuk grup WhatsApp beta dan ngobrol langsung dengan pendiri</li>
+      <li><strong>Uang kembali penuh</strong> jika kami belum meluncur {{ founding.refundText }}</li>
+    </ul>
+    <a class="btn btn--accent btn--block" href="{{ base }}#daftar" data-cta="plan-founding">Amankan tempatmu</a>
+  </article>
+  {{/if}}
+</div>
