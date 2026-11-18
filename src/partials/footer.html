@@ -1,0 +1,32 @@
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__about">
+        <a class="brand brand--footer" href="{{ base }}">
+          <svg class="brand__mark" aria-hidden="true"><use href="#i-logo"/></svg>
+          <span>{{ brand }}</span>
+        </a>
+        <p>Halaman bisnismu, cukup satu link. Katalog, link dan pesanan WhatsApp untuk UMKM Indonesia.</p>
+      </div>
+      <nav class="footer__col" aria-label="Produk">
+        <p class="footer__head">Produk</p>
+        <a href="{{ base }}#cara-kerja">Cara kerja</a>
+        <a href="{{ base }}#fitur">Fitur</a>
+        <a href="{{ base }}pricing/">Harga</a>
+      </nav>
+      <nav class="footer__col" aria-label="Bantuan">
+        <p class="footer__head">Bantuan</p>
+        <a href="{{ base }}help/">Pusat bantuan</a>
+        <a href="{{ base }}help/#bio-instagram">Pasang link di bio</a>
+        {{#if support.hasWhatsapp}}<a href="{{ support.waLink }}" data-wa-support>Chat WhatsApp kami</a>{{/if}}
+        {{#if support.hasEmail}}<a href="mailto:{{ support.email }}">{{ support.email }}</a>{{/if}}
+      </nav>
+      <nav class="footer__col" aria-label="Legal">
+        <p class="footer__head">Legal</p>
+        <a href="{{ base }}terms/">Syarat Layanan</a>
+        <a href="{{ base }}privacy/">Kebijakan Privasi</a>
+      </nav>
+    </div>
+    <p class="footer__copy">© <span data-year>{{ year }}</span> {{ brand }}. Dibuat di Indonesia untuk UMKM.</p>
+  </div>
+</footer>

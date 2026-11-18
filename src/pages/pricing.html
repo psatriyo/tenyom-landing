@@ -1,0 +1,110 @@
+---
+{
+  "title": "Harga · {{ brand }}",
+  "description": "Mulai gratis dengan halaman lengkap, QR code dan {{ free.links }} link. Pro menambahkan pesanan via WhatsApp dan daftar pesanan. Harga rupiah, bayar QRIS, tanpa komisi."
+}
+---
+    <section class="page-hero">
+      <div class="wrap"><div class="page-hero__inner">
+        <p class="eyebrow eyebrow--gold">Harga</p>
+        <h1 class="page-hero__title">Mulai gratis. Upgrade saat pesanan mulai ramai.</h1>
+        <p class="page-hero__lede">Tanpa komisi penjualan dan tanpa kartu kredit. {{ brand }} tidak pernah memegang uang pembelimu: pembayaran langsung ke rekening atau QRIS milikmu.</p>
+      </div></div>
+    </section>
+
+    <section class="section section--dark section--tight" aria-labelledby="paket">
+      <div class="wrap">
+        <h2 class="sr-only" id="paket">Pilihan paket</h2>
+        {{> plans }}
+      </div>
+    </section>
+
+    <section class="section" id="bandingkan">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="eyebrow">Bandingkan paket</p>
+          <h2 class="h2">Semua yang ada di Gratis dan Pro.</h2>
+        </div>
+        <div class="matrix reveal" tabindex="0" role="region" aria-label="Tabel perbandingan paket">
+          <table>
+            <caption class="sr-only">Perbandingan paket Gratis dan Pro</caption>
+            <thead>
+              <tr><th scope="col">Fitur</th><th scope="col">Gratis</th><th scope="col" class="matrix__pro">Pro</th></tr>
+            </thead>
+            <tbody>
+              <tr class="matrix__group"><th scope="rowgroup" colspan="3">Halaman</th></tr>
+              <tr><th scope="row">Halaman bisnis di {{ domain }}/namatoko, QR code &amp; tombol bagikan</th><td class="yes">Ya</td><td class="yes matrix__pro">Ya</td></tr>
+              <tr><th scope="row">Produk di katalog</th><td>{{ free.items }}</td><td class="matrix__pro">Tanpa batas<sup>*</sup></td></tr>
+              <tr><th scope="row">Link (tombol &amp; kartu bergambar)</th><td>{{ free.links }}</td><td class="matrix__pro">Tanpa batas</td></tr>
+              <tr><th scope="row">Ikon media sosial, judul bagian, posisi katalog</th><td>Ya, {{ free.socialIcons }} ikon</td><td class="matrix__pro">Ya, {{ free.socialIcons }} ikon</td></tr>
+              <tr><th scope="row">Jadwal tampil link <em class="soon">Segera hadir</em></th><td class="no">Tidak</td><td class="yes matrix__pro">Ya</td></tr>
+              <tr><th scope="row">Tema</th><td>Tema dasar</td><td class="matrix__pro">Semua tema + warna sendiri</td></tr>
+              <tr><th scope="row">Badge “Dibuat dengan {{ brand }}”</th><td>Tampil</td><td class="matrix__pro">Bisa dihapus</td></tr>
+
+              <tr class="matrix__group"><th scope="rowgroup" colspan="3">WhatsApp &amp; pesanan</th></tr>
+              <tr><th scope="row">Tombol “Tanya via WhatsApp” di tiap produk</th><td class="yes">Ya</td><td class="yes matrix__pro">Ya</td></tr>
+              <tr><th scope="row">Pesanan via WhatsApp (keranjang → pesan rapi)</th><td class="no">Tidak</td><td class="yes matrix__pro">Ya</td></tr>
+              <tr><th scope="row">Daftar pesanan dengan status</th><td class="no">Tidak</td><td class="yes matrix__pro">Ya</td></tr>
+
+              <tr class="matrix__group"><th scope="rowgroup" colspan="3">Statistik</th></tr>
+              <tr><th scope="row">Kunjungan, klik WhatsApp, pesanan dan klik per link</th><td>{{ free.statsDays }} hari terakhir</td><td class="matrix__pro">{{ pro.statsDays }} hari terakhir</td></tr>
+              <tr><th scope="row">Insights: sumber kunjungan, perangkat, jam ramai, produk yang paling ditanya <em class="soon">Segera hadir</em></th><td>Pratinjau</td><td class="yes matrix__pro">Ya</td></tr>
+
+              <tr class="matrix__group"><th scope="rowgroup" colspan="3">Harga</th></tr>
+              <tr><th scope="row">Per bulan</th><td><b>Rp0</b></td><td class="matrix__pro"><b>{{#if pro.hasPrice}}{{ pro.priceText }}{{else}}Diumumkan saat beta{{/if}}</b></td></tr>
+              <tr><th scope="row">Paket tahunan (12 bulan, bayar {{ pro.annualMonthsPaid }}){{#unless pro.annualAvailable}} <em class="soon">Segera hadir</em>{{/unless}}</th><td>—</td><td class="matrix__pro">{{#if pro.hasPrice}}{{ pro.annualPriceText }} per tahun{{else}}Hemat {{ pro.annualMonthsSaved }} bulan{{/if}}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="matrix__note">* Pemakaian wajar. Fitur bertanda <em class="soon">Segera hadir</em> belum tersedia saat peluncuran dan akan menyusul di tahun 2027.</p>
+      </div>
+    </section>
+
+    <section class="section section--light">
+      <div class="wrap faq">
+        <div class="section__head reveal">
+          <p class="eyebrow">Soal pembayaran</p>
+          <h2 class="h2">Yang perlu kamu tahu sebelum upgrade.</h2>
+          <p class="lede">Masih ragu? Lihat <a href="{{ base }}help/">pusat bantuan</a>{{#if support.hasWhatsapp}} atau <a href="{{ support.waLink }}" data-wa-support>chat kami di WhatsApp</a>{{/if}}.</p>
+        </div>
+        <div class="faq__list reveal">
+          <details>
+            <summary>Bagaimana cara membayar Pro?</summary>
+            <p>Dengan QRIS dari aplikasi bank atau e-wallet, atau transfer bank. Tidak perlu kartu kredit dan tidak ada potong saldo otomatis: kamu membayar setiap periode sendiri.</p>
+          </details>
+          {{#unless pro.hasPrice}}
+          <details>
+            <summary>Kenapa harga Pro belum ada?</summary>
+            <p>Harga Pro sedang kami uji bersama penjual beta supaya pas untuk UMKM. Harga final diumumkan saat beta. Paket Gratis tetap gratis.</p>
+          </details>
+          {{/unless}}
+          <details>
+            <summary>Apa yang terjadi kalau saya telat memperpanjang?</summary>
+            <p>Ada masa tenggang 7 hari, dan fitur Pro tetap aktif selama masa itu. Kalau tidak diperpanjang, tokomu kembali ke paket Gratis. Data tidak dihapus: produk di atas {{ free.items }} hanya disembunyikan, dan pesanan lama tetap bisa dilihat. Bayar kapan saja untuk mengaktifkan Pro lagi.</p>
+          </details>
+          <details>
+            <summary>Apakah ada potongan dari setiap penjualan?</summary>
+            <p>Tidak. {{ brand }} tidak mengambil komisi. Pembeli membayar langsung ke kamu, dan kami tidak pernah memegang uang pembeli.</p>
+          </details>
+          <details>
+            <summary>Apakah ada paket tahunan?</summary>
+            <p>{{#if pro.annualAvailable}}Ada. Bayar 12 bulan cukup dengan harga {{ pro.annualMonthsPaid }} bulan.{{else}}Segera hadir: bayar 12 bulan cukup dengan harga {{ pro.annualMonthsPaid }} bulan.{{/if}}</p>
+          </details>
+          {{#if founding.enabled}}
+          <details class="if-founding">
+            <summary>Apa itu founding member?</summary>
+            <p>Penawaran untuk penjual pertama, sampai {{ founding.deadlineText }}: deposit {{ founding.priceText }} untuk {{ founding.proMonths }} bulan Pro, mulai saat halamanmu tayang, plus halaman yang kami buatkan sebelum Ramadan. Uang kembali penuh jika kami belum meluncur sampai {{ founding.refundText }}. <a href="{{ base }}#daftar">Daftar di sini</a>.</p>
+          </details>
+          {{/if}}
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="wrap final__inner reveal">
+        <h2 class="final__title">Mulai dari Rp0.<br><span class="hl">Ganti link bio kamu.</span></h2>
+        <a class="btn btn--accent btn--lg" href="{{ ctaHref }}" data-cta="pricing-final">Ganti link bio kamu
+          <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+    </section>
