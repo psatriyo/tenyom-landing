@@ -29,7 +29,7 @@ export default {
   // and the founding-member button. Empty = the placeholder: wa.me opens
   // WhatsApp's "choose a chat" screen with the message filled in.
   // Do not put an invented number here.
-  founderWhatsApp: "",
+  founderWhatsApp: "6281212345678",
   // OPEN: support email. Empty = not shown (the legal drafts keep their own
   // [EMAIL DUKUNGAN] placeholders, which are never replaced automatically).
   supportEmail: "",
