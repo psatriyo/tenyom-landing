@@ -1,0 +1,19 @@
+<header class="header" data-header>
+  <div class="wrap header__inner">
+    <a class="brand" href="{{ base }}" aria-label="{{ brandName }}, beranda">
+      <svg class="brand__mark" aria-hidden="true"><use href="#i-logo"/></svg>
+      <span>{{ brandName }}</span>
+    </a>
+    {{#if page.isHome}}
+    <nav class="header__links" aria-label="Bagian halaman">
+      <a href="#cara-kerja">Cara kerja</a>
+      <a href="#harga">Harga</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    {{/if}}
+    <div class="header__actions">
+      <a class="header__login" href="#uji-coba" data-sheet-open="uji-coba">Masuk</a>
+      <a class="btn btn--accent btn--sm" href="#uji-coba" data-sheet-open="uji-coba">Coba gratis</a>
+    </div>
+  </div>
+</header>

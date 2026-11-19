@@ -1,0 +1,123 @@
+---
+{
+  "title": "Contoh dasbor: Kue Bu Rina · {{ brandName }}",
+  "description": "Contoh dasbor penjual di {{ brandName }}: catatan pesanan, statistik, dan Insights. Data contoh.",
+  "noindex": true,
+  "demo": true,
+  "demoLabel": "<b>Contoh dasbor</b> · data contoh"
+}
+---
+{{!-- Phone-sized mockups of the order log (F-09), stats (F-11) and Insights
+      (F-20). Static mock data, labelled "contoh". Orders sent from the demo
+      storefront in this browser tab are added on top. --}}
+  {{> demo-bar }}
+
+  <main id="main" class="dash" data-dash>
+    <header class="dash__head">
+      <span class="dash__logo" aria-hidden="true">R</span>
+      <span class="dash__shop">
+        <b>{{ demo.business.name }}</b>
+        <a href="{{ base }}contoh/kueburina/">{{ exampleUrl }}</a>
+      </span>
+      <span class="plan-pill pro-only">Pro</span>
+      <span class="plan-pill plan-pill--free pro-hide">Gratis</span>
+    </header>
+
+    <nav class="dash__tabs js-only" aria-label="Bagian dasbor" data-dash-tabs>
+      <a href="#pesanan" data-dash-tab="pesanan"><svg aria-hidden="true"><use href="#i-list"/></svg>Pesanan</a>
+      <a href="#statistik" data-dash-tab="statistik"><svg aria-hidden="true"><use href="#i-chart"/></svg>Statistik</a>
+      <a href="#insights" data-dash-tab="insights"><svg aria-hidden="true"><use href="#i-compass"/></svg>Insights</a>
+    </nav>
+
+    <!-- Order log (Pro) -->
+    <section class="panel" id="pesanan" data-panel="pesanan" aria-labelledby="pesanan-title">
+      <div class="panel__head">
+        <h1 class="panel__title" id="pesanan-title">Catatan pesanan</h1>
+        <span class="chip">contoh</span>
+      </div>
+      <div class="lockable">
+        <div class="lockable__content">
+          <div class="filters" role="group" aria-label="Saring status" data-filters>
+            <button type="button" data-filter="Semua" aria-pressed="true">Semua</button>
+            <button type="button" data-filter="Baru" aria-pressed="false">Baru</button>
+            <button type="button" data-filter="Dikonfirmasi" aria-pressed="false">Dikonfirmasi</button>
+            <button type="button" data-filter="Selesai" aria-pressed="false">Selesai</button>
+            <button type="button" data-filter="Dibatalkan" aria-pressed="false">Dibatalkan</button>
+          </div>
+          <ul class="orders" role="list" data-orders>
+            {{#each demo.orders}}
+            <li class="order">
+              <div class="order__top"><b>#{{ no }}</b><span>{{ time }}</span><em class="status status--{{ statusClass }}">{{ status }}</em></div>
+              <p class="order__name">{{ nameText }}</p>
+              <p class="order__summary">{{ summary }}</p>
+              <p class="order__total">{{ totalText }}</p>
+            </li>
+            {{/each}}
+          </ul>
+          <p class="panel__note" data-orders-empty hidden>Belum ada pesanan dengan status ini.</p>
+        </div>
+        <div class="lock pro-hide">
+          <span class="lock__icon" aria-hidden="true"><svg><use href="#i-lock"/></svg></span>
+          <p class="lock__title">Catatan pesanan ada di paket Pro</p>
+          <p class="lock__text">Pembeli isi keranjang dan pesan via WhatsApp. Setiap pesanan tercatat di sini dengan nomor, isi, total, dan status.</p>
+          <a class="btn btn--accent btn--block" href="#uji-coba" data-sheet-open="uji-coba"><span>Upgrade ke Pro · <span data-price="monthly">{{ price.monthly }}</span>/bulan</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats (Free 7 days, Pro 90 days) -->
+    <section class="panel" id="statistik" data-panel="statistik" aria-labelledby="statistik-title">
+      <div class="panel__head">
+        <h2 class="panel__title" id="statistik-title">Statistik</h2>
+        <span class="chip">7 hari terakhir</span>
+      </div>
+      <ul class="counters" role="list">
+        {{#each demo.stats.counters}}<li><b>{{ value }}</b><span>{{ label }}</span></li>{{/each}}
+      </ul>
+      <div class="card-box">
+        <h3 class="card-box__title">Link paling sering diklik</h3>
+        <ul class="bars" role="list">
+          {{#each demo.topLinks}}
+          <li class="bars__row"><span class="bars__label">{{ label }}</span><span class="bars__track"><span class="bars__fill" style="width:{{ pct }}%"></span></span><span class="bars__value">{{ valueText }}</span></li>
+          {{/each}}
+        </ul>
+      </div>
+      <p class="panel__note pro-hide">Paket Gratis menyimpan statistik {{ limits.freeStatsDays }} hari terakhir. Pro sampai {{ limits.proStatsDays }} hari. <a href="#uji-coba" data-sheet-open="uji-coba">Upgrade</a></p>
+      <p class="panel__note pro-only">Paket Pro menyimpan statistik sampai {{ limits.proStatsDays }} hari terakhir.</p>
+      <p class="panel__note">{{ demo.insights.privacyNote }}</p>
+    </section>
+
+    <!-- Insights (Pro, coming soon) -->
+    <section class="panel" id="insights" data-panel="insights" aria-labelledby="insights-title">
+      <div class="panel__head">
+        <h2 class="panel__title" id="insights-title">Insights</h2>
+        <span class="badge badge--soon">Pro · segera</span>
+      </div>
+      <div class="lockable">
+        <div class="lockable__content">
+          <div class="card-box">
+            <h3 class="card-box__title">Sumber pengunjung</h3>
+            <ul class="bars" role="list">
+              {{#each demo.sources}}
+              <li class="bars__row"><span class="bars__label">{{ label }}</span><span class="bars__track"><span class="bars__fill" style="width:{{ pct }}%"></span></span><span class="bars__value">{{ valueText }}</span></li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="card-box card-box--split">
+            <div><h3 class="card-box__title">Jam paling ramai</h3><p class="big">{{ demo.insights.busiestHours }}</p></div>
+            <div>
+              <h3 class="card-box__title">Produk paling sering diklik</h3>
+              <ol class="rank">{{#each demo.insights.topItems}}<li>{{ this }}</li>{{/each}}</ol>
+            </div>
+          </div>
+          <p class="panel__note">{{ demo.insights.privacyNote }}</p>
+        </div>
+        <div class="lock pro-hide">
+          <span class="lock__icon" aria-hidden="true"><svg><use href="#i-lock"/></svg></span>
+          <p class="lock__title">Tahu pembeli datang dari mana</p>
+          <p class="lock__text">Insights ada di paket Pro: sumber pengunjung, jam ramai, dan produk yang paling sering diklik.</p>
+          <a class="btn btn--accent btn--block" href="#uji-coba" data-sheet-open="uji-coba"><span>Upgrade ke Pro · <span data-price="monthly">{{ price.monthly }}</span>/bulan</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
