@@ -1,566 +1,366 @@
 ---
 {
-  "title": "{{ brand }}: Halaman bisnismu, cukup satu link",
-  "description": "Katalog, link dan pesanan WhatsApp dalam satu halaman. Gratis, siap dalam 15 menit dari HP. Pasang di bio Instagram dan TikTok, tanpa komisi penjualan."
+  "title": "{{ brandName }}: Halaman bisnismu, cukup satu link",
+  "description": "Katalog, link dan pesanan WhatsApp dalam satu halaman. Gratis, siap dalam 15 menit dari HP. Bayar pakai QRIS, tanpa komisi penjualan."
 }
 ---
+{{!-- Section order and copy follow [landing_page] in the export (source="derived"). --}}
+
     <!-- ============ HERO ============ -->
     <section class="hero" id="top">
-      <div class="hero__glow hero__glow--a" aria-hidden="true"></div>
-      <div class="hero__glow hero__glow--b" aria-hidden="true"></div>
-
       <div class="wrap hero__grid">
         <div class="hero__copy">
-          {{#if hasSignup}}
-          <p class="pill"><span class="pill__dot"></span> Beta sudah dibuka · gratis untuk mulai</p>
-          {{else}}
-          {{#if founding.enabled}}<p class="pill if-founding"><span class="pill__dot"></span> Founding member dibuka sampai {{ founding.deadlineShort }}</p>{{/if}}
-          <p class="pill if-no-founding"><span class="pill__dot"></span> Beta dibuka {{ dates.betaOpensText }}</p>
-          {{/if}}
-
+          <p class="eyebrow eyebrow--light">Untuk UMKM yang jualan lewat WhatsApp &amp; Instagram</p>
           <h1 class="hero__title">Halaman bisnismu, <span class="hl">cukup satu link.</span></h1>
           <p class="hero__lede">Katalog, link dan pesanan WhatsApp dalam satu halaman. Gratis, siap dalam 15 menit dari HP.</p>
-
           <div class="hero__cta">
-            <a class="btn btn--accent btn--lg" href="{{ ctaHref }}" data-cta="hero">Ganti link bio kamu
-              <svg aria-hidden="true"><use href="#i-arrow"/></svg>
-            </a>
-            <a class="btn btn--ghost btn--lg" href="#halaman">Lihat isinya</a>
+            <a class="btn btn--accent btn--lg" href="#uji-coba" data-sheet-open="uji-coba">Ganti link bio kamu</a>
+            <a class="btn btn--ghost btn--lg" href="{{ base }}contoh/kueburina/">Lihat contoh halaman <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
-
-          <ul class="hero__ticks" role="list">
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Gratis untuk mulai</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>0% komisi penjualan</li>
-            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Harga rupiah, bayar QRIS</li>
-          </ul>
+          <p class="hero__trust">Gratis selamanya untuk mulai <span aria-hidden="true">·</span> Bayar pakai QRIS <span aria-hidden="true">·</span> Tanpa komisi penjualan</p>
         </div>
 
-        <!-- Interactive example homepage -->
-        <div class="hero__demo" data-demo>
-          <p class="demo-hint" aria-hidden="true"><span>Coba tap <b>+</b>, link, lalu pesan</span>
-            <svg viewBox="0 0 60 40"><path d="M2 6c18 0 36 6 48 26m0 0-2-11m2 11-10-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </p>
-
-          <div class="phone" role="group" aria-label="Contoh halaman {{ brand }} yang bisa dicoba">
-            <div class="phone__notch" aria-hidden="true"></div>
-            <div class="phone__screen">
-
-              <!-- Screen 1: the merchant's homepage -->
-              <div class="screen screen--store is-active" data-screen="store">
-                <div class="store-scroll" data-scroll tabindex="0" aria-label="Isi halaman Kue Bu Rina">
-                  <div class="store-cover" aria-hidden="true"></div>
-                  <div class="store-head">
-                    <div class="store-avatar" aria-hidden="true">R</div>
-                    <p class="store-name">Kue Bu Rina</p>
-                    <p class="store-sub">Hampers &amp; kue kering · Bekasi</p>
-                    <ul class="store-socials" role="list">
-                      <li><button type="button" data-link="instagram" aria-label="Instagram Kue Bu Rina"><svg aria-hidden="true"><use href="#i-ig"/></svg></button></li>
-                      <li><button type="button" data-link="tiktok" aria-label="TikTok Kue Bu Rina"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></button></li>
-                      <li><button type="button" data-link="facebook" aria-label="Facebook Kue Bu Rina"><svg aria-hidden="true"><use href="#i-fb"/></svg></button></li>
-                    </ul>
-                  </div>
-
-                  <div class="store-tabs" aria-hidden="true"><span class="is-on">Semua</span><span>Kue kering</span><span>Hampers</span></div>
-                  <ul class="items" role="list">
-                    <li class="item" data-item data-name="Nastar premium" data-price="95000" data-qty="2">
-                      <span class="thumb thumb--gold" aria-hidden="true">
-                        <svg viewBox="0 0 40 40"><circle cx="13" cy="15" r="6"/><circle cx="27" cy="15" r="6"/><circle cx="20" cy="27" r="6"/></svg>
-                      </span>
-                      <span class="item__meta"><b>Nastar premium</b><small>Rp95.000 · 500 g</small></span>
-                      <span class="stepper">
-                        <button type="button" data-dec aria-label="Kurangi Nastar premium">−</button>
-                        <output aria-live="polite">2</output>
-                        <button type="button" data-inc aria-label="Tambah Nastar premium">+</button>
-                      </span>
-                    </li>
-                    <li class="item" data-item data-name="Hampers Lebaran A" data-price="250000" data-qty="1">
-                      <span class="thumb thumb--green" aria-hidden="true">
-                        <svg viewBox="0 0 40 40"><rect x="9" y="17" width="22" height="15" rx="2"/><rect x="7" y="12" width="26" height="6" rx="2"/><path d="M20 12v20" stroke="#fff" stroke-width="2.5"/></svg>
-                      </span>
-                      <span class="item__meta"><b>Hampers Lebaran A</b><small>Rp250.000 · 4 toples</small></span>
-                      <span class="stepper">
-                        <button type="button" data-dec aria-label="Kurangi Hampers Lebaran A">−</button>
-                        <output aria-live="polite">1</output>
-                        <button type="button" data-inc aria-label="Tambah Hampers Lebaran A">+</button>
-                      </span>
-                    </li>
-                    <li class="item" data-item data-name="Kastengel keju" data-price="90000" data-qty="0">
-                      <span class="thumb thumb--blue" aria-hidden="true">
-                        <svg viewBox="0 0 40 40"><rect x="8" y="11" width="24" height="5" rx="2.5"/><rect x="8" y="18" width="24" height="5" rx="2.5"/><rect x="8" y="25" width="24" height="5" rx="2.5"/></svg>
-                      </span>
-                      <span class="item__meta"><b>Kastengel keju</b><small>Rp90.000 · 500 g</small></span>
-                      <span class="stepper">
-                        <button type="button" data-dec aria-label="Kurangi Kastengel keju">−</button>
-                        <output aria-live="polite">0</output>
-                        <button type="button" data-inc aria-label="Tambah Kastengel keju">+</button>
-                      </span>
-                    </li>
-                    <li class="item item--ask">
-                      <span class="thumb thumb--pink" aria-hidden="true">
-                        <svg viewBox="0 0 40 40"><path d="M8 24a12 12 0 0 1 24 0z"/><circle cx="14" cy="29" r="2"/><circle cx="20" cy="30" r="2"/><circle cx="26" cy="29" r="2"/></svg>
-                      </span>
-                      <span class="item__meta"><b>Hampers custom</b><small>Tanya harga</small></span>
-                      <button type="button" class="ask-btn" data-ask="Hampers custom" aria-label="Tanya via WhatsApp tentang Hampers custom">
-                        <svg aria-hidden="true"><use href="#i-wa"/></svg>Tanya
-                      </button>
-                    </li>
-                  </ul>
-
-                  <p class="store-heading">Belanja juga di</p>
-                  <ul class="store-links" role="list">
-                    <li><button type="button" class="store-link" data-link="gofood"><span class="pf pf--food" aria-hidden="true"><svg><use href="#i-bowl"/></svg></span>Pesan lewat GoFood</button></li>
-                    <li><button type="button" class="store-link" data-link="shopee"><span class="pf pf--shop" aria-hidden="true"><svg><use href="#i-bag"/></svg></span>Belanja di Shopee</button></li>
-                    <li>
-                      <button type="button" class="store-card" data-link="video">
-                        <span class="store-card__thumb" aria-hidden="true"><svg><use href="#i-play"/></svg></span>
-                        <span class="store-card__label">Video collab bareng @dapurlebaran</span>
-                      </button>
-                    </li>
-                  </ul>
-                  <p class="store-foot"><span>Laporkan</span> · <span>Dibuat dengan {{ brand }}</span></p>
-                </div>
-
-                <div class="order-bar">
-                  <button class="order-btn" type="button" data-order>
-                    <svg aria-hidden="true"><use href="#i-wa"/></svg>
-                    <span>Pesan via WhatsApp · <b data-count>3</b> item</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Screen 2: WhatsApp chat -->
-              <div class="screen screen--chat" data-screen="chat" aria-hidden="true">
-                <div class="wa-head">
-                  <button type="button" class="wa-back" data-back aria-label="Kembali ke halaman toko">
-                    <svg aria-hidden="true"><use href="#i-back"/></svg>
-                  </button>
-                  <span class="store-avatar store-avatar--sm" aria-hidden="true">R</span>
-                  <span><b>Kue Bu Rina</b><small>online</small></span>
-                </div>
-                <div class="wa-body" data-chat aria-live="polite"></div>
-                <button type="button" class="wa-replay" data-back>↺ Kembali ke halaman</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="demo-cards">
-            <!-- Live order card (Pro) -->
-            <div class="demo-card order-card" aria-live="polite">
-              <div class="demo-card__top">
-                <b>Pesanan #<span data-order-no>12</span></b>
-                <span class="chip chip--new" data-status>Baru</span>
-              </div>
-              <ul class="order-card__lines" data-lines role="list"></ul>
-              <p class="order-card__total">Total <b data-total>Rp440.000</b></p>
-            </div>
-
-            <!-- Per-link clicks -->
-            <div class="demo-card link-card">
-              <div class="demo-card__top">
-                <b>Klik per link</b>
-                <span class="chip chip--muted">7 hari</span>
-              </div>
-              <ol class="link-stats" data-link-stats role="list"></ol>
-            </div>
-            <p class="demo-caption">Contoh halaman. Pesanan dan klik di sini hanya simulasi.</p>
+        <div class="hero__visual">
+          <a class="phone" href="{{ base }}contoh/kueburina/" aria-label="Buka contoh halaman Kue Bu Rina">
+            <span class="phone__screen" aria-hidden="true">
+              <span class="mock-cover"></span>
+              <span class="mock-head">
+                <span class="mock-logo">R</span>
+                <b class="mock-name">{{ demo.business.name }}</b>
+                <span class="mock-sub">{{ demo.business.categoryCity }}</span>
+                <span class="mock-socials">
+                  {{#each demo.socials}}<span><svg><use href="#{{ icon }}"/></svg></span>{{/each}}
+                </span>
+              </span>
+              <span class="mock-tabs"><span class="is-on">Semua</span>{{#each demo.categories}}<span>{{ name }}</span>{{/each}}</span>
+              <span class="mock-grid">
+                {{#each demo.firstItems}}
+                <span class="mock-item">
+                  <img src="{{ imageUrl }}" alt="" width="200" height="200">
+                  <b>{{ name }}</b>
+                  <span>{{ priceLabel }}</span>
+                  <i>+</i>
+                </span>
+                {{/each}}
+              </span>
+              <span class="mock-link"><svg><use href="#i-bag"/></svg>Belanja di Shopee</span>
+            </span>
+            <span class="phone__cta">Tap untuk coba <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          </a>
+          <div class="bio-card" aria-hidden="true">
+            <span class="bio-card__avatar">R</span>
+            <span class="bio-card__text">
+              <b>kueburina</b>
+              <span>Hampers &amp; kue kering · Bekasi</span>
+              <span class="bio-card__link"><svg><use href="#i-link"/></svg>{{ exampleUrl }}</span>
+            </span>
           </div>
         </div>
-      </div>
-
-      <!-- Proof strip -->
-      <div class="wrap">
-        <dl class="stats">
-          <div><dt>Siap dari HP</dt><dd>15<span>menit</span></dd></div>
-          <div><dt>Komisi penjualan</dt><dd>0<span>%</span></dd></div>
-          <div><dt>Untuk mulai</dt><dd>Rp0</dd></div>
-          <div><dt>Pembeli install aplikasi</dt><dd>Tidak<span>perlu</span></dd></div>
-        </dl>
       </div>
     </section>
 
-    <!-- ============ PROBLEM ============ -->
-    <section class="section section--light" id="masalah">
+    <!-- ============ MASALAH ============ -->
+    <section class="section" id="masalah" aria-labelledby="masalah-title">
       <div class="wrap split">
-        <div class="split__copy reveal">
-          <p class="eyebrow">Kenal situasi ini?</p>
-          <h2 class="h2">Profil Instagram jadi “website” toko. Padahal pembeli susah cari harga.</h2>
+        <div>
+          <p class="eyebrow">Masalah</p>
+          <h2 class="h2" id="masalah-title">Kenal situasi ini?</h2>
           <ul class="pains" role="list">
-            <li><b>Produk musim ini tertimbun.</b> Postingan diurutkan dari yang terbaru, jadi hampers tahun lalu bercampur dengan menu Lebaran sekarang.</li>
-            <li><b>Harga tenggelam di caption.</b> “Pricelist dong kak” datang terus, dan daftar harga diketik ulang puluhan kali sehari.</li>
-            <li><b>Link tercecer.</b> Bio cuma muat beberapa link, padahal ada Shopee, GoFood, WhatsApp, dan video collab.</li>
-            <li><b>Pesanan dicatat manual.</b> Di puncak Ramadan, pesanan dari chat ditulis di notes, dan ada saja yang terlewat.</li>
+            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-scatter"/></svg></span>Harga dan katalog tersebar di status WA, highlight IG, dan link marketplace.</li>
+            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>Chat “ready kak?” dan “berapa harganya?” datang terus, dan kamu ketik ulang daftar harga berkali-kali sehari.</li>
+            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-note"/></svg></span>Pas Ramadan dan Lebaran, pesanan dicatat manual di notes, lalu ada yang kelewat.</li>
+            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-grid"/></svg></span>Feed Instagram urut tanggal: produk tahun lalu campur dengan yang baru, harga tenggelam di caption.</li>
+            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-compass"/></svg></span>Tidak tahu pembeli datang dari mana: Instagram, TikTok, atau WhatsApp?</li>
           </ul>
-          <p class="lede">{{ brand }} tidak menggantikan Instagram atau WhatsApp. Tokomu dapat <strong>satu halaman yang rapi</strong>: dipasang di bio, berisi produk dan harga, lalu mengantar pembeli ke WhatsApp-mu.</p>
         </div>
-
-        <div class="compare reveal" aria-label="Perbandingan sebelum dan sesudah {{ brand }}">
-          <div class="compare__col compare__col--before">
-            <p class="compare__label">Sebelum</p>
-            <div class="chatlist" aria-hidden="true">
-              <p class="msg">ready kak? 🙏</p>
-              <p class="msg">pricelist dong kak</p>
-              <p class="msg">kak nastar yg kemarin masih ada?</p>
-              <p class="msg msg--me">masih kak, cek highlight ya</p>
-              <p class="msg">link shopee nya mana kak?</p>
-              <p class="msg">yg hampers jadi 2 ya kak</p>
-              <p class="msg">kak pesanan saya udh dicatat kan??</p>
-            </div>
-          </div>
-          <div class="compare__col compare__col--after">
-            <p class="compare__label">Dengan {{ brand }}</p>
-            <div class="mini" aria-hidden="true">
-              <p class="mini__url"><svg><use href="#i-link"/></svg>{{ exampleUrl }}</p>
-              <ul class="mini__items" role="list">
-                <li><span>Nastar premium</span><b>Rp95.000</b></li>
-                <li><span>Hampers Lebaran A</span><b>Rp250.000</b></li>
-                <li><span>Hampers custom</span><b class="ask">Tanya harga</b></li>
-              </ul>
-              <div class="mini__links"><span>GoFood</span><span>Shopee</span><span>Video collab</span></div>
-              <p class="mini__label">Pesanan masuk</p>
-              <ul class="orderlog" role="list">
-                <li><span><b>#14</b> 2× Nastar, 1× Kastengel</span><em class="chip chip--new">Baru</em></li>
-                <li><span><b>#13</b> 2× Hampers Lebaran A</span><em class="chip chip--ok">Dikonfirmasi</em></li>
-                <li><span><b>#12</b> 3× Putri salju</span><em class="chip chip--done">Selesai</em></li>
-              </ul>
-            </div>
-          </div>
+        <div class="chat-mock" aria-hidden="true">
+          <p class="chat-mock__head"><span class="chat-mock__av">R</span><b>Chat masuk</b><small>hari ini</small></p>
+          <p class="bubble">ready kak? 🙏</p>
+          <p class="bubble">berapa harganya kak?</p>
+          <p class="bubble">pricelist dong kak</p>
+          <p class="bubble bubble--me">cek highlight ya kak 🙏</p>
+          <p class="bubble">link shopee nya mana kak?</p>
+          <p class="bubble">kak pesanan saya udh dicatat kan??</p>
         </div>
       </div>
     </section>
 
-    <!-- ============ THE PAGE ============ -->
-    <section class="section" id="halaman">
+    <!-- ============ SOLUSI ============ -->
+    <section class="section section--tint" id="solusi" aria-labelledby="solusi-title">
       <div class="wrap">
-        <div class="section__head reveal">
-          <p class="eyebrow">Satu halaman</p>
-          <h2 class="h2">Semua jalur jualanmu, dalam satu link.</h2>
-          <p class="lede">Pembeli tidak perlu lompat-lompat. Dari satu link mereka bisa lihat produk dan harga, tanya atau pesan lewat WhatsApp, atau lanjut ke Shopee dan GoFood-mu.</p>
+        <div class="section__head">
+          <p class="eyebrow">Solusi</p>
+          <h2 class="h2" id="solusi-title">Satu link untuk semua</h2>
+          <p class="lede">Taruh satu link di bio Instagram, TikTok, status WhatsApp, banner, dan kemasan. Pembeli langsung lihat semuanya.</p>
         </div>
-
-        <div class="layers">
-          <article class="layer reveal">
-            <span class="layer__no">1</span>
-            <h3>Identitas toko</h3>
-            <p>Logo, nama toko, kota dan deskripsi singkat. Jam buka, alamat dan Google Maps. Tombol WhatsApp untuk langsung chat.</p>
-            <p class="layer__sub">Ikon media sosial, hingga {{ free.socialIcons }}:</p>
-            <ul class="tags" role="list">
-              <li>Instagram</li><li>TikTok</li><li>Facebook</li><li>YouTube</li><li>X</li><li>Threads</li><li>Saluran WhatsApp</li><li>Telegram</li>
-            </ul>
-          </article>
-          <article class="layer layer--accent reveal">
-            <span class="layer__no">2</span>
-            <h3>Katalog</h3>
-            <p>Produk per kategori dengan foto dan harga rupiah. Untuk pesanan custom, tampilkan “Tanya harga”. Setiap produk punya tombol <em>Tanya via WhatsApp</em>.</p>
-            <p class="layer__sub">Di paket Pro:</p>
-            <ul class="tags tags--gold" role="list">
-              <li>Keranjang</li><li>Pesan via WhatsApp</li><li>Daftar pesanan</li>
-            </ul>
-          </article>
-          <article class="layer reveal">
-            <span class="layer__no">3</span>
-            <h3>Link</h3>
-            <p>Tombol biasa atau kartu bergambar untuk video collab, plus judul bagian seperti “Belanja online” atau “Testimoni”.</p>
-            <p class="layer__sub">Contoh tujuan link:</p>
-            <ul class="tags" role="list">
-              <li>Shopee</li><li>Tokopedia</li><li>TikTok Shop</li><li>Lazada</li><li>GoFood</li><li>GrabFood</li><li>ShopeeFood</li><li>Video YouTube &amp; TikTok</li>
-            </ul>
-          </article>
+        <div class="link-flow" aria-hidden="true">
+          <span class="link-flow__chips"><span>Bio Instagram</span><span>Bio TikTok</span><span>Status WhatsApp</span><span>Banner</span><span>Kemasan</span></span>
+          <span class="link-flow__arrow"><svg><use href="#i-arrow"/></svg></span>
+          <span class="link-flow__url"><svg><use href="#i-link"/></svg>{{ exampleUrl }}</span>
         </div>
-
-        <div class="page-notes reveal">
-          <p><svg aria-hidden="true"><use href="#i-list"/></svg><span><b>Kamu yang atur urutannya.</b> Halaman baru dimulai dari katalog. Link bisa dipindah ke atas kapan saja.</span></p>
-          <p><svg aria-hidden="true"><use href="#i-store"/></svg><span><b>Jualan di marketplace saja?</b> Halaman berisi link dan ikon sosial saja juga bisa.</span></p>
-          <p><svg aria-hidden="true"><use href="#i-sparkle"/></svg><span><b>Pembeli tidak perlu aplikasi.</b> Halaman terbuka cepat, juga dari browser di dalam Instagram, TikTok dan WhatsApp.</span></p>
+        <div class="blocks">
+          <article class="block">
+            <span class="block__icon" aria-hidden="true"><svg><use href="#i-store"/></svg></span>
+            <h3>Katalog rapi</h3>
+            <p>Kategori, foto, dan harga yang selalu terbaru. Pembeli tinggal pilih.</p>
+          </article>
+          <article class="block">
+            <span class="block__icon" aria-hidden="true"><svg><use href="#i-link"/></svg></span>
+            <h3>Semua link di satu tempat</h3>
+            <p>Shopee, Tokopedia, TikTok Shop, GoFood, GrabFood, video, testimoni, plus ikon media sosial.</p>
+          </article>
+          <article class="block block--wa">
+            <span class="block__icon" aria-hidden="true"><svg><use href="#i-wa"/></svg></span>
+            <h3>Pesan langsung ke WhatsApp</h3>
+            <p>Tombol “Tanya via WhatsApp” di tiap produk. Di paket Pro, pembeli isi keranjang dan kirim pesanan rapi lengkap dengan nomor pesanan.</p>
+          </article>
+          <article class="block">
+            <span class="block__icon" aria-hidden="true"><svg><use href="#i-chart"/></svg></span>
+            <h3>Tahu apa yang diklik</h3>
+            <p>Lihat kunjungan, klik WhatsApp, dan klik per link. Tanpa cookie, tanpa melacak pengunjung.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ============ HOW IT WORKS ============ -->
-    <section class="section section--light" id="cara-kerja">
+    <!-- ============ CARA KERJA ============ -->
+    <section class="section" id="cara-kerja" aria-labelledby="cara-kerja-title">
       <div class="wrap">
-        <div class="section__head reveal">
+        <div class="section__head">
           <p class="eyebrow">Cara kerja</p>
-          <h2 class="h2">Dari daftar sampai link di bio, sekitar 15 menit.</h2>
+          <h2 class="h2" id="cara-kerja-title">Siap dalam 15 menit, langsung dari HP</h2>
         </div>
-
         <ol class="steps" role="list">
-          <li class="step reveal">
+          <li class="step">
             <span class="step__no">1</span>
-            <h3>Daftar dengan Google</h3>
-            <p>Atau lewat link masuk yang dikirim ke email. Tanpa password dan tanpa formulir panjang.</p>
+            <h3>Daftar</h3>
+            <p>Masuk pakai akun Google, kurang dari semenit.</p>
           </li>
-          <li class="step reveal">
+          <li class="step">
             <span class="step__no">2</span>
-            <h3>Isi halamanmu</h3>
-            <p>Nama toko, link toko, nomor WhatsApp, akun media sosial, lalu produk berikut fotonya. Semua dari HP.</p>
+            <h3>Isi tokomu</h3>
+            <p>Nama toko, link toko, nomor WhatsApp, media sosial, logo, lalu minimal 3 produk.</p>
           </li>
-          <li class="step reveal">
+          <li class="step">
             <span class="step__no">3</span>
-            <h3>Ganti link bio</h3>
-            <p>Pasang di bio Instagram dan TikTok, bagikan ke status WhatsApp, atau cetak QR untuk lapak dan kemasan.</p>
-          </li>
-          <li class="step step--accent reveal">
-            <span class="step__no">4</span>
-            <h3>Terima pesanan</h3>
-            <p>Pembeli tanya atau pesan lewat WhatsApp. Kamu lihat link mana yang paling sering di-tap.</p>
+            <h3>Terbitkan &amp; bagikan</h3>
+            <p>Pasang di bio, bagikan ke status WA, cetak kode QR untuk lapak dan kemasan.</p>
           </li>
         </ol>
-
-        <div class="url-demo reveal" aria-hidden="true">
-          <svg class="url-demo__lock"><use href="#i-link"/></svg>
-          <span>{{ domain }}/<b data-typer>kueburina</b><i class="caret"></i></span>
-        </div>
-        <p class="steps__note reveal">Selama beta, halaman baru ditinjau dulu sebelum tayang supaya {{ domain }} tetap bebas halaman judi dan penipuan.</p>
+        <p class="center"><a class="btn btn--dark btn--lg" href="{{ base }}contoh/kueburina/">Lihat contoh: Kue Bu Rina <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
       </div>
     </section>
 
-    <!-- ============ FEATURES ============ -->
-    <section class="section" id="fitur">
+    <!-- ============ PESANAN (PRO) ============ -->
+    <section class="section section--dark" id="pesanan" aria-labelledby="pesanan-title">
       <div class="wrap">
-        <div class="section__head reveal">
-          <p class="eyebrow">Fitur</p>
-          <h2 class="h2">Halaman yang bukan cuma daftar link, tapi bisa menerima pesanan.</h2>
-          <p class="lede">Dibuat untuk penjual barang yang closing di WhatsApp, bukan untuk kreator produk digital.</p>
+        <div class="section__head">
+          <p class="eyebrow eyebrow--light">Paket Pro</p>
+          <h2 class="h2" id="pesanan-title">Chat jadi daftar pesanan yang rapi <span class="badge badge--pro">Pro</span></h2>
+          <p class="lede">Pembeli pilih produk, isi jumlah, lalu tekan “Pesan via WhatsApp”. Pesanan langsung tercatat di dasbor kamu, dan WhatsApp terbuka dengan pesan yang sudah rapi.</p>
         </div>
 
-        <div class="bento">
-          <article class="card card--wide reveal">
-            <span class="badge badge--pro">Pro</span>
-            <h3>Pesanan WhatsApp yang rapi</h3>
-            <p>Pembeli pilih produk ke keranjang, lalu satu tap membuka WhatsApp dengan pesan pesanan yang sudah lengkap: nomor pesanan, produk, jumlah dan total. Pesanan tercatat <em>sebelum</em> chat terkirim, jadi tidak hilang walau chat tertimbun.</p>
-            <div class="wa-snippet" aria-hidden="true">
-              <p>Halo Kue Bu Rina, saya mau pesan:</p>
-              <p class="gap"><b>Pesanan #12</b></p>
-              <p>2× Nastar premium — Rp190.000</p>
-              <p>1× Hampers Lebaran A — Rp250.000</p>
-              <p class="gap"><b>Total Rp440.000</b></p>
-              <p class="gap muted">— via {{ exampleUrl }}</p>
+        <div class="order-visual">
+          <figure class="wa-chat">
+            <figcaption class="wa-chat__head"><span class="wa-chat__av">R</span><span><b>{{ demo.business.name }}</b><small>Pesan dari pembeli</small></span></figcaption>
+            <div class="wa-chat__body">
+              <p class="wa-msg">Halo Kue Bu Rina, saya mau pesan:<br><br><b>Pesanan #12</b><br>2× Nastar premium — Rp190.000<br>1× Hampers Lebaran A — Rp250.000<br><br><b>Total Rp440.000</b><br><br>Nama: Sari<br>Catatan: Ambil tanggal 5 April<br><br><span class="wa-msg__via">— via {{ exampleUrl }}</span><span class="wa-msg__time">09.14 ✓✓</span></p>
             </div>
-          </article>
+          </figure>
 
-          <article class="card reveal">
-            <span class="badge badge--pro">Pro</span>
-            <h3>Daftar pesanan</h3>
-            <p>Semua pesanan di satu tempat dengan status <em>Baru</em>, <em>Dikonfirmasi</em> dan <em>Selesai</em>. Cocokkan chat dengan nomor pesanannya. Selamat tinggal catatan di notes.</p>
-          </article>
+          <span class="order-visual__arrow" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>
 
-          <article class="card reveal">
-            <span class="card__icon" aria-hidden="true"><svg><use href="#i-chart"/></svg></span>
-            <h3>Tahu link mana yang dipakai</h3>
-            <p>Lihat kunjungan, klik WhatsApp dan jumlah klik tiap link serta ikon sosial. Gratis untuk {{ free.statsDays }} hari terakhir, Pro sampai {{ pro.statsDays }} hari.</p>
-          </article>
+          <figure class="order-log">
+            <figcaption class="order-log__head"><b>Pesanan</b><span class="chip">contoh</span></figcaption>
+            <ul role="list">
+              {{#each demo.orders}}
+              <li class="order-row">
+                <span class="order-row__no">#{{ no }}</span>
+                <span class="order-row__main"><b>{{ nameText }}</b><small>{{ summary }}</small></span>
+                <span class="order-row__side"><b>{{ totalText }}</b><em class="status status--{{ statusClass }}">{{ status }}</em></span>
+              </li>
+              {{/each}}
+            </ul>
+          </figure>
+        </div>
 
-          <article class="card reveal">
-            <span class="badge badge--soon">Pro · Segera hadir</span>
-            <h3>Insights: dari mana pembeli datang</h3>
-            <p>Instagram, TikTok, WhatsApp, atau QR di bazar? Lihat sumber kunjungan, jam ramai dan produk yang paling sering ditanya. Tetap tanpa melacak siapa pun.</p>
-          </article>
-
-          <article class="card reveal">
-            <span class="card__icon" aria-hidden="true"><svg><use href="#i-qr"/></svg></span>
-            <h3>QR siap cetak</h3>
-            <p>Unduh QR halamanmu untuk stiker kemasan, banner lapak, atau kartu ucapan hampers. Link-nya juga gampang dibagikan ke status WhatsApp.</p>
-          </article>
-
-          <article class="card reveal">
-            <span class="card__icon card__icon--green" aria-hidden="true"><svg><use href="#i-wa"/></svg></span>
-            <h3>Tombol “Tanya via WhatsApp”</h3>
-            <p>Setiap produk punya tombol chat yang otomatis menyebut nama produknya. Tidak ada lagi “yang mana kak?”. Ada di semua paket.</p>
-          </article>
+        <ul class="points" role="list">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Nomor pesanan otomatis, gampang dicocokkan dengan chat (“Pesanan #12”).</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Status: Baru → Dikonfirmasi → Selesai.</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Pembayaran tetap langsung ke kamu (QRIS atau transfer milikmu). Kami tidak menyentuh uang pembeli dan tidak ambil komisi.</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Kami tidak meminta nomor HP pembeli.</li>
+        </ul>
+        <div class="center btn-row">
+          <a class="btn btn--accent btn--lg" href="{{ base }}contoh/kueburina/?paket=pro">Coba alur pesanan Pro <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost btn--lg" href="{{ base }}contoh/dasbor/?paket=pro">Lihat contoh dasbor</a>
         </div>
       </div>
     </section>
 
-    <!-- ============ FOR WHO ============ -->
-    <section class="section section--light" id="untuk-siapa">
+    <!-- ============ INSIGHTS ============ -->
+    <section class="section" id="insights" aria-labelledby="insights-title">
+      <div class="wrap split split--rev">
+        <div>
+          <p class="eyebrow">Insights <span class="badge badge--soon">Segera di Pro</span></p>
+          <h2 class="h2" id="insights-title">Tahu pembeli datang dari mana</h2>
+          <p class="lede">Instagram, TikTok, WhatsApp, Google, atau QR di bazar? Lihat sumber pengunjung, jam paling ramai, dan produk yang paling sering ditanyakan. Semua berupa hitungan anonim, tanpa melacak siapa pun.</p>
+          <p class="more-link"><a href="{{ base }}contoh/dasbor/?paket=pro#insights">Lihat contoh Insights <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+        </div>
+        <figure class="insight-card">
+          <figcaption class="insight-card__head"><b>Sumber pengunjung</b><span class="chip">contoh</span></figcaption>
+          <ul class="bars" role="list">
+            {{#each demo.sources}}
+            <li class="bars__row"><span class="bars__label">{{ label }}</span><span class="bars__track"><span class="bars__fill" style="width:{{ pct }}%"></span></span><span class="bars__value">{{ valueText }}</span></li>
+            {{/each}}
+          </ul>
+          <p class="insight-card__foot"><span><small>Jam paling ramai</small><b>{{ demo.insights.busiestHours }}</b></span><span><small>Produk teratas</small><b>Nastar premium</b></span></p>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ HARGA ============ -->
+    <section class="section section--tint" id="harga" aria-labelledby="harga-title">
       <div class="wrap">
-        <div class="section__head reveal">
-          <p class="eyebrow">Untuk siapa</p>
-          <h2 class="h2">Untuk penjual yang closing di WhatsApp.</h2>
-        </div>
-        <div class="who">
-          <article class="who__card reveal">
-            <span class="who__icon who__icon--gold" aria-hidden="true">
-              <svg viewBox="0 0 40 40"><circle cx="13" cy="15" r="6"/><circle cx="27" cy="15" r="6"/><circle cx="20" cy="27" r="6"/></svg>
-            </span>
-            <h3>Penjual rumahan</h3>
-            <p>Kue kering, hampers dan makanan rumahan. Siap untuk musim Lebaran dan Natal tanpa pesanan yang terlewat.</p>
-          </article>
-          <article class="who__card reveal">
-            <span class="who__icon who__icon--blue" aria-hidden="true">
-              <svg viewBox="0 0 40 40"><path d="M14 8h12l7 6-4 5-3-2v15H14V17l-3 2-4-5z"/></svg>
-            </span>
-            <h3>Toko online kecil</h3>
-            <p>Thrift, fashion dan reseller di IG, TikTok dan Shopee. Satu link di bio yang mengarah ke stok ready, marketplace dan WhatsApp.</p>
-          </article>
-          <article class="who__card reveal">
-            <span class="who__icon who__icon--green" aria-hidden="true">
-              <svg viewBox="0 0 40 40"><path d="M20 33s-12-7.2-12-15.5A6.5 6.5 0 0 1 20 13a6.5 6.5 0 0 1 12 4.5C32 25.8 20 33 20 33z"/></svg>
-            </span>
-            <h3>Handmade &amp; kerajinan</h3>
-            <p>Produk buatan tangan dan custom order. Tampilkan “Tanya harga” untuk pesanan yang harganya disepakati di chat.</p>
-          </article>
+        <div class="section__head">
+          <p class="eyebrow">Harga</p>
+          <h2 class="h2" id="harga-title">Mulai gratis. Upgrade kalau butuh pesanan rapi.</h2>
         </div>
 
-        <div class="vs reveal" tabindex="0" role="region" aria-label="Tabel perbandingan">
-          <table>
-            <caption class="sr-only">Perbandingan {{ brand }} dengan alternatif yang biasa dipakai penjual</caption>
-            <thead>
-              <tr>
-                <th scope="col"><span class="sr-only">Kebutuhan</span></th>
-                <th scope="col" class="vs__us">{{ brand }}</th>
-                <th scope="col">Link-in-bio biasa</th>
-                <th scope="col">Profil Instagram</th>
-                <th scope="col">Katalog WA Business</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><th scope="row">Link &amp; ikon media sosial dalam satu halaman</th><td class="vs__us yes">Ya</td><td class="yes">Ya</td><td class="part">Beberapa link</td><td class="no">Tidak</td></tr>
-              <tr><th scope="row">Katalog dengan harga rupiah</th><td class="vs__us yes">Ya</td><td class="part">Terbatas</td><td class="part">Hanya postingan</td><td class="part">Hanya di WhatsApp</td></tr>
-              <tr><th scope="row">Pesanan masuk WhatsApp dan tercatat rapi</th><td class="vs__us yes">Ya (Pro)</td><td class="no">Tidak</td><td class="no">Tidak</td><td class="part">Hanya chat</td></tr>
-              <tr><th scope="row">Tahu link mana yang di-tap</th><td class="vs__us yes">Ya</td><td class="part">Tergantung layanan</td><td class="part">Insight akun saja</td><td class="no">Tidak</td></tr>
-              <tr><th scope="row">Tanpa potongan penjualan</th><td class="vs__us yes">0%</td><td class="part">Ada yang memotong</td><td class="yes">Ya</td><td class="yes">Ya</td></tr>
-              <tr><th scope="row">Harga rupiah, bayar QRIS</th><td class="vs__us yes">Ya</td><td class="part">Ada yang pakai USD</td><td class="yes">Gratis</td><td class="yes">Gratis</td></tr>
-            </tbody>
-          </table>
+        <div class="plans">
+          <article class="plan" aria-labelledby="plan-free">
+            <h3 class="plan__name" id="plan-free">Gratis</h3>
+            <p class="plan__price"><b>Rp0</b><span>selamanya</span></p>
+            <p class="plan__note">Untuk mulai punya halaman usaha.</p>
+            <ul class="plan__list" role="list">
+              <li>Halaman usaha, kode QR, tombol bagikan</li>
+              <li>Sampai {{ limits.freeItems }} produk di katalog (yang tampil)</li>
+              <li>Sampai {{ limits.freeLinks }} tombol dan kartu link</li>
+              <li>Ikon media sosial (sampai {{ limits.socialIcons }}), judul bagian, atur urutan blok</li>
+              <li>Tombol “Tanya via WhatsApp” per produk</li>
+              <li>Statistik {{ limits.freeStatsDays }} hari terakhir</li>
+              <li>Insights: pratinjau</li>
+              <li>Tema dasar · lencana “Dibuat dengan {{ brandName }}”</li>
+            </ul>
+            <a class="btn btn--outline btn--block" href="#uji-coba" data-sheet-open="uji-coba">Ganti link bio kamu</a>
+          </article>
+
+          <article class="plan plan--pro" aria-labelledby="plan-pro" data-billing="monthly">
+            <h3 class="plan__name" id="plan-pro">Pro <span class="badge badge--pro">Untuk terima pesanan</span></h3>
+            <div class="billing js-only" role="group" aria-label="Periode bayar">
+              <button type="button" data-billing-set="monthly" aria-pressed="true">Bulanan</button>
+              <button type="button" data-billing-set="annual" aria-pressed="false">Tahunan <small>(2 bulan gratis)</small></button>
+            </div>
+            <p class="plan__price when-monthly"><b data-price="monthly">{{ price.monthly }}</b><span>/bulan</span></p>
+            <p class="plan__price when-annual"><b data-price="annual">{{ price.annual }}</b><span>/tahun</span></p>
+            <p class="plan__note when-monthly">Atau <span data-price="annual">{{ price.annual }}</span>/tahun. Bayar tahunan: 2 bulan gratis.</p>
+            <p class="plan__note when-annual">12 bulan, bayar 10. Hemat <span data-price="saving">{{ price.annualSaving }}</span>.</p>
+            <p class="plan__highlight">Pesanan via WhatsApp + catatan pesanan, statistik {{ limits.proStatsDays }} hari, Insights (segera), tanpa lencana, semua tema.</p>
+            <ul class="plan__list" role="list">
+              <li><b>Semua di paket Gratis</b>, plus:</li>
+              <li>Pesanan via WhatsApp (keranjang → pesan pesanan rapi)</li>
+              <li>Catatan pesanan dengan status</li>
+              <li>Produk tanpa batas (wajar) dan link tanpa batas</li>
+              <li>Statistik {{ limits.proStatsDays }} hari terakhir</li>
+              <li>Insights: sumber pengunjung, perangkat, jam ramai, klik per produk <span class="soon">segera</span></li>
+              <li>Lencana bisa dihilangkan · semua tema + warna sendiri</li>
+            </ul>
+            <a class="btn btn--accent btn--block" href="#uji-coba" data-sheet-open="uji-coba">Pilih Pro</a>
+            <p class="plan__pay">Bayar pakai QRIS atau transfer. Tanpa potong otomatis.</p>
+          </article>
         </div>
+        <p class="plans__foot"><svg aria-hidden="true"><use href="#i-check"/></svg>Tanpa komisi dari penjualanmu.</p>
+
+        <details class="matrix">
+          <summary>Bandingkan semua fitur</summary>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="Perbandingan paket Gratis dan Pro">
+            <table>
+              <thead><tr><th scope="col">Fitur</th><th scope="col">Gratis</th><th scope="col">Pro</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Halaman usaha, kode QR, tombol bagikan</th><td>✓</td><td>✓</td></tr>
+                <tr><th scope="row">Produk di katalog</th><td>sampai {{ limits.freeItems }} (yang tampil)</td><td>tanpa batas (wajar)</td></tr>
+                <tr><th scope="row">Tombol dan kartu link</th><td>sampai {{ limits.freeLinks }}</td><td>tanpa batas</td></tr>
+                <tr><th scope="row">Ikon media sosial, judul bagian, atur urutan blok</th><td>✓ (sampai {{ limits.socialIcons }} ikon)</td><td>✓ (sampai {{ limits.socialIcons }} ikon)</td></tr>
+                <tr><th scope="row">Tombol “Tanya via WhatsApp” per produk</th><td>✓</td><td>✓</td></tr>
+                <tr><th scope="row">Pesanan via WhatsApp (keranjang → pesan pesanan rapi)</th><td><span aria-label="tidak">–</span></td><td>✓</td></tr>
+                <tr><th scope="row">Catatan pesanan dengan status</th><td><span aria-label="tidak">–</span></td><td>✓</td></tr>
+                <tr><th scope="row">Statistik: kunjungan, klik WhatsApp, pesanan, klik per link</th><td>{{ limits.freeStatsDays }} hari terakhir</td><td>{{ limits.proStatsDays }} hari terakhir</td></tr>
+                <tr><th scope="row">Insights: sumber pengunjung, perangkat, jam ramai, klik per produk</th><td>pratinjau</td><td>✓ (segera)</td></tr>
+                <tr><th scope="row">Lencana “Dibuat dengan {{ brandName }}”</th><td>tampil</td><td>bisa dihilangkan</td></tr>
+                <tr><th scope="row">Tema</th><td>dasar</td><td>semua + warna sendiri</td></tr>
+                <tr><th scope="row">Harga</th><td>Rp0</td><td><span data-price="monthly">{{ price.monthly }}</span> / bulan</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
       </div>
     </section>
 
-    <!-- ============ TRUST ============ -->
-    <section class="section" id="kepercayaan">
+    {{#if founding.enabled}}
+    <!-- ============ ANGGOTA PENDIRI ============ -->
+    <section class="section" id="anggota-pendiri" aria-labelledby="pendiri-title">
       <div class="wrap">
-        <div class="section__head reveal">
-          <p class="eyebrow">Aman &amp; bisa dipercaya</p>
-          <h2 class="h2">Tokomu, pembelimu, uangmu. Tetap milikmu.</h2>
-        </div>
-        <div class="trust">
-          <div class="trust__item reveal">
-            <svg class="trust__icon" aria-hidden="true"><use href="#i-wallet"/></svg>
-            <h3>Tidak memegang uang pembeli</h3>
-            <p>Pembeli bayar langsung ke QRIS atau rekeningmu. Tanpa komisi, tanpa dana tertahan.</p>
+        <div class="founding">
+          <div class="founding__copy">
+            <p class="eyebrow eyebrow--light">Sebelum beta dibuka</p>
+            <h2 class="h2" id="pendiri-title">Jadi anggota pendiri</h2>
+            <p class="founding__text">Deposit {{ founding.deposit }} untuk {{ founding.proMonths }} bulan Pro, dan halaman tokomu kami buatkan sebelum Ramadan. Masa Pro mulai saat halamanmu tayang. Uang kembali penuh kalau kami belum meluncur sampai {{ founding.refundText }}.</p>
+            <a class="btn btn--wa btn--lg" href="{{ wa.founding }}"><svg aria-hidden="true"><use href="#i-wa"/></svg>Daftar lewat WhatsApp</a>
           </div>
-          <div class="trust__item reveal">
-            <svg class="trust__icon" aria-hidden="true"><use href="#i-eye-off"/></svg>
-            <h3>Tanpa pelacakan pengunjung</h3>
-            <p>Halaman toko tanpa cookie dan tanpa skrip pihak ketiga. Statistik hanya hitungan anonim, dan nomor HP pembeli tidak disimpan.</p>
-          </div>
-          <div class="trust__item reveal">
-            <svg class="trust__icon" aria-hidden="true"><use href="#i-shield"/></svg>
-            <h3>Bebas halaman judi &amp; penipuan</h3>
-            <p>Selama beta, halaman baru ditinjau sebelum tayang. Setiap halaman punya tombol Laporkan. Merekmu tidak bertetangga dengan spam.</p>
-          </div>
-          <div class="trust__item reveal">
-            <svg class="trust__icon" aria-hidden="true"><use href="#i-doc"/></svg>
-            <h3>Mengacu pada UU PDP</h3>
-            <p>Dirancang mengacu pada UU Pelindungan Data Pribadi, dengan <a href="{{ base }}privacy/">kebijakan privasi</a> berbahasa Indonesia.</p>
-          </div>
+          <ul class="founding__facts" role="list">
+            <li><b>{{ founding.deposit }}</b><span>deposit</span></li>
+            <li><b>{{ founding.proMonths }} bulan Pro</b><span>mulai saat halamanmu tayang</span></li>
+            <li><b>Dibuatkan</b><span>halaman tokomu, sebelum Ramadan</span></li>
+            <li><b>Uang kembali</b><span>kalau belum meluncur {{ founding.refundText }}</span></li>
+          </ul>
         </div>
       </div>
     </section>
-
-    <!-- ============ PRICING ============ -->
-    <section class="section section--dark" id="harga">
-      <div class="wrap">
-        <div class="section__head section__head--center reveal">
-          <p class="eyebrow eyebrow--gold">Harga</p>
-          <h2 class="h2">Mulai gratis. Upgrade saat pesanan mulai ramai.</h2>
-          <p class="lede">Tanpa komisi. Tanpa kartu kredit. {{ brand }} tidak pernah memegang uang pembelimu: pembayaran langsung ke rekening atau QRIS milikmu.</p>
-        </div>
-        {{> plans }}
-        <p class="plans__more reveal"><a href="{{ base }}pricing/">Bandingkan paket lengkap <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
-      </div>
-    </section>
-
-    <!-- ============ SIGN UP / WAITLIST ============ -->
-    {{#if hasSignup}}
-    <section class="section signup-cta" id="daftar">
-      <div class="wrap signup-cta__inner reveal">
-        <p class="eyebrow">Mulai sekarang</p>
-        <h2 class="h2">Ganti link bio kamu hari ini.</h2>
-        <p class="lede">Daftar dengan Google atau email, isi halamanmu dari HP, dan pasang link-nya di bio. Gratis untuk mulai.</p>
-        <a class="btn btn--accent btn--lg" href="{{ ctaHref }}" data-cta="signup-section">Buat halaman gratis <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      </div>
-    </section>
-    {{else}}
-    {{> signup-form }}
     {{/if}}
 
-    <!-- ============ FAQ ============ -->
-    <section class="section section--light" id="faq">
-      <div class="wrap faq">
-        <div class="section__head reveal">
-          <p class="eyebrow">FAQ</p>
-          <h2 class="h2">Pertanyaan yang sering muncul</h2>
-          <p class="lede">Belum terjawab? Lihat <a href="{{ base }}help/">pusat bantuan</a>{{#if support.hasWhatsapp}} atau <a href="{{ support.waLink }}" data-wa-support>chat kami di WhatsApp</a>{{/if}}. Kami balas {{ support.responseTime }}.</p>
+    <!-- ============ AMAN ============ -->
+    <section class="section{{#unless founding.enabled}} section--plain{{/unless}}" id="aman" aria-labelledby="aman-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Kepercayaan</p>
+          <h2 class="h2" id="aman-title">Aman dan menghargai privasi</h2>
         </div>
-        <div class="faq__list reveal">
-          <details>
-            <summary>Apa bedanya dengan link-in-bio biasa?</summary>
-            <p>Link-in-bio biasa berhenti di daftar link. Halaman {{ brand }} juga punya katalog dengan harga, tombol tanya di tiap produk, dan di paket Pro, pesanan WhatsApp yang tercatat rapi. Jadi halamanmu bukan cuma papan petunjuk, tapi etalase yang bisa menerima pesanan.</p>
-          </details>
-          <details>
-            <summary>Apakah {{ brand }} benar-benar gratis?</summary>
-            <p>Ya. Paket Gratis berisi halaman lengkap dengan QR code, hingga {{ free.items }} produk, {{ free.links }} link, {{ free.socialIcons }} ikon media sosial dan tombol “Tanya via WhatsApp”, tanpa batas waktu. Paket Pro menambahkan pesanan via WhatsApp dan daftar pesanan.</p>
-          </details>
-          <details>
-            <summary>Apakah ada potongan dari penjualan saya?</summary>
-            <p>Tidak ada. {{ brand }} tidak mengambil komisi sama sekali. Kamu hanya membayar langganan Pro kalau membutuhkannya.</p>
-          </details>
-          <details>
-            <summary>Bagaimana pembeli membayar?</summary>
-            <p>Langsung ke kamu, seperti biasa: QRIS atau transfer ke rekeningmu, disepakati di chat WhatsApp. {{ brand }} tidak pernah menyentuh uang pembeli.</p>
-          </details>
-          <details>
-            <summary>Apakah pembeli harus install aplikasi atau daftar akun?</summary>
-            <p>Tidak. Pembeli cukup membuka link-mu, termasuk dari browser di dalam Instagram, TikTok atau WhatsApp, lalu tanya atau pesan lewat WhatsApp.</p>
-          </details>
-          <details>
-            <summary>Saya cuma jualan di Shopee atau GoFood. Masih berguna?</summary>
-            <p>Masih. Halamanmu bisa berisi link ke Shopee, Tokopedia, TikTok Shop atau GoFood plus ikon media sosial, tanpa katalog. Kamu juga bisa lihat link mana yang paling sering di-tap pembeli.</p>
-          </details>
-          <details>
-            <summary>Bagaimana cara memasang link-nya di bio Instagram dan TikTok?</summary>
-            <p>Salin link halamanmu, lalu tempel di kolom tautan atau situs web saat mengedit profil. Langkah lengkapnya ada di <a href="{{ base }}help/#bio-instagram">panduan pasang link di bio</a>.</p>
-          </details>
-          <details>
-            <summary>Saya tidak punya laptop. Bisa?</summary>
-            <p>Bisa. {{ brand }} dibuat untuk HP sejak awal. Daftar, unggah foto produk dan kelola pesanan semuanya dari HP.</p>
-          </details>
-          <details>
-            <summary>Apa bedanya dengan katalog WhatsApp Business?</summary>
-            <p>Kami bekerja <em>bersama</em> WhatsApp, bukan menggantikannya. Katalog WhatsApp Business hanya bisa dilihat di dalam WhatsApp, tidak punya halaman bermerek untuk bio, tidak punya link ke marketplace dan tidak punya daftar pesanan. {{ brand }} melengkapi semua itu.</p>
-          </details>
-          <details>
-            <summary>Apakah pengunjung halaman saya dilacak?</summary>
-            <p>Tidak. Halaman toko tidak memakai cookie dan tidak memuat skrip pihak ketiga. Statistik yang kamu lihat hanya berupa hitungan anonim, misalnya jumlah kunjungan dan klik per link, tanpa data siapa pengunjungnya.</p>
-          </details>
-          <details>
-            <summary>Bisa pakai domain sendiri?</summary>
-            <p>Belum. Untuk saat ini halamanmu ada di {{ domain }}/namatoko. Link ini bisa langsung dipasang di bio, kemasan, banner dan kartu nama.</p>
-          </details>
-          {{#unless hasSignup}}
-          {{#if founding.enabled}}
-          <details class="if-founding">
-            <summary>Bagaimana kalau {{ brand }} batal meluncur?</summary>
-            <p>Deposit founding member {{ founding.priceText }} dikembalikan penuh jika kami belum meluncur sampai {{ founding.refundText }}.</p>
-          </details>
-          {{/if}}
-          <details>
-            <summary>Kapan {{ brand }} bisa dipakai?</summary>
-            <p>{{#if founding.enabled}}<span class="if-founding">Halaman founding member kami buatkan dan tayangkan sebelum Ramadan ({{ dates.conciergeWindow }}). </span>{{/if}}Beta terbuka untuk umum mulai {{ dates.betaOpensText }}.</p>
-          </details>
-          {{/unless}}
+        <ul class="trust" role="list">
+          <li><span class="trust__icon" aria-hidden="true"><svg><use href="#i-eye-off"/></svg></span>Halaman toko tanpa cookie dan tanpa pelacak pihak ketiga.</li>
+          <li><span class="trust__icon" aria-hidden="true"><svg><use href="#i-chart"/></svg></span>Statistik berupa hitungan anonim. Nomor HP pembeli tidak disimpan.</li>
+          <li><span class="trust__icon" aria-hidden="true"><svg><use href="#i-shield"/></svg></span>Setiap halaman ditinjau sebelum tayang selama masa beta. Tidak ada tempat untuk judi online dan penipuan; siapa pun bisa melaporkan halaman.</li>
+          <li><span class="trust__icon" aria-hidden="true"><svg><use href="#i-server"/></svg></span>Data disimpan di server Singapura.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section section--tint" id="faq" aria-labelledby="faq-title">
+      <div class="wrap wrap--narrow">
+        <div class="section__head">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="h2" id="faq-title">Pertanyaan yang sering ditanyakan</h2>
+        </div>
+        <div class="faq">
+          <details><summary>Apakah benar-benar gratis?</summary><p>Ya. Paket Gratis bisa dipakai selamanya: sampai {{ limits.freeItems }} produk, {{ limits.freeLinks }} link, dan tombol “Tanya via WhatsApp”. Bayar hanya kalau butuh fitur Pro.</p></details>
+          <details><summary>Apa bedanya dengan Linktree atau link bio lain?</summary><p>{{ brandName }} dibuat untuk penjual barang: ada katalog dengan harga, tombol tanya per produk, dan pesanan via WhatsApp. Link ke marketplace dan media sosial tetap bisa dipasang.</p></details>
+          <details><summary>Apa bedanya dengan katalog WhatsApp Business?</summary><p>Kamu dapat halaman bermerek yang bisa dibuka siapa saja dari bio, QR, atau kemasan, lengkap dengan link ke semua tempat jualanmu, statistik, dan (di Pro) pesanan yang tercatat rapi.</p></details>
+          <details><summary>Apakah {{ brandName }} ambil komisi?</summary><p>Tidak. Pembeli membayar langsung ke kamu. Kami tidak menyentuh uang pembeli.</p></details>
+          <details><summary>Bagaimana cara bayar Pro?</summary><p>Pakai QRIS atau transfer bank, bulanan atau tahunan. Tidak ada potong otomatis.</p></details>
+          <details><summary>Kalau saya berhenti bayar Pro?</summary><p>Fitur Pro tetap jalan 7 hari, lalu akun kembali ke Gratis. Data tidak dihapus; produk dan link di atas batas Gratis hanya disembunyikan.</p></details>
+          <details><summary>Perlu aplikasi?</summary><p>Tidak. Semua lewat browser di HP, dan dasbornya bisa dipasang di layar utama seperti aplikasi.</p></details>
+          <details><summary>Saya cuma jualan di Shopee. Bisa?</summary><p>Bisa. Kamu bisa membuat halaman berisi link saja, lalu tambah katalog kapan pun.</p></details>
+          <details><summary>Kapan bisa mulai?</summary><p>Masa beta dibuka {{ betaOpensText }}.{{#if founding.enabled}} Mau lebih cepat? <a href="#anggota-pendiri">Jadi anggota pendiri</a> dan halamanmu kami buatkan sebelum Ramadan.{{/if}}</p></details>
         </div>
       </div>
     </section>
 
-    <!-- ============ FINAL CTA ============ -->
-    <section class="final">
-      <div class="wrap final__inner reveal">
-        <h2 class="final__title">Bio-mu layak dapat halaman<br><span class="hl">yang bisa jualan.</span></h2>
-        <a class="btn btn--accent btn--lg" href="{{ ctaHref }}" data-cta="final">Ganti link bio kamu
-          <svg aria-hidden="true"><use href="#i-arrow"/></svg>
-        </a>
+    <!-- ============ CTA AKHIR ============ -->
+    <section class="final" aria-labelledby="final-title">
+      <div class="wrap center">
+        <h2 class="final__title" id="final-title">Halaman bisnismu, <span class="hl">cukup satu link.</span></h2>
+        <div class="btn-row">
+          <a class="btn btn--accent btn--lg" href="#uji-coba" data-sheet-open="uji-coba">Ganti link bio kamu</a>
+          <a class="btn btn--ghost btn--lg" href="{{ base }}contoh/kueburina/">Lihat contoh halaman</a>
+        </div>
       </div>
     </section>
