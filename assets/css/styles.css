@@ -324,6 +324,7 @@ tbody th { font-weight: 600; }
 /* Mulai sebelum beta: concierge page (D-71) and founding members (P-06) */
 .offers { display: grid; gap: 18px; align-items: stretch; }
 @media (min-width: 860px) { .offers { grid-template-columns: 1fr 1fr; } }
+.offers:has(> .offer:only-child) { grid-template-columns: 1fr; max-width: 680px; }
 .offer { display: flex; flex-direction: column; gap: 12px; padding: clamp(22px, 4vw, 32px); border-radius: 28px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--line); }
 .offer--dark { color: #fff; background: radial-gradient(600px 300px at 100% 0%, rgba(245, 165, 36, .28), transparent 70%), linear-gradient(140deg, #16233f, #0b1428); box-shadow: var(--shadow-lg); }
 .offer__tag { align-self: flex-start; padding: 3px 12px; border-radius: 999px; background: #e2f5eb; color: var(--green-700); font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }

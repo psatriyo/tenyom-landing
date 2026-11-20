@@ -11,7 +11,7 @@ Built from the requirement documents (`2027-project-requirement-documents`, 20 N
 | D-73 | The WhatsApp cart, order message and order log are P2: removed from the landing page, the example page and the dashboard. "Tanya via WhatsApp" stays |
 | D-74 | Branch blocks are in the MVP: on the example page, in the pricing and in the FAQ |
 | D-75 | Pro sells your own brand (no badge, colours), no limits, 90-day stats and Insights, and promos and "Baru" labels (P1, marked "segera"). No ads on any plan |
-| D-71 | New free offer: "Coba dulu: halamanmu kami buatkan" (concierge page), next to the founding-member offer |
+| D-71 | New free offer: "Coba dulu: halamanmu kami buatkan" (concierge page). The founding-member deposit offer is switched off |
 | D-78 | The dashboard checklist counts "≥3 menu items or 1 branch" |
 
 The site is the founder's prop for the Phase 0 interviews (until 20 Dec 2026): it explains the product in under a minute, lets the interviewee tap through an example restaurant page and dashboard in Free and Pro, and shows how to start before the beta. **No real sign-up, no database, no payments.**
@@ -24,7 +24,7 @@ The site is the founder's prop for the Phase 0 interviews (until 20 Dec 2026): i
 
 | Path | Content |
 | --- | --- |
-| `/` | Header (Masuk, Coba gratis), hero, masalah, solusi, cara kerja, Pro, Insights (segera), harga, mulai sebelum beta (concierge page and founding members), aman, FAQ, closing CTA, footer |
+| `/` | Header (Masuk, Coba gratis), hero, masalah, solusi, cara kerja, Pro, Insights (segera), harga, mulai sebelum beta (free concierge page; founding members when switched on), aman, FAQ, closing CTA, footer |
 | `/contoh/warungsari/` | Example restaurant page "Warung Sari" in the "Kafe dan resto" layout (F-15-FR6): header with WhatsApp button, social icons, Info toko, **Menu** with category tabs and item sheet ("Tanya via WhatsApp"), text-only items with a placeholder tile, two **branch cards** with their contacts, links (GoFood, GrabFood, Google Maps review, reservation, video card), badge. Free/Pro switch: Pro removes the badge, uses the merchant's own colours and shows promo and "Baru" labels (segera) |
 | `/contoh/dasbor/` | Example dashboard: Ringkasan (copy link, QR, share, activation checklist, plan usage vs the Free limits, upgrade card), Statistik (7 or 90 days, clicks per link and per branch contact), Insights (blurred with an upgrade prompt on Free) |
 | `/syarat-layanan/`, `/kebijakan-privasi/`, `/kebijakan-konten/` | The three legal **drafts (v0.1, not in force)**, rendered from `content/legal/*.md` with the draft banner, highlighted `[PLACEHOLDERS]` and a table of contents |
@@ -59,7 +59,7 @@ All brand, domain, price and contact values are in this one file. Edit it and re
 | `pricing.annualMonthsPaid` | 10 | Annual = 12 months for the price of 10 |
 | `limits.*` | 20 items, 10 links, 8 icons, 7 / 90 days | 204, D-32, D-43, D-48 |
 | `conciergeOffer.*` | enabled, area "Jabodetabek" | D-71. Free concierge page, live only with the merchant's OK. Turn off once Gate 0 has enough pages (they must be live by 13 Dec 2026) |
-| `foundingOffer.*` | enabled, Rp149.000, 3 months, refund by 15 Feb 2027 | P-06, to confirm; no longer a Gate 0 criterion (D-71). `enabled: false` removes it |
+| `foundingOffer.*` | **off**, Rp149.000, 3 months, refund by 15 Feb 2027 | P-06, to confirm; no longer a Gate 0 criterion (D-71). Turned off by the founder on 20 Nov; `enabled: true` brings it back |
 | `dates.betaOpens` | 2027-02-15 | Shown in the "uji coba" sheet, the offers and the FAQ |
 | `siteUrl`, `basePath` | `https://tenyom.com`, `/` | Canonical URLs, Open Graph, sitemap |
 

@@ -73,8 +73,10 @@ export default {
   // Founding-member offer (104 §4, P-06 "to confirm"; still offered, no
   // longer a Gate 0 criterion, D-71). Set enabled: false to hide it.
   // No countdown, no fake scarcity.
+  // Off since 20 Nov (founder): the free concierge page replaces it on the
+  // site, since strangers try first rather than pay a deposit (403, finding 11).
   foundingOffer: {
-    enabled: true,
+    enabled: false,
     deposit: 149000,
     proMonths: 3, // start when the merchant's page goes live (D-40)
     refundIfNoLaunchBy: "2027-02-15",
