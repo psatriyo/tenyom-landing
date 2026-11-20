@@ -8,8 +8,8 @@
     <a class="sheet__close" href="#" data-sheet-close aria-label="Tutup"><svg aria-hidden="true"><use href="#i-close"/></svg></a>
     <span class="sheet__icon" aria-hidden="true"><svg><use href="#i-sparkle"/></svg></span>
     <h2 class="sheet__title" id="uji-coba-title">{{ brandName }} masih dalam tahap uji coba</h2>
-    <p class="sheet__body" id="uji-coba-body">Terima kasih sudah mampir! Pendaftaran dibuka {{ betaOpensText }}. Mau dikabari atau ikut jadi anggota pendiri? Chat kami di WhatsApp.</p>
+    <p class="sheet__body" id="uji-coba-body">Terima kasih sudah mampir! Pendaftaran dibuka {{ betaOpensText }}. Mau dikabari, atau halamanmu kami buatkan lebih dulu? Chat kami di WhatsApp.</p>
     <a class="btn btn--wa btn--block btn--lg" href="{{ wa.ujiCoba }}"><svg aria-hidden="true"><use href="#i-wa"/></svg>Chat via WhatsApp</a>
-    {{#if founding.enabled}}{{#unless page.demo}}<a class="sheet__more" href="{{ base }}#anggota-pendiri" data-sheet-close>Lihat penawaran anggota pendiri</a>{{/unless}}{{/if}}
+    {{#if earlyStart}}{{#unless page.demo}}<a class="sheet__more" href="{{ base }}#mulai" data-sheet-close>Lihat cara mulai sebelum beta</a>{{/unless}}{{/if}}
   </div>
 </div>

@@ -26,7 +26,8 @@ const OUT = join(ROOT, "dist");
 // Legal documents in the order they are listed (D-54).
 const LEGAL_ORDER = ["syarat-layanan", "kebijakan-privasi", "kebijakan-konten"];
 // Routes of the previous version of the site, kept working as redirects.
-const REDIRECTS = { terms: "syarat-layanan/", privacy: "kebijakan-privasi/", pricing: "#harga", help: "#faq" };
+// "contoh/kueburina" was the example shop until the D-76 beachhead change.
+const REDIRECTS = { terms: "syarat-layanan/", privacy: "kebijakan-privasi/", pricing: "#harga", help: "#faq", "contoh/kueburina": "contoh/warungsari/" };
 
 /* ------------------------------------------------------------------ */
 /* Formatting helpers (NFR-14: rupiah as integers, "Rp99.000")          */
@@ -49,7 +50,7 @@ export const waLink = (number, text) => `https://wa.me/${digits(number)}${text ?
 export async function loadContext() {
   const bust = `?t=${Date.now()}`;
   const cfg = (await import(pathToFileURL(join(ROOT, "site.config.mjs")).href + bust)).default;
-  const demo = await import(pathToFileURL(join(SRC, "data", "kueburina.mjs")).href + bust);
+  const demo = await import(pathToFileURL(join(SRC, "data", "warungsari.mjs")).href + bust);
 
   const base = cfg.basePath.endsWith("/") ? cfg.basePath : cfg.basePath + "/";
   const siteUrl = cfg.siteUrl.replace(/\/+$/, "");
@@ -61,24 +62,55 @@ export async function loadContext() {
   const merchantWa = digits(cfg.demoMerchantWhatsApp) || founderWa;
   const exampleUrl = `${cfg.domain}/${demo.business.slug}`;
   const f = cfg.foundingOffer;
+  const c = cfg.conciergeOffer;
+  const name = demo.business.name;
 
-  // WhatsApp templates (F-08; wording still open, Q-P07). The cart's order
-  // message (F-09, D-37) is built in assets/js/demo.js.
+  // "Tanya via WhatsApp" message (F-08 template; wording still open, Q-P07).
   const via = `\n\n— via ${exampleUrl}`;
   const askText = (it) =>
     it.price
-      ? `Halo ${demo.business.name}, saya mau tanya tentang:\n*${it.name}* (${rupiah(it.price)})\n\nMasih tersedia?${via}`
-      : `Halo ${demo.business.name}, saya mau tanya tentang:\n*${it.name}*\n\nBoleh info harganya?${via}`; // derived
-  const items = demo.items.map((it) => ({
-    ...it,
-    askHref: waLink(merchantWa, askText(it)),
-    priceText: it.price ? rupiah(it.price) : "",
-    priceLabel: it.price ? rupiah(it.price) : "Tanya harga",
-    imageUrl: `${base}assets/img/produk/${it.image}.svg`,
-    categoryName: demo.categories.find((c) => c.id === it.category).name,
+      ? `Halo ${name}, saya mau tanya tentang:\n*${it.name}* (${rupiah(it.price)})\n\nMasih tersedia?${via}`
+      : `Halo ${name}, saya mau tanya tentang:\n*${it.name}*\n\nBoleh info harganya?${via}`; // derived
+  const items = demo.items.map((it) => {
+    const pro = it.pro || {};
+    return {
+      ...it,
+      askHref: waLink(merchantWa, askText(it)),
+      priceLabel: it.price ? rupiah(it.price) : "Tanya harga",
+      imageUrl: it.image ? `${base}assets/img/menu/${it.image}.svg` : "",
+      hasImage: Boolean(it.image),
+      // Pro view only (promos and labels, D-75, P1)
+      proLabel: pro.label || "",
+      proLabelClass: (pro.label || "").toLowerCase(),
+      hasPromo: Boolean(pro.promoPrice),
+      promoLabel: pro.promoPrice ? rupiah(pro.promoPrice) : "",
+    };
+  });
+  const branches = demo.branches.map((b) => ({
+    ...b,
+    contacts: b.contacts.map((ct) => ({
+      ...ct,
+      aria: `${ct.label} ${b.name}`,
+      // F-04-FR35: a WhatsApp contact opens a prefilled chat.
+      href: ct.type === "whatsapp" ? waLink(merchantWa, `Halo Kak, saya lihat dari halaman ${name} (${b.name}).`) : "#",
+      isDemo: ct.type !== "whatsapp",
+    })),
+  }));
+  const links = demo.links.list.map((l) => ({
+    ...l,
+    showPlatform: l.style === "card",
+    href: l.whatsapp ? waLink(merchantWa, l.whatsapp) : "#",
+    isDemo: !l.whatsapp,
   }));
   const maxOf = (list) => Math.max(...list.map((x) => x.value));
   const bars = (list, unit = "") => list.map((x) => ({ ...x, pct: Math.round((x.value / maxOf(list)) * 100), valueText: `${x.value}${unit}` }));
+
+  // Plan usage shown in the example dashboard (204: visible items; link
+  // blocks, where each branch counts as one, D-43 and D-74).
+  const usage = {
+    items: demo.items.length,
+    linkBlocks: demo.links.list.length + demo.branches.length,
+  };
 
   const ctx = {
     brandName: brand,
@@ -96,6 +128,7 @@ export async function loadContext() {
       contact: waLink(founderWa, `Halo, saya mau tanya tentang ${brand}.`),
       ujiCoba: waLink(founderWa, `Halo, saya mau dikabari soal ${brand}.`),
       founding: waLink(founderWa, `Halo, saya tertarik jadi anggota pendiri ${brand}.`),
+      concierge: waLink(founderWa, `Halo, saya mau dibuatkan halaman ${brand} untuk usaha saya.`),
       isPlaceholder: !founderWa,
     },
     price: {
@@ -111,16 +144,27 @@ export async function loadContext() {
       proMonths: f.proMonths,
       refundText: dateLong(f.refundIfNoLaunchBy),
     },
+    concierge: {
+      enabled: Boolean(c.enabled),
+      area: c.area,
+    },
+    // The "Mulai sebelum beta" section shows when either offer is on.
+    earlyStart: Boolean(f.enabled || c.enabled),
     betaOpensText: dateLong(cfg.dates.betaOpens),
     demo: {
       ...demo,
-      chatHref: waLink(merchantWa, `Halo ${demo.business.name}, saya mau tanya.${via}`), // derived
+      chatHref: waLink(merchantWa, `Halo ${name}, saya mau tanya.${via}`), // derived
       items,
-      firstItems: items.filter((it) => ["nastar", "hampers-a"].includes(it.id)),
-      links: { ...demo.links, list: demo.links.list.map((l) => ({ ...l, showPlatform: l.style === "card" })) },
-      orders: demo.orders.map((o) => ({ ...o, totalText: o.total ? rupiah(o.total) : "harga via chat", nameText: o.name || "—", statusClass: o.status.toLowerCase() })),
+      branches,
+      firstItems: items.filter((it) => ["nasi-goreng", "es-kopi-susu"].includes(it.id)),
+      links: { ...demo.links, list: links },
       topLinks: bars(demo.stats.topLinks),
       sources: bars(demo.insights.sources, "%"),
+      usage: {
+        ...usage,
+        itemsPct: Math.min(100, Math.round((usage.items / cfg.limits.freeItems) * 100)),
+        linksPct: Math.min(100, Math.round((usage.linkBlocks / cfg.limits.freeLinks) * 100)),
+      },
     },
   };
 
@@ -132,12 +176,8 @@ export async function loadContext() {
     price: { param: p.priceParam, options: p.proMonthlyOptions, fallback: p.proMonthlyDefault, annualMonthsPaid: p.annualMonthsPaid },
   }).replace(/</g, "\\u003c");
   ctx.demoJson = JSON.stringify({
-    merchantWa,
     url: exampleUrl,
-    business: demo.business,
-    items: demo.items.map(({ id, name, price, description, category }) => ({ id, name, price, description, category })),
-    orders: demo.orders,
-    nextOrderNo: Math.max(...demo.orders.map((o) => o.no)) + 1,
+    items: demo.items.map(({ id, name, price, description, pro }) => ({ id, name, price, description, promoPrice: (pro && pro.promoPrice) || null })),
   }).replace(/</g, "\\u003c");
 
   return ctx;

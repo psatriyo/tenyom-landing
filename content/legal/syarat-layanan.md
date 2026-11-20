@@ -12,7 +12,7 @@ Ringkasan ini membantu Anda memahami isi Syarat Layanan, tetapi tidak menggantik
 |---|---|
 | **Siapa kami** | BookBook dijalankan oleh [NAMA LENGKAP PENYEDIA], usaha perorangan dengan NIB [NIB]. |
 | **Untuk siapa** | Pemilik usaha berusia 21 tahun ke atas atau sudah menikah, atau berusia 18–20 tahun dengan izin orang tua atau wali, yang menjual barang atau jasa yang legal. |
-| **Apa yang kami sediakan** | Halaman usaha dengan katalog, tautan, dan tombol WhatsApp. Paket Pro menambahkan pesanan lewat WhatsApp, catatan pesanan, dan statistik lengkap. |
+| **Apa yang kami sediakan** | Halaman usaha dengan menu atau katalog, cabang, tautan, dan tombol WhatsApp. Paket Pro menambahkan tampilan dengan merek Anda sendiri tanpa lencana BookBook, menu, tautan, dan cabang tanpa batas, serta statistik yang lebih panjang. |
 | **Apa yang tidak kami lakukan** | Kami **tidak** menjadi pihak dalam jual beli antara Anda dan pembeli, **tidak** menerima uang pembeli, dan **tidak** mengambil komisi dari penjualan Anda. |
 | **Konten Anda** | Tetap milik Anda. Anda bertanggung jawab atas isi halaman **dan semua tautannya**. Aturannya ada di [Kebijakan Konten dan Tautan](/kebijakan-konten). |
 | **Pembayaran Pro** | Dibayar di muka, tanpa potong otomatis. Jika tidak diperpanjang, akun kembali ke paket Gratis dan data Anda tetap aman. |

@@ -1,67 +1,80 @@
 ---
 {
-  "title": "Contoh dasbor: Kue Bu Rina · {{ brandName }}",
-  "description": "Contoh dasbor penjual di {{ brandName }}: catatan pesanan, statistik, dan Insights. Data contoh.",
+  "title": "Contoh dasbor: Warung Sari · {{ brandName }}",
+  "description": "Contoh dasbor pemilik usaha di {{ brandName }}: ringkasan halaman, statistik, dan Insights. Data contoh.",
   "noindex": true,
   "demo": true,
   "demoLabel": "<b>Contoh dasbor</b> · data contoh"
 }
 ---
-{{!-- Phone-sized mockups of the order log (F-09), stats (F-11) and Insights
-      (F-20). Static mock data, labelled "contoh". Orders sent from the demo
-      storefront in this browser tab are added on top. --}}
+{{!-- Phone-sized mockups of the dashboard home (activation checklist,
+      F-02-FR6 with D-78; plan usage, 204), stats (F-11) and Insights (F-20).
+      Static mock data, labelled "contoh". No order log: the order flow is P2
+      (D-73). --}}
   {{> demo-bar }}
 
   <main id="main" class="dash" data-dash>
     <header class="dash__head">
-      <span class="dash__logo" aria-hidden="true">R</span>
+      <span class="dash__logo" aria-hidden="true">{{ demo.business.initial }}</span>
       <span class="dash__shop">
         <b>{{ demo.business.name }}</b>
-        <a href="{{ base }}contoh/kueburina/">{{ exampleUrl }}</a>
+        <a href="{{ base }}contoh/warungsari/">{{ exampleUrl }}</a>
       </span>
       <span class="plan-pill pro-only">Pro</span>
       <span class="plan-pill plan-pill--free pro-hide">Gratis</span>
     </header>
 
     <nav class="dash__tabs js-only" aria-label="Bagian dasbor" data-dash-tabs>
-      <a href="#pesanan" data-dash-tab="pesanan"><svg aria-hidden="true"><use href="#i-list"/></svg>Pesanan</a>
+      <a href="#ringkasan" data-dash-tab="ringkasan"><svg aria-hidden="true"><use href="#i-home"/></svg>Ringkasan</a>
       <a href="#statistik" data-dash-tab="statistik"><svg aria-hidden="true"><use href="#i-chart"/></svg>Statistik</a>
       <a href="#insights" data-dash-tab="insights"><svg aria-hidden="true"><use href="#i-compass"/></svg>Insights</a>
     </nav>
 
-    <!-- Order log (Pro) -->
-    <section class="panel" id="pesanan" data-panel="pesanan" aria-labelledby="pesanan-title">
+    <!-- Home: share, checklist, plan usage -->
+    <section class="panel" id="ringkasan" data-panel="ringkasan" aria-labelledby="ringkasan-title">
       <div class="panel__head">
-        <h1 class="panel__title" id="pesanan-title">Catatan pesanan</h1>
+        <h1 class="panel__title" id="ringkasan-title">Halamanmu sudah tayang</h1>
         <span class="chip">contoh</span>
       </div>
-      <div class="lockable">
-        <div class="lockable__content">
-          <div class="filters" role="group" aria-label="Saring status" data-filters>
-            <button type="button" data-filter="Semua" aria-pressed="true">Semua</button>
-            <button type="button" data-filter="Baru" aria-pressed="false">Baru</button>
-            <button type="button" data-filter="Dikonfirmasi" aria-pressed="false">Dikonfirmasi</button>
-            <button type="button" data-filter="Selesai" aria-pressed="false">Selesai</button>
-            <button type="button" data-filter="Dibatalkan" aria-pressed="false">Dibatalkan</button>
-          </div>
-          <ul class="orders" role="list" data-orders>
-            {{#each demo.orders}}
-            <li class="order">
-              <div class="order__top"><b>#{{ no }}</b><span>{{ time }}</span><em class="status status--{{ statusClass }}">{{ status }}</em></div>
-              <p class="order__name">{{ nameText }}</p>
-              <p class="order__summary">{{ summary }}</p>
-              <p class="order__total">{{ totalText }}</p>
-            </li>
-            {{/each}}
-          </ul>
-          <p class="panel__note" data-orders-empty hidden>Belum ada pesanan dengan status ini.</p>
+
+      <div class="card-box share-box">
+        <p class="share-box__url"><svg aria-hidden="true"><use href="#i-link"/></svg>{{ exampleUrl }}</p>
+        <div class="share-box__actions">
+          <button type="button" class="btn btn--dark btn--sm" data-demo-action="Contoh: di dasbor asli, link langsung tersalin untuk bio Instagram dan TikTok."><svg aria-hidden="true"><use href="#i-copy"/></svg>Salin link</button>
+          <button type="button" class="btn btn--outline btn--sm" data-demo-action="Contoh: di dasbor asli, kode QR bisa diunduh untuk dicetak di meja, kasir, dan kemasan."><svg aria-hidden="true"><use href="#i-qr"/></svg>Unduh QR</button>
+          <button type="button" class="btn btn--outline btn--sm" data-demo-action="Contoh: di dasbor asli, ini membuka menu bagikan HP, misalnya ke Status WhatsApp."><svg aria-hidden="true"><use href="#i-share"/></svg>Bagikan</button>
         </div>
-        <div class="lock pro-hide">
-          <span class="lock__icon" aria-hidden="true"><svg><use href="#i-lock"/></svg></span>
-          <p class="lock__title">Catatan pesanan ada di paket Pro</p>
-          <p class="lock__text">Pembeli isi keranjang dan pesan via WhatsApp. Setiap pesanan tercatat di sini dengan nomor, isi, total, dan status.</p>
-          <a class="btn btn--accent btn--block" href="#uji-coba" data-sheet-open="uji-coba"><span>Upgrade ke Pro · <span data-price="monthly">{{ price.monthly }}</span>/bulan</span></a>
-        </div>
+      </div>
+
+      <div class="card-box">
+        <h2 class="card-box__title">Langkah awal</h2>
+        <ul class="checklist" role="list">
+          <li class="is-done"><svg aria-hidden="true"><use href="#i-check"/></svg>Nomor WhatsApp terisi</li>
+          <li class="is-done"><svg aria-hidden="true"><use href="#i-check"/></svg>Minimal 3 menu atau 1 cabang</li>
+          <li class="is-done"><svg aria-hidden="true"><use href="#i-check"/></svg>Halaman diterbitkan</li>
+          <li><svg aria-hidden="true"><use href="#i-link"/></svg>Pasang link di bio Instagram dan TikTok</li>
+        </ul>
+      </div>
+
+      <div class="card-box">
+        <h2 class="card-box__title">Pemakaian paket</h2>
+        <ul class="usage" role="list">
+          <li>
+            <span class="usage__top"><b>Menu tampil</b><span class="pro-hide">{{ demo.usage.items }} dari {{ limits.freeItems }}</span><span class="pro-only">{{ demo.usage.items }} · tanpa batas</span></span>
+            <span class="usage__track pro-hide"><span class="usage__fill" style="width:{{ demo.usage.itemsPct }}%"></span></span>
+          </li>
+          <li>
+            <span class="usage__top"><b>Link dan cabang</b><span class="pro-hide">{{ demo.usage.linkBlocks }} dari {{ limits.freeLinks }}</span><span class="pro-only">{{ demo.usage.linkBlocks }} · tanpa batas</span></span>
+            <span class="usage__track pro-hide"><span class="usage__fill" style="width:{{ demo.usage.linksPct }}%"></span></span>
+          </li>
+        </ul>
+        <p class="panel__note">Setiap cabang dihitung sebagai satu link. Ikon media sosial dan judul bagian tidak dihitung.</p>
+      </div>
+
+      <div class="upgrade pro-hide">
+        <p class="upgrade__title">Menu lebih dari {{ limits.freeItems }}? Mau tampil dengan merekmu?</p>
+        <p class="upgrade__text">Pro: menu, link dan cabang tanpa batas, tanpa lencana, semua tema dan warna sendiri, statistik {{ limits.proStatsDays }} hari.</p>
+        <a class="btn btn--accent btn--block" href="#uji-coba" data-sheet-open="uji-coba"><span>Upgrade ke Pro · <span data-price="monthly">{{ price.monthly }}</span>/bulan</span></a>
       </div>
     </section>
 
@@ -69,13 +82,14 @@
     <section class="panel" id="statistik" data-panel="statistik" aria-labelledby="statistik-title">
       <div class="panel__head">
         <h2 class="panel__title" id="statistik-title">Statistik</h2>
-        <span class="chip">7 hari terakhir</span>
+        <span class="chip pro-hide">{{ limits.freeStatsDays }} hari terakhir</span>
+        <span class="chip pro-only">{{ limits.proStatsDays }} hari terakhir</span>
       </div>
       <ul class="counters" role="list">
         {{#each demo.stats.counters}}<li><b>{{ value }}</b><span>{{ label }}</span></li>{{/each}}
       </ul>
       <div class="card-box">
-        <h3 class="card-box__title">Link paling sering diklik</h3>
+        <h3 class="card-box__title">Paling sering diklik</h3>
         <ul class="bars" role="list">
           {{#each demo.topLinks}}
           <li class="bars__row"><span class="bars__label">{{ label }}</span><span class="bars__track"><span class="bars__fill" style="width:{{ pct }}%"></span></span><span class="bars__value">{{ valueText }}</span></li>
@@ -84,7 +98,7 @@
       </div>
       <p class="panel__note pro-hide">Paket Gratis menyimpan statistik {{ limits.freeStatsDays }} hari terakhir. Pro sampai {{ limits.proStatsDays }} hari. <a href="#uji-coba" data-sheet-open="uji-coba">Upgrade</a></p>
       <p class="panel__note pro-only">Paket Pro menyimpan statistik sampai {{ limits.proStatsDays }} hari terakhir.</p>
-      <p class="panel__note">{{ demo.insights.privacyNote }}</p>
+      <p class="panel__note">{{ demo.insights.privacyNote }} Tanpa cookie, tanpa melacak pengunjung.</p>
     </section>
 
     <!-- Insights (Pro, coming soon) -->
@@ -106,7 +120,7 @@
           <div class="card-box card-box--split">
             <div><h3 class="card-box__title">Jam paling ramai</h3><p class="big">{{ demo.insights.busiestHours }}</p></div>
             <div>
-              <h3 class="card-box__title">Produk paling sering diklik</h3>
+              <h3 class="card-box__title">Menu paling sering dilihat</h3>
               <ol class="rank">{{#each demo.insights.topItems}}<li>{{ this }}</li>{{/each}}</ol>
             </div>
           </div>
@@ -114,8 +128,8 @@
         </div>
         <div class="lock pro-hide">
           <span class="lock__icon" aria-hidden="true"><svg><use href="#i-lock"/></svg></span>
-          <p class="lock__title">Tahu pembeli datang dari mana</p>
-          <p class="lock__text">Insights ada di paket Pro: sumber pengunjung, jam ramai, dan produk yang paling sering diklik.</p>
+          <p class="lock__title">Tahu tamu datang dari mana</p>
+          <p class="lock__text">Insights ada di paket Pro: sumber pengunjung (Instagram, Google, QR di meja…), jam ramai, dan menu yang paling sering dilihat.</p>
           <a class="btn btn--accent btn--block" href="#uji-coba" data-sheet-open="uji-coba"><span>Upgrade ke Pro · <span data-price="monthly">{{ price.monthly }}</span>/bulan</span></a>
         </div>
       </div>
