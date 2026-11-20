@@ -1,0 +1,123 @@
+---
+{
+  "title": "Contoh halaman: Warung Sari · {{ brandName }}",
+  "description": "Contoh halaman usaha di {{ brandName }}: menu, cabang, link dan WhatsApp dalam satu halaman. Bukan usaha sungguhan.",
+  "noindex": true,
+  "demo": true,
+  "demoLabel": "<b>Contoh halaman</b> · bukan usaha sungguhan"
+}
+---
+{{!-- Phone-sized mockup of a merchant's public page (F-07 page anatomy) in
+      the "Kafe dan resto" layout (F-15-FR6, 208 §10): header → social icons
+      → info toko → Menu (catalog block) → branch cards (D-74) → links →
+      footer. Orders stay in WhatsApp: no cart (D-73). The Pro view shows
+      what Pro sells (D-75): no badge, own colours, promo and "Baru" labels
+      (P1, marked "segera"). "Warung Sari" is a persona (D-61). --}}
+  {{> demo-bar }}
+
+  <main id="main" class="store" data-store>
+    <header class="store__head">
+      <div class="store__cover" aria-hidden="true"></div>
+      <div class="store__logo" aria-hidden="true">{{ demo.business.initial }}</div>
+      <h1 class="store__name">{{ demo.business.name }}</h1>
+      <p class="store__meta">{{ demo.business.categoryCity }}</p>
+      <p class="store__desc">{{ demo.business.description }}</p>
+      <a class="btn btn--wa btn--block" href="{{ demo.chatHref }}"><svg aria-hidden="true"><use href="#i-wa"/></svg>Chat via WhatsApp</a>
+    </header>
+
+    <ul class="store__socials" role="list" aria-label="Media sosial">
+      {{#each demo.socials}}
+      <li><a href="#" data-demo-link aria-label="{{ label }} {{ demo.business.name }}"><svg aria-hidden="true"><use href="#{{ icon }}"/></svg></a></li>
+      {{/each}}
+    </ul>
+
+    <details class="store__info" open>
+      <summary><svg aria-hidden="true"><use href="#i-info"/></svg>Info toko<svg class="store__chev" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <ul role="list">
+        <li><svg aria-hidden="true"><use href="#i-clock"/></svg>{{ demo.business.hours }}</li>
+        <li><svg aria-hidden="true"><use href="#i-pin"/></svg><span>{{ demo.business.address }} · <a href="#" data-demo-link>Lihat peta</a></span></li>
+      </ul>
+    </details>
+
+    <section class="catalog" aria-labelledby="menu-title">
+      <h2 class="block-title" id="menu-title">{{ demo.catalogTitle }}</h2>
+      <div class="tabs" role="group" aria-label="Kategori menu" data-tabs>
+        <button type="button" data-tab="all" aria-pressed="true">Semua</button>
+        {{#each demo.categories}}<button type="button" data-tab="{{ id }}" aria-pressed="false">{{ name }}</button>{{/each}}
+      </div>
+      <ul class="grid" role="list" data-grid>
+        {{#each demo.items}}
+        <li class="card" data-item="{{ id }}" data-cat="{{ category }}">
+          <a class="card__open" href="{{ askHref }}" data-open-item="{{ id }}" data-ask-href="{{ askHref }}">
+            {{#if hasImage}}<img class="card__img" src="{{ imageUrl }}" alt="{{ alt }}" width="200" height="200"{{#if index}} loading="lazy"{{/if}}>{{else}}<span class="card__img card__img--none" aria-hidden="true"><svg><use href="#i-utensils"/></svg></span>{{/if}}
+            {{#if proLabel}}<span class="tag tag--{{ proLabelClass }} pro-only">{{ proLabel }}</span>{{/if}}
+            <span class="card__name">{{ name }}</span>
+            {{#if hasPromo}}
+            <span class="card__price pro-hide">{{ priceLabel }}</span>
+            <span class="card__price pro-only"><s>{{ priceLabel }}</s> <b class="card__promo">{{ promoLabel }}</b></span>
+            {{else}}
+            <span class="card__price{{#unless price}} card__price--ask{{/unless}}">{{ priceLabel }}</span>
+            {{/if}}
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+      <p class="store__pro-note pro-only"><svg aria-hidden="true"><use href="#i-tag"/></svg>Harga promo dan label “Baru” / “Promo” adalah fitur Pro yang <b>segera</b> hadir.</p>
+    </section>
+
+    <section class="branches" aria-labelledby="cabang-title">
+      <h2 class="block-title" id="cabang-title">Cabang</h2>
+      <ul role="list">
+        {{#each demo.branches}}
+        <li class="branch">
+          <h3 class="branch__name"><svg aria-hidden="true"><use href="#i-store"/></svg>{{ name }}</h3>
+          <p class="branch__line"><svg aria-hidden="true"><use href="#i-pin"/></svg><span>{{ address }} · <a href="#" data-demo-link>Lihat peta</a></span></p>
+          <p class="branch__line"><svg aria-hidden="true"><use href="#i-clock"/></svg>{{ hours }}</p>
+          <div class="branch__contacts">
+            {{#each contacts}}
+            <a class="branch__contact branch__contact--{{ type }}" href="{{ href }}"{{#if isDemo}} data-demo-link{{/if}} aria-label="{{ aria }}"><svg aria-hidden="true"><use href="#{{ icon }}"/></svg>{{ label }}</a>
+            {{/each}}
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </section>
+
+    <section class="links" aria-labelledby="links-title">
+      <h2 class="block-title" id="links-title">{{ demo.links.heading }}</h2>
+      <ul role="list">
+        {{#each demo.links.list}}
+        <li>
+          <a class="link link--{{ style }}" href="{{ href }}"{{#if isDemo}} data-demo-link{{/if}}>
+            <span class="link__icon link__icon--{{ id }}" aria-hidden="true"><svg><use href="#{{ icon }}"/></svg></span>
+            <span class="link__label">{{ label }}{{#if showPlatform}}<small>{{ platform }}</small>{{/if}}</span>
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+    </section>
+
+    <footer class="store__foot">
+      <a class="badge-made pro-hide" href="{{ base }}"><svg aria-hidden="true"><use href="#i-logo"/></svg>Dibuat dengan {{ brandName }}</a>
+      <p>
+        <a href="#" data-report><svg aria-hidden="true"><use href="#i-flag"/></svg>Laporkan</a>
+        <a href="{{ base }}syarat-layanan/">Syarat</a>
+        <a href="{{ base }}kebijakan-privasi/">Privasi</a>
+      </p>
+    </footer>
+  </main>
+
+  <!-- Item sheet -->
+  <div class="sheet sheet--item" data-sheet="item" role="dialog" aria-modal="true" aria-labelledby="item-name">
+    <a class="sheet__backdrop" href="#" data-sheet-close aria-label="Tutup"></a>
+    <div class="sheet__panel" tabindex="-1">
+      <span class="sheet__grip" aria-hidden="true"></span>
+      <a class="sheet__close" href="#" data-sheet-close aria-label="Tutup"><svg aria-hidden="true"><use href="#i-close"/></svg></a>
+      <img class="item__img" data-item-img src="" alt="" width="200" height="200">
+      <h2 class="item__name" id="item-name" data-item-name></h2>
+      <p class="item__price" data-item-price></p>
+      <p class="item__desc" data-item-desc></p>
+      <a class="btn btn--wa btn--block" data-item-ask href="#"><svg aria-hidden="true"><use href="#i-wa"/></svg>Tanya via WhatsApp</a>
+      <p class="item__note">Pesanan diurus langsung di chat WhatsApp dengan {{ demo.business.name }}.</p>
+    </div>
+  </div>

@@ -2,9 +2,9 @@
 // Site configuration: the ONE place for brand, domain, price and contact
 // values. Edit here, then run `node scripts/build.mjs`.
 //
-// Source of truth: "BookBook · landing-page and demo export" (19 Nov 2026,
-// requirement-documents commit 1ef6476). IDs in comments (D-xx decided,
-// P-xx proposed, Q-xx open) point to the decision log in that export.
+// Source of truth: the requirement documents (2027-project-requirement-documents,
+// 20 Nov 2026, commit b58a8c4, decisions up to D-78). IDs in comments (D-xx
+// decided, P-xx proposed, Q-xx open) point to its decision log (114).
 // Values marked OPEN are undecided: the default is used until they are.
 // ---------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ export default {
   // OPEN (Q-04, due before 15 Feb 2027). Working name only (D-22).
   brandName: "BookBook",
   // OPEN (Q-04). Example domain used throughout the docs; not registered.
-  // Merchant pages live at /[slug] on this domain, e.g. bookbook.id/kueburina.
+  // Merchant pages live at /[slug] on this domain, e.g. bookbook.id/warungsari.
   domain: "bookbook.id",
   // The merchant app lives on an app. subdomain (D-70). Not linked during the
   // demo: "Masuk" and "Coba gratis" open the "uji coba" sheet instead.
@@ -26,14 +26,15 @@ export default {
 
   // OPEN: founder's WhatsApp number, international format without "+" or
   // spaces, e.g. "6281234567890". Used by "Hubungi kami", the "uji coba" sheet
-  // and the founding-member button. Empty = the placeholder: wa.me opens
+  // and the concierge and founding-member buttons. Empty = the placeholder: wa.me opens
   // WhatsApp's "choose a chat" screen with the message filled in.
   // Do not put an invented number here.
   founderWhatsApp: "6281212345678",
   // OPEN: support email. Empty = not shown (the legal drafts keep their own
   // [EMAIL DUKUNGAN] placeholders, which are never replaced automatically).
   supportEmail: "",
-  // Number the demo shop "Kue Bu Rina" sends its WhatsApp messages to.
+  // Number the example page "Warung Sari" sends its WhatsApp messages to
+  // ("Tanya via WhatsApp", branch contacts, reservation link).
   // Empty = founderWhatsApp; if that is empty too, the "choose a chat" screen.
   // Never a stranger's number.
   demoMerchantWhatsApp: "",
@@ -58,8 +59,20 @@ export default {
     proStatsDays: 90,
   },
 
-  // Founding-member offer (104 §4, P-06 "to confirm"). Set enabled: false to
-  // hide the section and its links. No countdown, no fake scarcity.
+  // Free concierge page for Phase 0 (D-71): the founder builds the page from
+  // what the merchant sends, the merchant approves it in writing before it
+  // goes live and can ask for it to be taken down at any time. Free for the
+  // merchant. Shown in the "Mulai sebelum beta" section. Set enabled: false
+  // once Gate 0 has enough pages (pages must be live by 13 Dec 2026).
+  conciergeOffer: {
+    enabled: true,
+    // Where the founder can set pages up (Phase 0 runs in Greater Jakarta).
+    area: "Jabodetabek",
+  },
+
+  // Founding-member offer (104 §4, P-06 "to confirm"; still offered, no
+  // longer a Gate 0 criterion, D-71). Set enabled: false to hide it.
+  // No countdown, no fake scarcity.
   foundingOffer: {
     enabled: true,
     deposit: 149000,

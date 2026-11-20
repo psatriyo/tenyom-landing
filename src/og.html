@@ -10,7 +10,7 @@
   .copy { position: absolute; left: 72px; top: 0; bottom: 0; width: 560px; display: flex; flex-direction: column; justify-content: center; }
   .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 30px; letter-spacing: -.02em; }
   .brand svg { width: 40px; height: 40px; }
-  h1 { margin-top: 30px; font-size: 72px; line-height: 1.02; letter-spacing: -.045em; font-weight: 800; }
+  h1 { margin-top: 30px; font-size: 64px; line-height: 1.02; letter-spacing: -.045em; font-weight: 800; }
   h1 span { color: #f5a524; }
   p { margin-top: 24px; font-size: 24px; line-height: 1.45; color: #c3cde3; max-width: 500px; }
   .url { margin-top: 30px; display: inline-flex; align-self: flex-start; padding: 12px 22px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); font-size: 22px; font-weight: 600; color: #dbe2f0; }
@@ -33,12 +33,12 @@
   .lab { margin: 14px 16px 6px; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #4a5672; }
   .lk { margin: 0 14px 8px; display: flex; align-items: center; gap: 10px; padding: 9px; border-radius: 14px; background: #fff; box-shadow: 0 0 0 1px #edf0f6; font-size: 14px; font-weight: 700; }
   .lk i { width: 30px; height: 30px; border-radius: 8px; }
-  .order { position: absolute; left: 598px; top: 372px; width: 226px; padding: 16px 18px; border-radius: 18px; background: #fff; color: #14203a; box-shadow: 0 30px 60px -20px rgba(5,12,30,.6); font-size: 15px; line-height: 1.5; }
-  .order .top { display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
-  .chip { padding: 2px 10px; border-radius: 999px; background: #fff1e9; color: #c2441d; font-size: 12px; font-weight: 700; }
-  .order ul { list-style: none; margin-top: 6px; color: #4a5672; }
-  .tot { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #e6e1d8; color: #4a5672; }
-  .tot b { color: #178a52; font-size: 18px; }
+  .br { position: absolute; left: 600px; top: 388px; width: 236px; padding: 16px 18px; border-radius: 18px; background: #fff; color: #14203a; box-shadow: 0 30px 60px -20px rgba(5,12,30,.6); font-size: 15px; line-height: 1.45; }
+  .br b { display: block; font-size: 16px; }
+  .br small { display: block; color: #4a5672; font-size: 13px; }
+  .br .row { display: flex; gap: 8px; margin-top: 10px; }
+  .br .row i { height: 30px; padding: 0 12px; border-radius: 999px; background: #137d4a; color: #fff; font-style: normal; font-size: 13px; font-weight: 700; line-height: 30px; }
+  .br .row i + i { background: #eef0f5; color: #14203a; }
 </style>
 </head>
 <body>
@@ -47,27 +47,28 @@
       <svg viewBox="0 0 32 32"><path d="M6 3h20a4 4 0 0 1 4 4v13.5a4 4 0 0 1-4 4H13.5L7 30v-5.5H6a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z" fill="#F26B3A"/><path d="M7.5 9.6c2.8-1 5.6-.6 8 1.1v9.1c-2.4-1.6-5.2-2-8-1.1zM24.5 9.6c-2.8-1-5.6-.6-8 1.1v9.1c2.4-1.6 5.2-2 8-1.1z" fill="#fff"/></svg>
       {{ brandName }}
     </div>
-    <h1>Halaman bisnismu, <span>cukup satu link.</span></h1>
-    <p>Katalog, link dan pesanan WhatsApp dalam satu halaman. Gratis, siap dalam 15 menit dari HP.</p>
-    <div class="url">{{ domain }}/<b>kueburina</b></div>
+    <h1>Halaman bisnismu di internet, <span>cukup satu link.</span></h1>
+    <p>Menu atau katalog, cabang, link dan WhatsApp dalam satu halaman. Gratis, siap dalam 15 menit dari HP.</p>
+    <div class="url">{{ domain }}/<b>{{ demo.business.slug }}</b></div>
   </div>
   <div class="phone"><div class="screen">
     <div class="cover"></div>
-    <div class="head"><div class="av">R</div><div class="name">Kue Bu Rina</div><div class="sub">Hampers &amp; kue kering · Bekasi</div>
+    <div class="head"><div class="av">{{ demo.business.initial }}</div><div class="name">{{ demo.business.name }}</div><div class="sub">{{ demo.business.categoryCity }}</div>
       <div class="soc"><i></i><i></i><i></i></div></div>
-    <div class="items">
-      <div class="it"><span class="th g1"></span><span><b>Nastar premium</b><small>Rp95.000 · 500 g</small></span></div>
-      <div class="it"><span class="th g2"></span><span><b>Hampers Lebaran A</b><small>Rp250.000 · 3 toples</small></span></div>
-      <div class="it"><span class="th g3"></span><span><b>Hampers custom</b><small style="color:#c2441d;font-weight:700">Tanya harga</small></span></div>
+    <div class="lab">Menu</div>
+    <div class="items" style="padding-top:0">
+      <div class="it"><span class="th g1"></span><span><b>Nasi goreng spesial</b><small>Rp35.000</small></span></div>
+      <div class="it"><span class="th g2"></span><span><b>Paket makan siang</b><small>Rp45.000</small></span></div>
+      <div class="it"><span class="th g3"></span><span><b>Es kopi susu</b><small>Rp22.000</small></span></div>
     </div>
-    <div class="lab">Belanja juga di</div>
-    <div class="lk"><i style="background:#1aa260"></i>Pesan lewat GoFood</div>
-    <div class="lk"><i style="background:#f05a28"></i>Belanja di Shopee</div>
+    <div class="lab">Pesan &amp; ulasan</div>
+    <div class="lk"><i style="background:#1aa260"></i>Pesan di GoFood</div>
+    <div class="lk"><i style="background:#f5a524"></i>Ulasan di Google Maps</div>
   </div></div>
-  <div class="order">
-    <div class="top">Pesanan #12 <span class="chip">Baru</span></div>
-    <ul><li>2× Nastar premium</li><li>1× Hampers Lebaran A</li></ul>
-    <div class="tot">Total <b>Rp440.000</b></div>
+  <div class="br">
+    <b>Cabang Puri Indah</b>
+    <small>Setiap hari, 10.00–21.00</small>
+    <div class="row"><i>WhatsApp</i><i>Peta</i></div>
   </div>
 </body>
 </html>
