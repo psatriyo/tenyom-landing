@@ -345,7 +345,7 @@ async function build() {
   const docs = [];
   for (const n of names) {
     const doc = renderMarkdown(await readFile(join(legalDir, `${n}.md`), "utf8"), { base: ctx.base });
-    // "Syarat Layanan BookBook" -> "Syarat Layanan"
+    // "Syarat Layanan SatuPage" -> "Syarat Layanan"
     doc.short = doc.title.replace(new RegExp(`\\s+${ctx.brandName}$`), "");
     doc.route = n;
     docs.push(doc);

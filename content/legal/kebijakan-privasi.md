@@ -1,4 +1,4 @@
-# Kebijakan Privasi BookBook
+# Kebijakan Privasi SatuPage
 
 > **DRAF v0.1 · 18 November 2026 · belum berlaku.** Draf ini disusun untuk ditinjau penasihat hukum (sesi 31 Januari 2027) dan bukan nasihat hukum. Teks dalam tanda kurung siku, misalnya [EMAIL PRIVASI], wajib diisi sebelum diterbitkan. Bagian yang bertanda ⚠️ harus dicocokkan dengan pengaturan penyedia layanan yang sebenarnya.
 
@@ -16,11 +16,11 @@
 
 ## 1. Siapa kami
 
-1.1. Layanan BookBook dijalankan oleh **[NAMA LENGKAP PENYEDIA]**, usaha perorangan dengan NIB **[NIB]**, beralamat di **[ALAMAT USAHA]** ("**kami**").
+1.1. Layanan SatuPage dijalankan oleh **[NAMA LENGKAP PENYEDIA]**, usaha perorangan dengan NIB **[NIB]**, beralamat di **[ALAMAT USAHA]** ("**kami**").
 
 1.2. Kebijakan ini menjelaskan cara kami memproses data pribadi menurut UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi ("**UU PDP**") dan peraturan pelaksananya.
 
-1.3. Kebijakan ini berlaku untuk situs BookBook, dasbor penjual, dan semua Halaman toko di [DOMAIN].
+1.3. Kebijakan ini berlaku untuk situs SatuPage, dasbor penjual, dan semua Halaman toko di satupage.com.
 
 ## 2. Peran kami
 

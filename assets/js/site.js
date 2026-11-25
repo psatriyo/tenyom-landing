@@ -1,4 +1,4 @@
-/* BookBook marketing site: shared behaviour for every page.
+/* SatuPage marketing site: shared behaviour for every page.
    - Pro price switch for interviews: ?harga=49 or ?harga=99 (kept for the tab)
    - Monthly / annual toggle on the Pro card
    - Bottom sheets ("uji coba" and the demo sheets), toast

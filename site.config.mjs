@@ -9,19 +9,18 @@
 // ---------------------------------------------------------------------------
 
 export default {
-  // OPEN (Q-04, due before 15 Feb 2027). Working name only (D-22).
-  brandName: "BookBook",
-  // OPEN (Q-04). Example domain used throughout the docs; not registered.
-  // Merchant pages live at /[slug] on this domain, e.g. bookbook.id/warungsari.
-  domain: "bookbook.id",
+  // Decided (Q-04): the product name and domain.
+  brandName: "SatuPage",
+  // Merchant pages live at /[slug] on this domain, e.g. satupage.com/warungsari.
+  domain: "satupage.com",
   // The merchant app lives on an app. subdomain (D-70). Not linked during the
   // demo: "Masuk" and "Coba gratis" open the "uji coba" sheet instead.
-  appDomain: "app.bookbook.id",
+  appDomain: "app.satupage.com",
 
   // Where THIS site is served: canonical URLs, Open Graph, sitemap.
   // No trailing slash. basePath is "/" on a custom domain; use
   // "/tenyom-landing/" if served from psatriyo.github.io/tenyom-landing/.
-  siteUrl: "https://tenyom.com",
+  siteUrl: "https://satupage.com",
   basePath: "/",
 
   // OPEN: founder's WhatsApp number, international format without "+" or
@@ -86,6 +85,6 @@ export default {
     betaOpens: "2027-02-15",
   },
 
-  // Footer: "© 2026 BookBook · nama kerja · prototipe untuk riset".
+  // Footer: "© 2026 SatuPage · prototipe untuk riset".
   copyrightYear: 2026,
 };
