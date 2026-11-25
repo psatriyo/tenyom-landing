@@ -1,6 +1,6 @@
-# BookBook marketing site and interview demo
+# SatuPage marketing site and interview demo
 
-Marketing one-pager, legal drafts and clickable mockups for **BookBook** (working name, D-22): **"Halaman bisnismu di internet, cukup satu link."** A phone-first business page for Indonesian small businesses, led by food and drink businesses with a shop (cafés, restaurants, warung, bakeries), with home food sellers as the secondary segment.
+Marketing one-pager, legal drafts and clickable mockups for **SatuPage** (satupage.com): **"Halaman bisnismu di internet, cukup satu link."** A phone-first business page for Indonesian small businesses, led by food and drink businesses with a shop (cafés, restaurants, warung, bakeries), with home food sellers as the secondary segment.
 
 Built from the requirement documents (`2027-project-requirement-documents`, 20 Nov 2026, commit `b58a8c4`, decisions up to **D-78**). Where the previous version of this site (the 19 Nov export) disagrees with them, the requirement documents win. The main changes since that export:
 
@@ -50,8 +50,8 @@ All brand, domain, price and contact values are in this one file. Edit it and re
 
 | Key | Default | Status |
 | --- | --- | --- |
-| `brandName`, `domain` | BookBook, bookbook.id | Open (Q-04, due 15 Feb 2027) |
-| `appDomain` | app.bookbook.id | D-70. Not linked in the demo: "Masuk" opens the "uji coba" sheet |
+| `brandName`, `domain` | SatuPage, satupage.com | Decided (Q-04) |
+| `appDomain` | app.satupage.com | D-70. Not linked in the demo: "Masuk" opens the "uji coba" sheet |
 | `founderWhatsApp` | set | Used by "Hubungi kami", the "uji coba" sheet and both offer buttons. Empty opens WhatsApp's "choose a chat" screen with the message filled in |
 | `supportEmail` | empty = `[EMAIL DUKUNGAN]` | Open. Shown in the footer once set |
 | `demoMerchantWhatsApp` | empty (falls back to `founderWhatsApp`) | Number the example page sends to ("Tanya via WhatsApp", branch contacts, reservation). Never a stranger's number |
@@ -61,7 +61,7 @@ All brand, domain, price and contact values are in this one file. Edit it and re
 | `conciergeOffer.*` | enabled, area "Jabodetabek" | D-71. Free concierge page, live only with the merchant's OK. Turn off once Gate 0 has enough pages (they must be live by 13 Dec 2026) |
 | `foundingOffer.*` | **off**, Rp149.000, 3 months, refund by 15 Feb 2027 | P-06, to confirm; no longer a Gate 0 criterion (D-71). Turned off by the founder on 20 Nov; `enabled: true` brings it back |
 | `dates.betaOpens` | 2027-02-15 | Shown in the "uji coba" sheet, the offers and the FAQ |
-| `siteUrl`, `basePath` | `https://tenyom.com`, `/` | Canonical URLs, Open Graph, sitemap |
+| `siteUrl`, `basePath` | `https://satupage.com`, `/` | Canonical URLs, Open Graph, sitemap |
 
 The "Mulai sebelum beta" section shows when either offer is on.
 The example page's data (menu, branches, links, stats, Insights) is in `src/data/warungsari.mjs`.
@@ -85,7 +85,7 @@ Then open http://localhost:8000. The output in `dist/` is ignored by git.
 
 ## Deploy to GitHub Pages
 
-`.github/workflows/pages.yml` builds the site and deploys `dist/` on every push to `main` (or by hand from the Actions tab). In **Settings → Pages → Build and deployment → Source**, choose **GitHub Actions**, and keep the custom domain (`CNAME`, `tenyom.com`).
+`.github/workflows/pages.yml` builds the site and deploys `dist/` on every push to `main` (or by hand from the Actions tab). In **Settings → Pages → Build and deployment → Source**, choose **GitHub Actions**, and keep the custom domain (`CNAME`, `satupage.com`).
 
 ## Social preview image
 

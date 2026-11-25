@@ -1,6 +1,6 @@
-# Syarat Layanan BookBook
+# Syarat Layanan SatuPage
 
-> **DRAF v0.1 · 18 November 2026 · belum berlaku.** Draf ini disusun untuk ditinjau penasihat hukum (sesi 31 Januari 2027) dan bukan nasihat hukum. Teks dalam tanda kurung siku, misalnya [NIB], wajib diisi sebelum diterbitkan. "BookBook" adalah nama kerja; ganti dengan nama akhir (Q-04).
+> **DRAF v0.1 · 18 November 2026 · belum berlaku.** Draf ini disusun untuk ditinjau penasihat hukum (sesi 31 Januari 2027) dan bukan nasihat hukum. Teks dalam tanda kurung siku, misalnya [NIB], wajib diisi sebelum diterbitkan.
 
 **Berlaku sejak:** [TANGGAL BERLAKU] · **Versi:** [VERSI]
 
@@ -10,9 +10,9 @@ Ringkasan ini membantu Anda memahami isi Syarat Layanan, tetapi tidak menggantik
 
 | | |
 |---|---|
-| **Siapa kami** | BookBook dijalankan oleh [NAMA LENGKAP PENYEDIA], usaha perorangan dengan NIB [NIB]. |
+| **Siapa kami** | SatuPage dijalankan oleh [NAMA LENGKAP PENYEDIA], usaha perorangan dengan NIB [NIB]. |
 | **Untuk siapa** | Pemilik usaha berusia 21 tahun ke atas atau sudah menikah, atau berusia 18–20 tahun dengan izin orang tua atau wali, yang menjual barang atau jasa yang legal. |
-| **Apa yang kami sediakan** | Halaman usaha dengan menu atau katalog, cabang, tautan, dan tombol WhatsApp. Paket Pro menambahkan tampilan dengan merek Anda sendiri tanpa lencana BookBook, menu, tautan, dan cabang tanpa batas, serta statistik yang lebih panjang. |
+| **Apa yang kami sediakan** | Halaman usaha dengan menu atau katalog, cabang, tautan, dan tombol WhatsApp. Paket Pro menambahkan tampilan dengan merek Anda sendiri tanpa lencana SatuPage, menu, tautan, dan cabang tanpa batas, serta statistik yang lebih panjang. |
 | **Apa yang tidak kami lakukan** | Kami **tidak** menjadi pihak dalam jual beli antara Anda dan pembeli, **tidak** menerima uang pembeli, dan **tidak** mengambil komisi dari penjualan Anda. |
 | **Konten Anda** | Tetap milik Anda. Anda bertanggung jawab atas isi halaman **dan semua tautannya**. Aturannya ada di [Kebijakan Konten dan Tautan](/kebijakan-konten). |
 | **Pembayaran Pro** | Dibayar di muka, tanpa potong otomatis. Jika tidak diperpanjang, akun kembali ke paket Gratis dan data Anda tetap aman. |
@@ -20,7 +20,7 @@ Ringkasan ini membantu Anda memahami isi Syarat Layanan, tetapi tidak menggantik
 
 ## 1. Tentang kami dan perjanjian ini
 
-1.1. Layanan BookBook ("**Layanan**") disediakan oleh **[NAMA LENGKAP PENYEDIA]**, usaha perorangan dengan Nomor Induk Berusaha **[NIB]**, beralamat di **[ALAMAT USAHA]**, terdaftar sebagai Penyelenggara Sistem Elektronik Lingkup Privat dengan nomor **[NOMOR TANDA DAFTAR PSE]** ("**kami**").
+1.1. Layanan SatuPage ("**Layanan**") disediakan oleh **[NAMA LENGKAP PENYEDIA]**, usaha perorangan dengan Nomor Induk Berusaha **[NIB]**, beralamat di **[ALAMAT USAHA]**, terdaftar sebagai Penyelenggara Sistem Elektronik Lingkup Privat dengan nomor **[NOMOR TANDA DAFTAR PSE]** ("**kami**").
 
 1.2. Syarat Layanan ini adalah perjanjian antara kami dan Anda sebagai pengguna yang membuat akun ("**Anda**" atau "**Penjual**"). Dengan mencentang kotak persetujuan saat mendaftar, atau dengan menggunakan Layanan, Anda menyetujui:
 
@@ -34,7 +34,7 @@ Ringkasan ini membantu Anda memahami isi Syarat Layanan, tetapi tidak menggantik
 
 | Istilah | Arti |
 |---|---|
-| **Halaman** | Halaman publik Anda di [DOMAIN]/alamat-anda, termasuk katalog, tautan, dan ikon media sosial. |
+| **Halaman** | Halaman publik Anda di satupage.com/alamat-anda, termasuk katalog, tautan, dan ikon media sosial. |
 | **Alamat Halaman** (*slug*) | Bagian alamat setelah domain, misalnya `kueburina`. |
 | **Konten** | Semua teks, gambar, harga, tautan, dan data lain yang Anda masukkan atau tampilkan melalui Layanan, termasuk tujuan setiap tautan. |
 | **Pembeli** atau **Pengunjung** | Orang yang membuka Halaman Anda atau memesan dari Anda. |
@@ -140,9 +140,9 @@ Statistik dan Insights adalah hitungan anonim (misalnya jumlah kunjungan dan kli
 
 ## 11. Hak kekayaan intelektual kami
 
-11.1. Nama, logo, desain, kode, dan perangkat lunak BookBook adalah milik kami atau pemberi lisensi kami. Anda tidak memperoleh hak atasnya selain hak menggunakan Layanan menurut perjanjian ini.
+11.1. Nama, logo, desain, kode, dan perangkat lunak SatuPage adalah milik kami atau pemberi lisensi kami. Anda tidak memperoleh hak atasnya selain hak menggunakan Layanan menurut perjanjian ini.
 
-11.2. Pada Paket Gratis, lencana "Dibuat dengan BookBook" ditampilkan di Halaman Anda dan tidak boleh disembunyikan atau diubah.
+11.2. Pada Paket Gratis, lencana "Dibuat dengan SatuPage" ditampilkan di Halaman Anda dan tidak boleh disembunyikan atau diubah.
 
 ## 12. Hal yang tidak boleh dilakukan terhadap Layanan
 

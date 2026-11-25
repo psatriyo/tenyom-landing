@@ -1,4 +1,4 @@
-# Kebijakan Konten dan Tautan BookBook
+# Kebijakan Konten dan Tautan SatuPage
 
 > **DRAF v0.1 · 18 November 2026 · belum berlaku.** Draf ini disusun untuk ditinjau penasihat hukum (sesi 31 Januari 2027) dan bukan nasihat hukum. Teks dalam tanda kurung siku, misalnya [EMAIL ADUAN], wajib diisi sebelum diterbitkan.
 
@@ -6,7 +6,7 @@
 
 ## Ringkasan
 
-- BookBook adalah halaman usaha untuk **usaha nyata yang menjual barang atau jasa yang legal**.
+- SatuPage adalah halaman usaha untuk **usaha nyata yang menjual barang atau jasa yang legal**.
 - **Tautan adalah konten.** Anda bertanggung jawab atas semua tujuan tautan di halaman Anda, termasuk ke mana tautan itu mengarah dan apa isinya nanti.
 - Ada **tiga tingkat aturan**: **nol toleransi** (akun langsung ditutup), **dilarang** (konten disembunyikan dan Anda mendapat peringatan), dan **dibatasi** (boleh dengan syarat).
 - **Judi online, penipuan, file APK, narkoba, senjata, dan konten seksual anak tidak pernah boleh**, dalam bentuk apa pun.
@@ -14,7 +14,7 @@
 
 ## 1. Ruang lingkup
 
-1.1. Kebijakan ini adalah bagian dari [Syarat Layanan](/syarat-layanan) dan berlaku untuk semua yang Anda tampilkan atau tautkan melalui BookBook ("**Konten**"), yaitu:
+1.1. Kebijakan ini adalah bagian dari [Syarat Layanan](/syarat-layanan) dan berlaku untuk semua yang Anda tampilkan atau tautkan melalui SatuPage ("**Konten**"), yaitu:
 
 - nama usaha, alamat halaman (slug), kategori, deskripsi, jam buka, dan alamat;
 - logo, foto sampul, foto produk, dan gambar kartu tautan;
@@ -22,21 +22,21 @@
 - label dan **tujuan setiap tautan** dan ikon media sosial, termasuk halaman yang dituju, halaman lanjutan tempat tautan itu dialihkan, dan file yang dapat diunduh dari sana;
 - kode kampanye, kode referal, dan isi pesan WhatsApp yang dibuat dari halaman Anda.
 
-1.2. Kebijakan ini berlaku di samping peraturan perundang-undangan Indonesia, antara lain UU Informasi dan Transaksi Elektronik beserta perubahannya, UU Perlindungan Konsumen, UU Pelindungan Data Pribadi, UU Pornografi, UU Narkotika, UU Kesehatan beserta peraturan pelaksananya, dan UU Jaminan Produk Halal. Jika suatu hal dilarang oleh hukum, hal itu juga dilarang di BookBook walaupun tidak disebut di sini.
+1.2. Kebijakan ini berlaku di samping peraturan perundang-undangan Indonesia, antara lain UU Informasi dan Transaksi Elektronik beserta perubahannya, UU Perlindungan Konsumen, UU Pelindungan Data Pribadi, UU Pornografi, UU Narkotika, UU Kesehatan beserta peraturan pelaksananya, dan UU Jaminan Produk Halal. Jika suatu hal dilarang oleh hukum, hal itu juga dilarang di SatuPage walaupun tidak disebut di sini.
 
 ## 2. Prinsip dasar
 
-1. **Usaha nyata dan legal.** Halaman BookBook mewakili usaha yang benar-benar ada dan menjual barang atau jasa yang boleh diperjualbelikan di Indonesia. Usaha perorangan dan rumahan sangat kami sambut.
+1. **Usaha nyata dan legal.** Halaman SatuPage mewakili usaha yang benar-benar ada dan menjual barang atau jasa yang boleh diperjualbelikan di Indonesia. Usaha perorangan dan rumahan sangat kami sambut.
 2. **Tautan adalah konten.** Menautkan ke sesuatu sama dengan menampilkannya di halaman Anda. Jika halaman tujuan berisi hal yang dilarang, tautan itu dilarang.
 3. **Jujur kepada pembeli.** Harga, isi produk, izin, dan klaim harus benar.
 4. **Hormati orang lain.** Jangan menampilkan data pribadi, foto, karya, atau merek orang lain tanpa hak.
 5. **Ragu? Tanyakan dulu.** Hubungi kami di [NOMOR WHATSAPP DUKUNGAN] sebelum menerbitkan sesuatu yang Anda ragukan.
 
-## 3. Siapa yang boleh memakai BookBook
+## 3. Siapa yang boleh memakai SatuPage
 
-3.1. BookBook diperuntukkan bagi usaha yang menjual barang atau jasa yang legal.
+3.1. SatuPage diperuntukkan bagi usaha yang menjual barang atau jasa yang legal.
 
-3.2. BookBook **tidak boleh** dipakai untuk:
+3.2. SatuPage **tidak boleh** dipakai untuk:
 
 - halaman pribadi yang bukan usaha, atau halaman penggemar;
 - kampanye politik, partai, atau calon dalam pemilihan;
@@ -68,7 +68,7 @@ Konten di bawah ini akan **disembunyikan atau halaman ditahan untuk ditinjau**, 
 | Kategori | Termasuk, antara lain |
 |---|---|
 | **Konten seksual dan produk dewasa** | Pornografi, ketelanjangan, konten seksual eksplisit, alat bantu seks, obat kuat tanpa izin edar |
-| **Rokok, vape, dan alkohol** | Rokok, cerutu, tembakau, rokok elektronik (vape, pod) dan cairannya, minuman beralkohol termasuk buatan rumah (ciu, tuak, arak). BookBook tidak memiliki verifikasi usia, sehingga produk ini tidak dapat dijual melalui BookBook |
+| **Rokok, vape, dan alkohol** | Rokok, cerutu, tembakau, rokok elektronik (vape, pod) dan cairannya, minuman beralkohol termasuk buatan rumah (ciu, tuak, arak). SatuPage tidak memiliki verifikasi usia, sehingga produk ini tidak dapat dijual melalui SatuPage |
 | **Obat, kosmetik, jamu, dan suplemen tanpa izin** | Produk tanpa nomor izin edar BPOM, krim racikan, pemutih instan, produk yang mengklaim menyembuhkan penyakit |
 | **Barang palsu dan bajakan** | Barang tiruan merek ("KW", "replika", "mirror"), film, musik, perangkat lunak, *e-book* bajakan, berbagi akun langganan berbayar |
 | **Barang lain yang dilarang** | Barang hasil kejahatan; barang yang dilarang diedarkan atau diimpor menurut peraturan, termasuk **pakaian bekas impor** ("bal", "ball press", "bal impor"); dan barang yang memerlukan izin khusus yang tidak Anda miliki |
@@ -88,7 +88,7 @@ Konten di bawah ini akan **disembunyikan atau halaman ditahan untuk ditinjau**, 
 | **Pre-order dan jasa titip (jastip)** | Jelaskan perkiraan waktu, uang muka (DP), dan kebijakan pembatalan. Jastip dari luar negeri wajib mematuhi ketentuan kepabeanan |
 | **Barang bekas (*preloved*)** | Barang bekas milik sendiri atau yang diperoleh di dalam negeri. Jelaskan kondisi barang dengan jujur. Pakaian bekas impor tidak boleh dijual (Tingkat 2) |
 | **Jasa** (rias, jahit, katering, les, servis) | Boleh, jika jasa itu legal dan Anda memiliki izin yang diwajibkan |
-| **Produk digital** (*e-book*, kelas, templat) | Hanya karya milik Anda sendiri atau yang Anda berhak jual. BookBook tidak menyimpan file untuk diunduh |
+| **Produk digital** (*e-book*, kelas, templat) | Hanya karya milik Anda sendiri atau yang Anda berhak jual. SatuPage tidak menyimpan file untuk diunduh |
 | **Giveaway dan promo** | Syarat ditulis jelas. Tidak memungut biaya untuk ikut dan tidak meminta data sensitif (KTP, OTP, PIN, data kartu) |
 
 Kami dapat meminta bukti izin atau sertifikat. Jika bukti tidak diberikan dalam 7 hari, produk yang bersangkutan dapat disembunyikan.
@@ -150,7 +150,7 @@ Kami dapat meminta bukti izin atau sertifikat. Jika bukti tidak diberikan dalam 
 
 ## 11. Melaporkan halaman
 
-11.1. Setiap halaman BookBook memiliki tombol **"Laporkan"**. Laporan bersifat anonim. Email hanya diminta untuk aduan hak cipta, merek, atau data pribadi agar kami dapat menindaklanjutinya.
+11.1. Setiap halaman SatuPage memiliki tombol **"Laporkan"**. Laporan bersifat anonim. Email hanya diminta untuk aduan hak cipta, merek, atau data pribadi agar kami dapat menindaklanjutinya.
 
 11.2. **Aduan hak cipta, merek, atau peniruan identitas** dapat dikirim ke [EMAIL ADUAN] dengan menyertakan: alamat halaman, konten yang dipersoalkan, bukti hak Anda, dan kontak Anda. Kami dapat menyembunyikan konten selama aduan diperiksa dan memberi kesempatan kepada penjual untuk menanggapi.
 
