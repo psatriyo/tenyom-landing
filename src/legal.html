@@ -1,24 +1,28 @@
 {{!-- Legal page shell. The text comes from content/legal/<route>.md, rendered
-      by scripts/markdown.mjs. Edit the Markdown, not this file. --}}
+      by scripts/markdown.mjs, and is Indonesian on both language versions.
+      Edit the Markdown, not this file. --}}
 <div class="legal">
   <div class="wrap">
-    <nav class="legal__docs" aria-label="Dokumen hukum">
-      {{#each page.doc.others}}<a href="{{ href }}"{{#if current}} aria-current="page"{{/if}}>{{ short }}</a>{{/each}}
+    <nav class="legal__docs" aria-label="{{ t.legal.docsLabel }}">
+      {{#each page.doc.others}}<a href="{{ href }}"{{#if current}} aria-current="page"{{/if}} lang="id">{{ short }}</a>{{/each}}
     </nav>
-    <aside class="draft-banner" aria-label="Status dokumen">
+    {{#if t.legal.onlyIndonesian}}<p class="legal__lang"><svg aria-hidden="true"><use href="#i-info"/></svg>{{ t.legal.onlyIndonesian }}</p>{{/if}}
+    <aside class="draft-banner" aria-label="{{ t.legal.statusLabel }}" lang="id">
       <svg aria-hidden="true"><use href="#i-alert"/></svg>
       <div>{{{ page.doc.banner }}}</div>
     </aside>
-    <div class="legal__grid">
-      <nav class="toc" aria-label="Daftar isi">
+    <div class="legal__grid{{#unless page.doc.hasToc}} legal__grid--single{{/unless}}">
+      {{#if page.doc.hasToc}}
+      <nav class="toc" aria-label="{{ t.legal.toc }}">
         <details data-toc>
-          <summary>Daftar isi</summary>
-          <ol>
+          <summary>{{ t.legal.toc }}</summary>
+          <ol lang="id">
             {{#each page.doc.toc}}<li><a href="#{{ id }}">{{{ text }}}</a></li>{{/each}}
           </ol>
         </details>
       </nav>
-      <article class="prose">
+      {{/if}}
+      <article class="prose" lang="id">
         <h1>{{ page.doc.title }}</h1>
 {{{ page.doc.html }}}
       </article>

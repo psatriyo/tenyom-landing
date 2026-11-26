@@ -11,8 +11,11 @@
 //                              `this` (the item) and `index` (0-based)
 //   {{!-- comment --}}
 // Pages start with a JSON front matter block between two "---" lines.
-// src/pages/a/b.html is served at /a/b/; index.html at /; 404.html at /404.html.
-// Every content/legal/<name>.md is served at /<name>/ through src/legal.html.
+// src/pages/a/b.html is served at /a/b/ (Indonesian) and /en/a/b/ (English);
+// index.html at / and /en/; 404.html at /404.html only (GitHub Pages serves
+// one 404 page). Every content/legal/<name>.md is served at /<name>/ and
+// /en/<name>/ through src/legal.html. Text comes from src/i18n/<lang>.mjs as
+// {{ t.… }}.
 
 import { readFile, writeFile, mkdir, readdir, rm, cp, stat } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
@@ -23,41 +26,80 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = join(ROOT, "src");
 const OUT = join(ROOT, "dist");
 
-// Legal documents in the order they are listed (D-54).
+// Languages: Indonesian at /, English at /en/ (same pages, same file names).
+export const LOCALES = ["id", "en"];
+const PREFIX = { id: "", en: "en/" };
+// Legal documents in the order they are listed (D-54). Their text is
+// Indonesian only; the English pages show it with a note.
 const LEGAL_ORDER = ["syarat-layanan", "kebijakan-privasi", "kebijakan-konten"];
-// Routes of the previous version of the site, kept working as redirects.
-// "contoh/kueburina" was the example shop until the D-76 beachhead change.
-const REDIRECTS = { terms: "syarat-layanan/", privacy: "kebijakan-privasi/", pricing: "#harga", help: "#faq", "contoh/kueburina": "contoh/warungsari/" };
+// Routes of earlier versions of this site and the product's English legal
+// routes, kept working as redirects. "contoh/kueburina" was the example shop
+// until the D-76 beachhead change.
+const REDIRECTS = {
+  terms: "syarat-layanan/",
+  privacy: "kebijakan-privasi/",
+  "content-policy": "kebijakan-konten/",
+  pricing: "#harga",
+  help: "#faq",
+  "contoh/kueburina": "contoh/warungsari/",
+};
 
 /* ------------------------------------------------------------------ */
-/* Formatting helpers (NFR-14: rupiah as integers, "Rp99.000")          */
+/* Formatting helpers                                                  */
 /* ------------------------------------------------------------------ */
-export const rupiah = (n) => "Rp" + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-const MONTHS = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-export const dateLong = (iso) => {
+// NFR-14: rupiah as integers, "Rp69.000" in Indonesian, "Rp69,000" in English.
+export const rupiah = (n, lang = "id") => "Rp" + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, lang === "en" ? "," : ".");
+const MONTHS = {
+  id: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+  en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+};
+export const dateLong = (iso, lang = "id") => {
   const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
   if (!m) throw new Error(`Bad date: ${iso}`);
-  return `${+m[3]} ${MONTHS[+m[2] - 1]} ${m[1]}`;
+  return `${+m[3]} ${MONTHS[lang][+m[2] - 1]} ${m[1]}`;
 };
 const digits = (s) => String(s || "").replace(/\D/g, "");
 // wa.me by direct navigation (plain <a href>), never window.open (NFR-03).
 // Without a number, wa.me opens WhatsApp's "choose a chat" screen.
 export const waLink = (number, text) => `https://wa.me/${digits(number)}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 
+// The two dictionaries must have the same keys (and list lengths).
+function shape(v, path = "") {
+  if (Array.isArray(v)) return v.flatMap((x, i) => shape(x, `${path}[${i}]`));
+  if (v && typeof v === "object") return Object.keys(v).sort().flatMap((k) => shape(v[k], path ? `${path}.${k}` : k));
+  return [path];
+}
+function checkDictionaries(dicts) {
+  const [first, ...rest] = LOCALES;
+  const ref = new Set(shape(dicts[first]));
+  for (const lang of rest) {
+    const keys = new Set(shape(dicts[lang]));
+    const missing = [...ref].filter((k) => !keys.has(k));
+    const extra = [...keys].filter((k) => !ref.has(k));
+    if (missing.length || extra.length) {
+      throw new Error(`src/i18n/${lang}.mjs does not match ${first}.mjs.` + (missing.length ? ` Missing: ${missing.join(", ")}.` : "") + (extra.length ? ` Extra: ${extra.join(", ")}.` : ""));
+    }
+  }
+}
+
 /* ------------------------------------------------------------------ */
-/* Context derived from the config                                     */
+/* Context derived from the config, per language                       */
 /* ------------------------------------------------------------------ */
-export async function loadContext() {
-  const bust = `?t=${Date.now()}`;
-  const cfg = (await import(pathToFileURL(join(ROOT, "site.config.mjs")).href + bust)).default;
-  const demo = await import(pathToFileURL(join(SRC, "data", "warungsari.mjs")).href + bust);
+const importFresh = async (file) => (await import(pathToFileURL(file).href + `?t=${Date.now()}`));
+
+export async function loadContext(lang = "id") {
+  const cfg = (await importFresh(join(ROOT, "site.config.mjs"))).default;
+  const demo = await importFresh(join(SRC, "data", "warungsari.mjs"));
+  const examples = await importFresh(join(SRC, "data", "examples.mjs"));
+  const dictFns = {};
+  for (const l of LOCALES) dictFns[l] = (await importFresh(join(SRC, "i18n", `${l}.mjs`))).default;
 
   const base = cfg.basePath.endsWith("/") ? cfg.basePath : cfg.basePath + "/";
   const siteUrl = cfg.siteUrl.replace(/\/+$/, "");
+  const appUrl = cfg.appUrl.replace(/\/+$/, "");
   const brand = cfg.brandName;
   const p = cfg.pricing;
-  const proMonthly = p.proMonthlyOptions[p.proMonthlyDefault];
-  if (!Number.isInteger(proMonthly)) throw new Error("pricing.proMonthlyDefault must be a key of pricing.proMonthlyOptions");
+  if (!Number.isInteger(p.proMonthly)) throw new Error("pricing.proMonthly must be an integer (rupiah)");
   const founderWa = digits(cfg.founderWhatsApp);
   const merchantWa = digits(cfg.demoMerchantWhatsApp) || founderWa;
   const exampleUrl = `${cfg.domain}/${demo.business.slug}`;
@@ -65,7 +107,31 @@ export async function loadContext() {
   const c = cfg.conciergeOffer;
   const name = demo.business.name;
 
+  // Numbers and formatted values the dictionaries need, per language.
+  const numbers = (l) => ({
+    brand,
+    demoName: name,
+    limits: cfg.limits,
+    price: {
+      monthly: rupiah(p.proMonthly, l),
+      annual: rupiah(p.proMonthly * p.annualMonthsPaid, l),
+      saving: rupiah(p.proMonthly * (12 - p.annualMonthsPaid), l),
+      freeMonths: 12 - p.annualMonthsPaid,
+      monthsPaid: p.annualMonthsPaid,
+    },
+    betaOpens: dateLong(cfg.dates.betaOpens, l),
+    concierge: { area: c.area },
+    founding: { deposit: rupiah(f.deposit, l), proMonths: f.proMonths, refund: dateLong(f.refundIfNoLaunchBy, l) },
+  });
+  const dicts = Object.fromEntries(LOCALES.map((l) => [l, dictFns[l](numbers(l))]));
+  checkDictionaries(dicts);
+  const t = dicts[lang];
+  const fmt = (n) => rupiah(n, lang);
+  const prefix = PREFIX[lang];
+  const home = `${base}${prefix}`;
+
   // "Tanya via WhatsApp" message (F-08 template; wording still open, Q-P07).
+  // WhatsApp messages stay Indonesian in both languages (they go to the merchant).
   const via = `\n\n— via ${exampleUrl}`;
   const askText = (it) =>
     it.price
@@ -76,14 +142,14 @@ export async function loadContext() {
     return {
       ...it,
       askHref: waLink(merchantWa, askText(it)),
-      priceLabel: it.price ? rupiah(it.price) : "Tanya harga",
+      priceLabel: it.price ? fmt(it.price) : t.store.askPrice,
       imageUrl: it.image ? `${base}assets/img/menu/${it.image}.svg` : "",
       hasImage: Boolean(it.image),
-      // Pro view only (promos and labels, D-75, P1)
+      // Pro view only (promos and labels, D-75, P1). Labels are merchant content.
       proLabel: pro.label || "",
       proLabelClass: (pro.label || "").toLowerCase(),
       hasPromo: Boolean(pro.promoPrice),
-      promoLabel: pro.promoPrice ? rupiah(pro.promoPrice) : "",
+      promoLabel: pro.promoPrice ? fmt(pro.promoPrice) : "",
     };
   });
   const branches = demo.branches.map((b) => ({
@@ -104,6 +170,11 @@ export async function loadContext() {
   }));
   const maxOf = (list) => Math.max(...list.map((x) => x.value));
   const bars = (list, unit = "") => list.map((x) => ({ ...x, pct: Math.round((x.value / maxOf(list)) * 100), valueText: `${x.value}${unit}` }));
+  const labelled = (list, labels) =>
+    list.map((x) => {
+      if (!(x.key in labels)) throw new Error(`src/i18n/${lang}.mjs: no label for "${x.key}"`);
+      return { ...x, label: labels[x.key] };
+    });
 
   // Plan usage shown in the example dashboard (204: visible items; link
   // blocks, where each branch counts as one, D-43 and D-74).
@@ -112,45 +183,54 @@ export async function loadContext() {
     linkBlocks: demo.links.list.length + demo.branches.length,
   };
 
+  // Promo mock-up on the landing page (Pro, P1, "segera").
+  const promo = [
+    { name: "Paket makan siang", tag: t.pro.promoTag, tagClass: "promo", old: fmt(45000), price: fmt(39000) },
+    { name: "Sop buntut", tag: t.pro.newTag, tagClass: "baru", old: "", price: fmt(65000) },
+    { name: "Nasi goreng spesial", tag: "", tagClass: "", old: "", price: fmt(35000) },
+  ];
+
+  // Fictional example pages for the hero switcher (D-103).
+  const priced = (list) => list.map((it) => ({ ...it, priceLabel: fmt(it.price) }));
+  const ex = {
+    po: { ...examples.po, items: priced(examples.po.items) },
+    photo: { ...examples.photo, items: priced(examples.photo.items) },
+    artist: { ...examples.artist, merch: { ...examples.artist.merch, priceLabel: fmt(examples.artist.merch.price) } },
+    personal: examples.personal,
+  };
+
   const ctx = {
+    lang,
+    t,
     brandName: brand,
     domain: cfg.domain,
-    appDomain: cfg.appDomain,
     base,
+    home,
+    prefix,
     siteUrl,
     exampleUrl,
     copyrightYear: cfg.copyrightYear,
     limits: cfg.limits,
     supportEmail: cfg.supportEmail,
     hasSupportEmail: Boolean(cfg.supportEmail),
+    // Merchant app (D-70). Links carry data-app-link so site.js can pass
+    // utm_* and ref on (F-01-FR9).
+    app: { login: `${appUrl}/login`, register: `${appUrl}/register` },
     wa: {
       // derived message texts, except the founding-member one (from the export)
       contact: waLink(founderWa, `Halo, saya mau tanya tentang ${brand}.`),
-      ujiCoba: waLink(founderWa, `Halo, saya mau dikabari soal ${brand}.`),
       founding: waLink(founderWa, `Halo, saya tertarik jadi anggota pendiri ${brand}.`),
-      concierge: waLink(founderWa, `Halo, saya mau dibuatkan halaman ${brand} untuk usaha saya.`),
+      concierge: waLink(founderWa, `Halo, saya mau dibuatkan halaman ${brand}.`),
       isPlaceholder: !founderWa,
     },
-    price: {
-      monthly: rupiah(proMonthly),
-      annual: rupiah(proMonthly * p.annualMonthsPaid),
-      annualSaving: rupiah(proMonthly * (12 - p.annualMonthsPaid)),
-      freeMonths: 12 - p.annualMonthsPaid,
-      options: Object.values(p.proMonthlyOptions).map(rupiah).join(" atau "),
-    },
-    founding: {
-      enabled: Boolean(f.enabled),
-      deposit: rupiah(f.deposit),
-      proMonths: f.proMonths,
-      refundText: dateLong(f.refundIfNoLaunchBy),
-    },
-    concierge: {
-      enabled: Boolean(c.enabled),
-      area: c.area,
-    },
+    price: numbers(lang).price,
+    founding: { enabled: Boolean(f.enabled) },
+    concierge: { enabled: Boolean(c.enabled) },
     // The "Mulai sebelum beta" section shows when either offer is on.
     earlyStart: Boolean(f.enabled || c.enabled),
-    betaOpensText: dateLong(cfg.dates.betaOpens),
+    heroTabs: t.hero.tabs.map((label, i) => ({ label, value: i, checked: i === 0 })),
+    ex,
+    promo,
     demo: {
       ...demo,
       chatHref: waLink(merchantWa, `Halo ${name}, saya mau tanya.${via}`), // derived
@@ -158,8 +238,9 @@ export async function loadContext() {
       branches,
       firstItems: items.filter((it) => ["nasi-goreng", "es-kopi-susu"].includes(it.id)),
       links: { ...demo.links, list: links },
+      counters: labelled(demo.stats.counters, t.dash.counters),
       topLinks: bars(demo.stats.topLinks),
-      sources: bars(demo.insights.sources, "%"),
+      sources: bars(labelled(demo.insights.sources, t.insights.sources), "%"),
       usage: {
         ...usage,
         itemsPct: Math.min(100, Math.round((usage.items / cfg.limits.freeItems) * 100)),
@@ -169,15 +250,16 @@ export async function loadContext() {
   };
 
   // Values the browser scripts need, emitted as inline JSON on every page.
-  ctx.runtimeJson = JSON.stringify({
-    brand,
-    domain: cfg.domain,
-    base,
-    price: { param: p.priceParam, options: p.proMonthlyOptions, fallback: p.proMonthlyDefault, annualMonthsPaid: p.annualMonthsPaid },
-  }).replace(/</g, "\\u003c");
+  ctx.runtimeJson = JSON.stringify({ lang, base, text: t.js }).replace(/</g, "\\u003c");
   ctx.demoJson = JSON.stringify({
     url: exampleUrl,
-    items: demo.items.map(({ id, name, price, description, pro }) => ({ id, name, price, description, promoPrice: (pro && pro.promoPrice) || null })),
+    items: demo.items.map(({ id, name, price, description, pro }) => ({
+      id,
+      name,
+      description,
+      priceLabel: price ? fmt(price) : "",
+      promoLabel: pro && pro.promoPrice ? fmt(pro.promoPrice) : "",
+    })),
   }).replace(/</g, "\\u003c");
 
   return ctx;
@@ -294,76 +376,86 @@ async function exists(p) { try { await stat(p); return true; } catch { return fa
 
 async function build() {
   const t0 = Date.now();
-  const ctx = await loadContext();
   const partials = await loadPartials();
   const layout = await readFile(join(SRC, "layout.html"), "utf8");
+  const legalTemplate = await readFile(join(SRC, "legal.html"), "utf8");
+  const pagesDir = join(SRC, "pages");
+  const pageFiles = await listPages(pagesDir);
+  const legalDir = join(ROOT, "content", "legal");
+  const legalNames = (await readdir(legalDir)).filter((f) => f.endsWith(".md")).map((f) => f.slice(0, -3));
+  legalNames.sort((a, b) => (LEGAL_ORDER.indexOf(a) + 1 || 99) - (LEGAL_ORDER.indexOf(b) + 1 || 99));
 
   await rm(OUT, { recursive: true, force: true });
   await mkdir(OUT, { recursive: true });
 
   const sitemap = [];
   let count = 0;
+  let ctx;
 
-  const emit = async (urlPath, meta, bodySrc, extra, name) => {
-    const page = {
-      title: "",
-      description: "",
-      noindex: false,
-      demo: false,
-      legal: false,
-      ...meta,
-      ...extra,
-      path: urlPath,
-      url: `${ctx.siteUrl}${ctx.base}${urlPath}`,
-      isHome: urlPath === "",
+  for (const lang of LOCALES) {
+    ctx = await loadContext(lang);
+    const other = LOCALES.find((l) => l !== lang);
+
+    // urlPath is relative to the language root ("" = home).
+    const emit = async (urlPath, meta, bodySrc, extra, name) => {
+      const full = `${PREFIX[lang]}${urlPath}`;
+      const page = {
+        title: "",
+        description: "",
+        noindex: false,
+        demo: false,
+        legal: false,
+        ...meta,
+        ...extra,
+        path: full,
+        url: `${ctx.siteUrl}${ctx.base}${full}`,
+        isHome: urlPath === "",
+        alternates: LOCALES.map((l) => ({ lang: l, url: `${ctx.siteUrl}${ctx.base}${PREFIX[l]}${urlPath}` })),
+        // Language switch: the same page in the other language.
+        otherLang: other,
+        otherHref: `${ctx.base}${PREFIX[other]}${urlPath}`,
+      };
+      const pageCtx = { ...ctx, page };
+      page.title = render(page.title, pageCtx, partials, `${name} title`);
+      page.description = render(page.description, pageCtx, partials, `${name} description`);
+      if (page.demoLabel) page.demoLabel = render(page.demoLabel, pageCtx, partials, `${name} demoLabel`);
+      pageCtx.body = render(bodySrc, pageCtx, partials, name);
+      const html = render(layout, pageCtx, partials, "layout.html");
+      const dest = join(OUT, full.endsWith(".html") ? full : `${full}index.html`);
+      await mkdir(dirname(dest), { recursive: true });
+      await writeFile(dest, html);
+      count++;
+      if (!page.noindex && !full.endsWith(".html")) sitemap.push(page.url);
     };
-    const pageCtx = { ...ctx, page };
-    page.title = render(page.title, pageCtx, partials, `${name} title`);
-    page.description = render(page.description, pageCtx, partials, `${name} description`);
-    pageCtx.body = render(bodySrc, pageCtx, partials, name);
-    const html = render(layout, pageCtx, partials, "layout.html");
-    const dest = join(OUT, urlPath.endsWith(".html") ? urlPath : `${urlPath}index.html`);
-    await mkdir(dirname(dest), { recursive: true });
-    await writeFile(dest, html);
-    count++;
-    if (!page.noindex && !urlPath.endsWith(".html")) sitemap.push(page.url);
-  };
 
-  // Template pages
-  const pagesDir = join(SRC, "pages");
-  for (const file of await listPages(pagesDir)) {
-    const { meta, body } = splitFrontMatter(await readFile(join(pagesDir, file), "utf8"), file);
-    const slug = file.slice(0, -5);
-    const urlPath = slug === "index" ? "" : slug === "404" ? "404.html" : `${slug}/`;
-    await emit(urlPath, meta, body, { slug: slug.replace(/\//g, "-") }, file);
-  }
+    // Template pages
+    for (const file of pageFiles) {
+      const slug = file.slice(0, -5);
+      if (slug === "404" && lang !== LOCALES[0]) continue;
+      const { meta, body } = splitFrontMatter(await readFile(join(pagesDir, file), "utf8"), file);
+      const urlPath = slug === "index" ? "" : slug === "404" ? "404.html" : `${slug}/`;
+      await emit(urlPath, meta, body, { slug: slug.replace(/\//g, "-") }, file);
+    }
 
-  // Legal pages (Markdown)
-  const legalDir = join(ROOT, "content", "legal");
-  const names = (await readdir(legalDir)).filter((f) => f.endsWith(".md")).map((f) => f.slice(0, -3));
-  names.sort((a, b) => (LEGAL_ORDER.indexOf(a) + 1 || 99) - (LEGAL_ORDER.indexOf(b) + 1 || 99));
-  const docs = [];
-  for (const n of names) {
-    const doc = renderMarkdown(await readFile(join(legalDir, `${n}.md`), "utf8"), { base: ctx.base });
-    // "Syarat Layanan SatuPage" -> "Syarat Layanan"
-    doc.short = doc.title.replace(new RegExp(`\\s+${ctx.brandName}$`), "");
-    doc.route = n;
-    docs.push(doc);
-  }
-  const legalTemplate = await readFile(join(SRC, "legal.html"), "utf8");
-  for (const doc of docs) {
-    const others = docs.map((d) => ({ short: d.short, href: `${ctx.base}${d.route}/`, current: d === doc }));
-    await emit(
-      `${doc.route}/`,
-      {
-        title: `${doc.short} (draf) · ${ctx.brandName}`,
-        description: `Draf ${doc.short} ${ctx.brandName} (v0.1, belum berlaku).`,
-        noindex: true,
-      },
-      legalTemplate,
-      { slug: `legal-${doc.route}`, legal: true, doc: { ...doc, others } },
-      `content/legal/${doc.route}.md`,
-    );
+    // Legal pages (Markdown, Indonesian in both languages)
+    const docs = [];
+    for (const n of legalNames) {
+      const doc = renderMarkdown(await readFile(join(legalDir, `${n}.md`), "utf8"), { base: ctx.base });
+      // "Syarat Layanan SatuPage" -> "Syarat Layanan"
+      doc.short = doc.title.replace(new RegExp(`\\s+${ctx.brandName}$`), "");
+      doc.route = n;
+      docs.push(doc);
+    }
+    for (const doc of docs) {
+      const others = docs.map((d) => ({ short: d.short, href: `${ctx.home}${d.route}/`, current: d === doc }));
+      await emit(
+        `${doc.route}/`,
+        { title: ctx.t.legal.title(doc.short), description: ctx.t.legal.description(doc.short), noindex: true },
+        legalTemplate,
+        { slug: `legal-${doc.route}`, legal: true, doc: { ...doc, others, hasToc: doc.toc.length > 0 } },
+        `content/legal/${doc.route}.md`,
+      );
+    }
   }
 
   // Redirects from the previous routes
@@ -391,7 +483,7 @@ async function build() {
       `\n</urlset>\n`,
   );
 
-  console.log(`Built ${count} pages and ${Object.keys(REDIRECTS).length} redirects into ${relative(ROOT, OUT)}/ in ${Date.now() - t0} ms`);
+  console.log(`Built ${count} pages (${LOCALES.join(", ")}) and ${Object.keys(REDIRECTS).length} redirects into ${relative(ROOT, OUT)}/ in ${Date.now() - t0} ms`);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {

@@ -1,64 +1,156 @@
 ---
 {
-  "title": "{{ brandName }}: Halaman bisnismu di internet, cukup satu link",
-  "description": "Menu atau katalog, cabang, link dan WhatsApp dalam satu halaman. Gratis, siap dalam 15 menit dari HP. Tanpa iklan, tanpa komisi penjualan."
+  "title": "{{{ t.meta.homeTitle }}}",
+  "description": "{{{ t.meta.homeDescription }}}"
 }
 ---
-{{!-- Copy follows the requirement documents of 20 Nov 2026: tagline and
-      supporting line D-77, beachhead D-76 (food and drink businesses with a
-      shop; home sellers secondary), order flow in P2 (D-73, not promised
-      here), branch blocks in the MVP (D-74), what Pro sells D-75, limits and
-      prices from 204, founding offer 104 §4 (P-06), concierge pages D-71. --}}
+{{!-- Copy and section order follow the product's landing page
+      (psatriyo/satupage, app/[lang]/(marketing)/page.tsx): tagline and the
+      five audiences D-103, public figures D-102, what Pro sells D-75, limits
+      and price from 204, interim price D-79. This site adds the
+      monthly/annual toggle, the "Mulai sebelum beta" section (concierge
+      pages D-71, founding offer P-06) and links to its own example page and
+      dashboard. Text is in src/i18n/<lang>.mjs. --}}
 
     <!-- ============ HERO ============ -->
     <section class="hero" id="top">
       <div class="wrap hero__grid">
         <div class="hero__copy">
-          <p class="eyebrow eyebrow--light">Untuk kafe, restoran, warung, bakery &amp; usaha makanan</p>
-          <h1 class="hero__title">Halaman bisnismu di internet, <span class="hl">cukup satu link.</span></h1>
-          <p class="hero__lede">Menu atau katalog, cabang, link dan WhatsApp dalam satu halaman. Gratis, siap dalam 15 menit dari HP.</p>
+          <p class="eyebrow eyebrow--light">{{ t.hero.eyebrow }}</p>
+          <h1 class="hero__title">{{ t.tagline.lead }}<span class="hl">{{ t.tagline.hl }}</span></h1>
+          <p class="hero__lede">{{ t.hero.sub }}</p>
           <div class="hero__cta">
-            <a class="btn btn--accent btn--lg" href="#uji-coba" data-sheet-open="uji-coba">Ganti link bio kamu</a>
-            <a class="btn btn--ghost btn--lg" href="{{ base }}contoh/warungsari/">Lihat contoh halaman <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--accent btn--lg" href="{{ app.register }}" data-app-link>{{ t.ctaCreate }}</a>
+            <a class="btn btn--ghost btn--lg" href="{{ home }}contoh/warungsari/">{{ t.ctaExample }} <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
-          <p class="hero__trust">Gratis untuk mulai <span aria-hidden="true">·</span> Tanpa iklan <span aria-hidden="true">·</span> Bayar Pro pakai QRIS <span aria-hidden="true">·</span> Tanpa komisi penjualan</p>
+          <p class="hero__trust">{{#each t.hero.trust}}{{#if index}}<span aria-hidden="true">·</span>{{/if}}{{ this }}{{/each}}</p>
         </div>
 
-        <div class="hero__visual">
-          <a class="phone" href="{{ base }}contoh/warungsari/" aria-label="Buka contoh halaman {{ demo.business.name }}">
-            <span class="phone__screen" aria-hidden="true">
-              <span class="mock-cover"></span>
-              <span class="mock-head">
-                <span class="mock-logo">{{ demo.business.initial }}</span>
-                <b class="mock-name">{{ demo.business.name }}</b>
-                <span class="mock-sub">{{ demo.business.categoryCity }}</span>
-                <span class="mock-socials">
-                  {{#each demo.socials}}<span><svg><use href="#{{ icon }}"/></svg></span>{{/each}}
+        {{!-- Example switcher (D-103): radio "tabs" and CSS, no JavaScript.
+              Only Warung Sari links to an example page; the other four are
+              fictional mock-ups (src/data/examples.mjs). Without :has()
+              support only Warung Sari shows. --}}
+        <div class="hero__visual examples">
+          <div class="examples__tabs" role="radiogroup" aria-label="{{ t.hero.tabsLabel }}">
+            {{#each heroTabs}}<label class="examples__tab"><input type="radio" name="example" value="{{ value }}"{{#if checked}} checked{{/if}}><span>{{ label }}</span></label>{{/each}}
+          </div>
+
+          <div class="examples__item" data-ex="0">
+            <a class="phone" href="{{ home }}contoh/warungsari/" aria-label="{{ t.hero.phoneLabel }}">
+              <span class="phone__screen" aria-hidden="true">
+                <span class="mock-cover"></span>
+                <span class="mock-head">
+                  <span class="mock-logo">{{ demo.business.initial }}</span>
+                  <b class="mock-name">{{ demo.business.name }}</b>
+                  <span class="mock-sub">{{ demo.business.categoryCity }}</span>
+                  <span class="mock-socials">
+                    {{#each demo.socials}}<span><svg><use href="#{{ icon }}"/></svg></span>{{/each}}
+                  </span>
                 </span>
-              </span>
-              <span class="mock-title">{{ demo.catalogTitle }}</span>
-              <span class="mock-tabs"><span class="is-on">Semua</span>{{#each demo.categories}}<span>{{ name }}</span>{{/each}}</span>
-              <span class="mock-grid">
-                {{#each demo.firstItems}}
-                <span class="mock-item">
-                  <img src="{{ imageUrl }}" alt="" width="200" height="200">
-                  <b>{{ name }}</b>
-                  <span>{{ priceLabel }}</span>
+                <span class="mock-title">{{ demo.catalogTitle }}</span>
+                <span class="mock-tabs"><span class="is-on">{{ t.hero.all }}</span>{{#each demo.categories}}<span>{{ name }}</span>{{/each}}</span>
+                <span class="mock-grid">
+                  {{#each demo.firstItems}}
+                  <span class="mock-item">
+                    <img src="{{ imageUrl }}" alt="" width="200" height="200">
+                    <b>{{ name }}</b>
+                    <span>{{ priceLabel }}</span>
+                  </span>
+                  {{/each}}
                 </span>
-                {{/each}}
+                <span class="mock-branch"><svg><use href="#i-store"/></svg><span><b>{{ t.hero.branches }}</b><small>PIK · Puri Indah</small></span><i><svg><use href="#i-wa"/></svg></i></span>
+                <span class="mock-link"><svg><use href="#i-bowl"/></svg>Pesan di GoFood</span>
               </span>
-              <span class="mock-branch"><svg><use href="#i-store"/></svg><span><b>2 cabang</b><small>PIK · Puri Indah</small></span><i><svg><use href="#i-wa"/></svg></i></span>
-              <span class="mock-link"><svg><use href="#i-bowl"/></svg>Pesan di GoFood</span>
-            </span>
-            <span class="phone__cta">Tap untuk coba <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
-          </a>
-          <div class="bio-card" aria-hidden="true">
-            <span class="bio-card__avatar">{{ demo.business.initial }}</span>
-            <span class="bio-card__text">
-              <b>{{ demo.business.slug }}</b>
-              <span>{{ demo.business.categoryCity }}</span>
-              <span class="bio-card__link"><svg><use href="#i-link"/></svg>{{ exampleUrl }}</span>
-            </span>
+              <span class="phone__cta">{{ t.hero.phoneCta }} <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+            </a>
+            <div class="bio-card" aria-hidden="true">
+              <span class="bio-card__avatar">{{ demo.business.initial }}</span>
+              <span class="bio-card__text">
+                <b>{{ demo.business.slug }}</b>
+                <span>{{ demo.business.categoryCity }}</span>
+                <span class="bio-card__link"><svg><use href="#i-link"/></svg>{{ exampleUrl }}</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="examples__item" data-ex="1">
+            <div class="phone phone--static" aria-hidden="true">
+              <span class="phone__screen">
+                <span class="mock-cover" style="background:{{ ex.po.cover }}"></span>
+                <span class="mock-head">
+                  <span class="mock-logo mock-logo--navy">{{ ex.po.initial }}</span>
+                  <b class="mock-name">{{ ex.po.name }}</b>
+                  <span class="mock-sub">{{ ex.po.categoryCity }}</span>
+                  <span class="mock-socials">{{#each ex.po.socials}}<span><svg><use href="#{{ this }}"/></svg></span>{{/each}}</span>
+                </span>
+                <span class="mock-title">{{ ex.po.heading }}</span>
+                {{#each ex.po.items}}<span class="fx-row fx-row--price"><span>{{ name }}</span><span class="fx-row__price">{{ priceLabel }}</span></span>{{/each}}
+                <span class="fx-row"><i class="fx-icon"><svg><use href="#i-box"/></svg></i>{{ ex.po.link }}</span>
+                <span class="fx-row"><i class="fx-icon fx-icon--wa"><svg><use href="#i-wa"/></svg></i>{{ ex.po.wa }}</span>
+              </span>
+            </div>
+            <span class="phone__chip">{{ t.hero.exampleChip }}</span>
+          </div>
+
+          <div class="examples__item" data-ex="2">
+            <div class="phone phone--static" aria-hidden="true">
+              <span class="phone__screen">
+                <span class="mock-cover" style="background:{{ ex.photo.cover }}"></span>
+                <span class="mock-head">
+                  <span class="mock-logo mock-logo--navy">{{ ex.photo.initial }}</span>
+                  <b class="mock-name">{{ ex.photo.name }}</b>
+                  <span class="mock-sub">{{ ex.photo.categoryCity }}</span>
+                  <span class="mock-socials">{{#each ex.photo.socials}}<span><svg><use href="#{{ this }}"/></svg></span>{{/each}}</span>
+                </span>
+                <span class="mock-title">{{ ex.photo.catalogTitle }}</span>
+                <span class="mock-grid">
+                  {{#each ex.photo.items}}<span class="mock-item"><span class="fx-tile" style="background:{{ tone }}"></span><b>{{ name }}</b><span>{{ priceLabel }}</span></span>{{/each}}
+                </span>
+                <span class="fx-row"><i class="fx-icon"><svg><use href="#i-camera"/></svg></i>{{ ex.photo.link }}</span>
+                <span class="fx-row"><i class="fx-icon fx-icon--wa"><svg><use href="#i-wa"/></svg></i>{{ ex.photo.wa }}</span>
+              </span>
+            </div>
+            <span class="phone__chip">{{ t.hero.exampleChip }}</span>
+          </div>
+
+          <div class="examples__item" data-ex="3">
+            <div class="phone phone--static" aria-hidden="true">
+              <span class="phone__screen">
+                <span class="mock-cover" style="background:{{ ex.artist.cover }}"></span>
+                <span class="mock-head">
+                  <span class="mock-logo mock-logo--navy">{{ ex.artist.initial }}</span>
+                  <b class="mock-name">{{ ex.artist.name }}</b>
+                  <span class="mock-sub">{{ ex.artist.categoryCity }}</span>
+                  <span class="mock-socials">{{#each ex.artist.socials}}<span><svg><use href="#{{ this }}"/></svg></span>{{/each}}</span>
+                </span>
+                <span class="fx-video"><span class="fx-video__img"><i><svg><use href="#i-play"/></svg></i></span><b>{{ ex.artist.video }}</b></span>
+                <span class="fx-row"><i class="fx-icon fx-icon--green"><svg><use href="#i-music"/></svg></i>{{ ex.artist.listen }}</span>
+                <span class="mock-title">{{ ex.artist.showsTitle }}</span>
+                {{#each ex.artist.shows}}<span class="fx-row"><i class="fx-icon"><svg><use href="#i-ticket"/></svg></i>{{ this }}</span>{{/each}}
+                <span class="mock-title">{{ ex.artist.merchTitle }}</span>
+                <span class="fx-row fx-row--price"><span>{{ ex.artist.merch.name }}</span><span class="fx-row__price">{{ ex.artist.merch.priceLabel }}</span></span>
+                <span class="fx-row"><i class="fx-icon fx-icon--wa"><svg><use href="#i-wa"/></svg></i>{{ ex.artist.booking }}</span>
+              </span>
+            </div>
+            <span class="phone__chip">{{ t.hero.exampleChip }}</span>
+          </div>
+
+          <div class="examples__item" data-ex="4">
+            <div class="phone phone--static" aria-hidden="true">
+              <span class="phone__screen">
+                <span class="mock-cover" style="background:{{ ex.personal.cover }}"></span>
+                <span class="mock-head">
+                  <span class="mock-logo mock-logo--navy">{{ ex.personal.initial }}</span>
+                  <b class="mock-name">{{ ex.personal.name }}</b>
+                  <span class="mock-sub">{{ ex.personal.categoryCity }}</span>
+                  <span class="mock-bio">{{ ex.personal.bio }}</span>
+                  <span class="mock-socials">{{#each ex.personal.socials}}<span><svg><use href="#{{ this }}"/></svg></span>{{/each}}</span>
+                </span>
+                <span class="fx-gap"></span>
+                {{#each ex.personal.links}}<span class="fx-row"><i class="fx-icon"><svg><use href="#i-link"/></svg></i>{{ this }}</span>{{/each}}
+              </span>
+            </div>
+            <span class="phone__chip">{{ t.hero.exampleChip }}</span>
           </div>
         </div>
       </div>
@@ -68,24 +160,17 @@
     <section class="section" id="masalah" aria-labelledby="masalah-title">
       <div class="wrap split">
         <div>
-          <p class="eyebrow">Masalah</p>
-          <h2 class="h2" id="masalah-title">Kenal situasi ini?</h2>
+          <p class="eyebrow">{{ t.problem.eyebrow }}</p>
+          <h2 class="h2" id="masalah-title">{{ t.problem.title }}</h2>
           <ul class="pains" role="list">
-            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-store"/></svg></span>Bikin website rasanya mahal dan ribet. Harus bayar orang, lalu siapa yang mengurus?</li>
-            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-grid"/></svg></span>Feed Instagram urut tanggal. Menu dan harga tenggelam di caption, promo minggu lalu sudah tidak kelihatan.</li>
-            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-chat"/></svg></span>Tamu bertanya lewat chat: menunya apa, harganya berapa, buka jam berapa. Jawabannya diketik ulang setiap hari.</li>
-            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-pin"/></svg></span>Dua cabang, dua akun, info yang beda-beda. Tamu bingung harus menghubungi yang mana.</li>
-            <li><span class="pains__icon" aria-hidden="true"><svg><use href="#i-scatter"/></svg></span>Link GoFood, GrabFood, Google Maps dan Instagram tersebar. Tidak tahu tamu datang dari mana.</li>
+            {{#each t.problem.pains}}<li><span class="pains__icon" aria-hidden="true"><svg><use href="#{{ icon }}"/></svg></span>{{ text }}</li>
+            {{/each}}
           </ul>
         </div>
         <div class="chat-mock" aria-hidden="true">
-          <p class="chat-mock__head"><span class="chat-mock__av">{{ demo.business.initial }}</span><b>Chat masuk</b><small>hari ini</small></p>
-          <p class="bubble">kak, menunya ada? 🙏</p>
-          <p class="bubble">buka sampai jam berapa ya?</p>
-          <p class="bubble">cabang puri indah alamatnya di mana kak?</p>
-          <p class="bubble bubble--me">cek IG ya kak 🙏</p>
-          <p class="bubble">ada promo apa minggu ini?</p>
-          <p class="bubble">bisa pesan nasi kotak 30 buat sabtu?</p>
+          <p class="chat-mock__head"><span class="chat-mock__av"><svg><use href="#i-chat"/></svg></span><b>{{ t.problem.chatTitle }}</b><small>{{ t.problem.chatWhen }}</small></p>
+          {{#each t.problem.bubbles}}<p class="bubble{{#if me}} bubble--me{{/if}}">{{ text }}</p>
+          {{/each}}
         </div>
       </div>
     </section>
@@ -94,76 +179,65 @@
     <section class="section section--tint" id="solusi" aria-labelledby="solusi-title">
       <div class="wrap">
         <div class="section__head">
-          <p class="eyebrow">Solusi</p>
-          <h2 class="h2" id="solusi-title">Satu halaman untuk usahamu, satu link untuk semua</h2>
-          <p class="lede">Halamanmu jadi “website” usahamu, tanpa perlu domain sendiri. Pasang link-nya di bio Instagram dan TikTok, di Google Maps, di status WhatsApp, dan cetak QR-nya untuk meja, kasir, dan kemasan.</p>
+          <p class="eyebrow">{{ t.solution.eyebrow }}</p>
+          <h2 class="h2" id="solusi-title">{{ t.solution.title }}</h2>
+          <p class="lede">{{ t.solution.lede }}</p>
         </div>
         <div class="link-flow" aria-hidden="true">
-          <span class="link-flow__chips"><span>Bio Instagram</span><span>Bio TikTok</span><span>Google Maps</span><span>Status WhatsApp</span><span>QR di meja</span><span>Kemasan</span></span>
+          <span class="link-flow__chips">{{#each t.solution.chips}}<span>{{ this }}</span>{{/each}}</span>
           <span class="link-flow__arrow"><svg><use href="#i-arrow"/></svg></span>
           <span class="link-flow__url"><svg><use href="#i-link"/></svg>{{ exampleUrl }}</span>
         </div>
         <div class="blocks">
-          <article class="block">
-            <span class="block__icon" aria-hidden="true"><svg><use href="#i-utensils"/></svg></span>
-            <h3>Menu yang rapi</h3>
-            <p>Menu atau katalog dengan kategori dan harga yang selalu terbaru. Belum punya foto bagus? Menu tanpa foto pun tetap rapi.</p>
+          {{#each t.solution.blocks}}
+          <article class="block{{#if wa}} block--wa{{/if}}">
+            <span class="block__icon" aria-hidden="true"><svg><use href="#{{ icon }}"/></svg></span>
+            <h3>{{ title }}</h3>
+            <p>{{ text }}</p>
           </article>
-          <article class="block">
-            <span class="block__icon" aria-hidden="true"><svg><use href="#i-store"/></svg></span>
-            <h3>Semua cabang di satu halaman</h3>
-            <p>Alamat, jam buka, peta, dan kontak WhatsApp atau media sosial tiap cabang. Tamu langsung menghubungi cabang terdekat.</p>
-          </article>
-          <article class="block">
-            <span class="block__icon" aria-hidden="true"><svg><use href="#i-link"/></svg></span>
-            <h3>Semua link di satu tempat</h3>
-            <p>GoFood, GrabFood, ulasan Google Maps, Shopee, reservasi, video, plus ikon Instagram, TikTok, dan media sosial lain.</p>
-          </article>
-          <article class="block block--wa">
-            <span class="block__icon" aria-hidden="true"><svg><use href="#i-wa"/></svg></span>
-            <h3>Tanya langsung via WhatsApp</h3>
-            <p>Tombol “Tanya via WhatsApp” di tiap menu, dengan nama menu dan harganya sudah tertulis. Pesanan tetap kamu urus di chat seperti biasa.</p>
-          </article>
-          <article class="block">
-            <span class="block__icon" aria-hidden="true"><svg><use href="#i-chart"/></svg></span>
-            <h3>Tahu apa yang diklik</h3>
-            <p>Kunjungan, klik WhatsApp, dan klik per link dan per cabang. Tanpa cookie, tanpa melacak pengunjung.</p>
-          </article>
-          <article class="block">
-            <span class="block__icon" aria-hidden="true"><svg><use href="#i-ban"/></svg></span>
-            <h3>Tanpa iklan</h3>
-            <p>Pengunjung langsung sampai ke menu dan link-mu, tanpa iklan layar penuh. Berlaku di semua paket, termasuk Gratis.</p>
-          </article>
+          {{/each}}
         </div>
       </div>
     </section>
 
-    <!-- ============ CARA KERJA ============ -->
-    <section class="section" id="cara-kerja" aria-labelledby="cara-kerja-title">
+    <!-- ============ UNTUK SIAPA ============ -->
+    <section class="section" id="untuk-siapa" aria-labelledby="untuk-siapa-title">
       <div class="wrap">
         <div class="section__head">
-          <p class="eyebrow">Cara kerja</p>
-          <h2 class="h2" id="cara-kerja-title">Siap dalam 15 menit, langsung dari HP</h2>
+          <p class="eyebrow">{{ t.useCases.eyebrow }}</p>
+          <h2 class="h2" id="untuk-siapa-title">{{ t.useCases.title }}</h2>
+          <p class="lede">{{ t.useCases.lede }}</p>
+        </div>
+        <ul class="uses" role="list">
+          {{#each t.useCases.cards}}
+          <li class="use{{#if wide}} use--wide{{/if}}">
+            <span class="block__icon" aria-hidden="true"><svg><use href="#{{ icon }}"/></svg></span>
+            <h3>{{ title }}</h3>
+            <p>{{ text }}</p>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CARA KERJA ============ -->
+    <section class="section section--tint" id="cara-kerja" aria-labelledby="cara-kerja-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">{{ t.how.eyebrow }}</p>
+          <h2 class="h2" id="cara-kerja-title">{{ t.how.title }}</h2>
         </div>
         <ol class="steps" role="list">
+          {{#each t.how.steps}}
           <li class="step">
-            <span class="step__no">1</span>
-            <h3>Daftar</h3>
-            <p>Masuk pakai akun Google atau link lewat email. Tanpa kata sandi, kurang dari semenit.</p>
+            <span class="step__no">{{ no }}</span>
+            <h3>{{ title }}</h3>
+            <p>{{ text }}</p>
           </li>
-          <li class="step">
-            <span class="step__no">2</span>
-            <h3>Isi halamanmu</h3>
-            <p>Pilih template “Kafe &amp; resto”, lalu isi nama usaha, nomor WhatsApp, jam buka, alamat, menu, dan cabang.</p>
-          </li>
-          <li class="step">
-            <span class="step__no">3</span>
-            <h3>Terbitkan &amp; bagikan</h3>
-            <p>Pasang di bio Instagram dan TikTok, bagikan ke status WhatsApp, cetak kode QR untuk meja, kasir, dan kemasan.</p>
-          </li>
+          {{/each}}
         </ol>
-        <p class="center"><a class="btn btn--dark btn--lg" href="{{ base }}contoh/warungsari/">Lihat contoh: {{ demo.business.name }} <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
-        {{#if concierge.enabled}}<p class="center steps__help">Belum sempat? <a href="#mulai">Halamanmu bisa kami buatkan, gratis.</a></p>{{/if}}
+        <p class="center"><a class="btn btn--dark btn--lg" href="{{ home }}contoh/warungsari/">{{ t.how.example }} <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+        {{#if concierge.enabled}}<p class="center steps__help">{{ t.how.helpLead }} <a href="#mulai">{{ t.how.helpLink }}</a></p>{{/if}}
       </div>
     </section>
 
@@ -171,46 +245,32 @@
     <section class="section section--dark" id="pro" aria-labelledby="pro-title">
       <div class="wrap">
         <div class="section__head">
-          <p class="eyebrow eyebrow--light">Paket Pro</p>
-          <h2 class="h2" id="pro-title">Halamanmu, dengan merekmu sendiri <span class="badge badge--pro">Pro</span></h2>
-          <p class="lede">Paket Gratis sudah cukup untuk punya halaman. Pro untuk usaha yang menunya panjang, cabangnya banyak, dan mau tampil dengan merek sendiri.</p>
+          <p class="eyebrow eyebrow--light">{{ t.pro.eyebrow }}</p>
+          <h2 class="h2" id="pro-title">{{ t.pro.title }} <span class="badge badge--pro">Pro</span></h2>
+          <p class="lede">{{ t.pro.lede }}</p>
         </div>
 
         <div class="pro-grid">
+          {{#each t.pro.cards}}
           <article class="pro-card">
-            <span class="pro-card__icon" aria-hidden="true"><svg><use href="#i-palette"/></svg></span>
-            <h3>Merekmu sendiri</h3>
-            <p>Tanpa lencana “Dibuat dengan {{ brandName }}”. Semua tema, plus warna sendiri.</p>
+            <span class="pro-card__icon" aria-hidden="true"><svg><use href="#{{ icon }}"/></svg></span>
+            <h3>{{ title }}</h3>
+            <p>{{ text }}{{#if soon}} <span class="soon">{{ soon }}</span>{{/if}}</p>
           </article>
-          <article class="pro-card">
-            <span class="pro-card__icon" aria-hidden="true"><svg><use href="#i-infinity"/></svg></span>
-            <h3>Tanpa batas</h3>
-            <p>Menu, link, dan cabang tanpa batas. Pas untuk menu 30–60 item. Paket Gratis sampai {{ limits.freeItems }} menu dan {{ limits.freeLinks }} link.</p>
-          </article>
-          <article class="pro-card">
-            <span class="pro-card__icon" aria-hidden="true"><svg><use href="#i-compass"/></svg></span>
-            <h3>Kenali pengunjungmu</h3>
-            <p>Statistik {{ limits.proStatsDays }} hari terakhir, lalu Insights: dari mana tamu datang, jam ramai, menu yang paling dilihat. <span class="soon">Insights segera</span></p>
-          </article>
-          <article class="pro-card">
-            <span class="pro-card__icon" aria-hidden="true"><svg><use href="#i-tag"/></svg></span>
-            <h3>Promo &amp; menu baru</h3>
-            <p>Harga promo dengan harga lama dicoret, label “Baru” atau “Promo”, dan tanggal berakhir otomatis. <span class="soon">segera</span></p>
-          </article>
+          {{/each}}
         </div>
 
-        <figure class="promo-mock" aria-label="Contoh menu dengan label Promo dan Baru di paket Pro">
-          <figcaption class="promo-mock__head"><b>{{ demo.business.name }} · Menu</b><span class="chip">contoh · segera</span></figcaption>
+        <figure class="promo-mock" aria-label="{{ t.pro.promoLabel }}">
+          <figcaption class="promo-mock__head"><b>{{ t.pro.promoHead }}</b><span class="chip">{{ t.pro.promoChip }}</span></figcaption>
           <ul role="list">
-            <li><span class="promo-mock__name">Paket makan siang <span class="tag tag--promo">Promo</span></span><span class="promo-mock__price"><s>Rp45.000</s> <b>Rp39.000</b></span></li>
-            <li><span class="promo-mock__name">Sop buntut <span class="tag tag--baru">Baru</span></span><span class="promo-mock__price"><b>Rp65.000</b></span></li>
-            <li><span class="promo-mock__name">Nasi goreng spesial</span><span class="promo-mock__price"><b>Rp35.000</b></span></li>
+            {{#each promo}}<li><span class="promo-mock__name">{{ name }}{{#if tag}} <span class="tag tag--{{ tagClass }}">{{ tag }}</span>{{/if}}</span><span class="promo-mock__price">{{#if old}}<s>{{ old }}</s> {{/if}}<b>{{ price }}</b></span></li>
+            {{/each}}
           </ul>
         </figure>
 
         <div class="center btn-row pro-cta">
-          <a class="btn btn--accent btn--lg" href="{{ base }}contoh/warungsari/?paket=pro">Lihat versi Pro <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn--ghost btn--lg" href="{{ base }}contoh/dasbor/">Lihat contoh dasbor</a>
+          <a class="btn btn--accent btn--lg" href="{{ home }}contoh/warungsari/?paket=pro">{{ t.pro.ctaPro }} <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost btn--lg" href="{{ home }}contoh/dasbor/">{{ t.pro.ctaDash }}</a>
         </div>
       </div>
     </section>
@@ -219,19 +279,19 @@
     <section class="section" id="insights" aria-labelledby="insights-title">
       <div class="wrap split split--rev">
         <div>
-          <p class="eyebrow">Insights <span class="badge badge--soon">Segera di Pro</span></p>
-          <h2 class="h2" id="insights-title">Tahu tamu datang dari mana</h2>
-          <p class="lede">Instagram, Google, TikTok, WhatsApp, atau QR di meja? Lihat sumber pengunjung, jam paling ramai, dan menu yang paling sering dilihat. Semua berupa hitungan anonim, tanpa melacak siapa pun.</p>
-          <p class="more-link"><a href="{{ base }}contoh/dasbor/?paket=pro#insights">Lihat contoh Insights <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+          <p class="eyebrow">{{ t.insights.eyebrow }} <span class="badge badge--soon">{{ t.insights.soon }}</span></p>
+          <h2 class="h2" id="insights-title">{{ t.insights.title }}</h2>
+          <p class="lede">{{ t.insights.lede }}</p>
+          <p class="more-link"><a href="{{ home }}contoh/dasbor/?paket=pro#insights">{{ t.insights.more }} <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
         </div>
         <figure class="insight-card">
-          <figcaption class="insight-card__head"><b>Sumber pengunjung</b><span class="chip">contoh</span></figcaption>
+          <figcaption class="insight-card__head"><b>{{ t.insights.cardTitle }}</b><span class="chip">{{ t.insights.chip }}</span></figcaption>
           <ul class="bars" role="list">
             {{#each demo.sources}}
             <li class="bars__row"><span class="bars__label">{{ label }}</span><span class="bars__track"><span class="bars__fill" style="width:{{ pct }}%"></span></span><span class="bars__value">{{ valueText }}</span></li>
             {{/each}}
           </ul>
-          <p class="insight-card__foot"><span><small>Jam paling ramai</small><b>{{ demo.insights.busiestHours }}</b></span><span><small>Menu teratas</small><b>Nasi goreng spesial</b></span></p>
+          <p class="insight-card__foot"><span><small>{{ t.insights.busiest }}</small><b>{{ t.insights.busiestValue }}</b></span><span><small>{{ t.insights.topItem }}</small><b>Nasi goreng spesial</b></span></p>
         </figure>
       </div>
     </section>
@@ -240,73 +300,52 @@
     <section class="section section--tint" id="harga" aria-labelledby="harga-title">
       <div class="wrap">
         <div class="section__head">
-          <p class="eyebrow">Harga</p>
-          <h2 class="h2" id="harga-title">Mulai gratis. Upgrade kalau menumu panjang atau mau tampil dengan merekmu.</h2>
+          <p class="eyebrow">{{ t.pricing.eyebrow }}</p>
+          <h2 class="h2" id="harga-title">{{ t.pricing.title }}</h2>
         </div>
 
         <div class="plans">
           <article class="plan" aria-labelledby="plan-free">
-            <h3 class="plan__name" id="plan-free">Gratis</h3>
-            <p class="plan__price"><b>Rp0</b><span>selamanya</span></p>
-            <p class="plan__note">Untuk punya halaman usaha yang lengkap.</p>
+            <h3 class="plan__name" id="plan-free">{{ t.pricing.free }}</h3>
+            <p class="plan__price"><b>Rp0</b><span>{{ t.pricing.forever }}</span></p>
+            <p class="plan__note">{{ t.pricing.freeNote }}</p>
             <ul class="plan__list" role="list">
-              <li>Halaman usaha, kode QR, tombol bagikan</li>
-              <li>Sampai {{ limits.freeItems }} menu atau produk yang tampil</li>
-              <li>Sampai {{ limits.freeLinks }} link: tombol, kartu, atau cabang (tiap cabang dihitung satu)</li>
-              <li>Cabang dengan alamat, jam buka, dan kontaknya</li>
-              <li>Ikon media sosial (sampai {{ limits.socialIcons }}), judul bagian, atur urutan blok</li>
-              <li>Tombol “Tanya via WhatsApp” di tiap menu</li>
-              <li>Statistik {{ limits.freeStatsDays }} hari: kunjungan, klik WhatsApp, klik per link dan cabang</li>
-              <li>Insights: pratinjau</li>
-              <li>Tanpa iklan · tema dasar · lencana “Dibuat dengan {{ brandName }}”</li>
+              {{#each t.pricing.freeFeatures}}<li>{{ this }}</li>
+              {{/each}}
             </ul>
-            <a class="btn btn--outline btn--block" href="#uji-coba" data-sheet-open="uji-coba">Ganti link bio kamu</a>
+            <a class="btn btn--outline btn--block" href="{{ app.register }}" data-app-link>{{ t.ctaCreate }}</a>
           </article>
 
           <article class="plan plan--pro" aria-labelledby="plan-pro" data-billing="monthly">
-            <h3 class="plan__name" id="plan-pro">Pro <span class="badge badge--pro">Untuk merekmu sendiri</span></h3>
-            <div class="billing js-only" role="group" aria-label="Periode bayar">
-              <button type="button" data-billing-set="monthly" aria-pressed="true">Bulanan</button>
-              <button type="button" data-billing-set="annual" aria-pressed="false">Tahunan <small>(2 bulan gratis)</small></button>
+            <h3 class="plan__name" id="plan-pro">{{ t.pricing.pro }} <span class="badge badge--pro">{{ t.pricing.proBadge }}</span></h3>
+            <div class="billing js-only" role="group" aria-label="{{ t.pricing.billingLabel }}">
+              <button type="button" data-billing-set="monthly" aria-pressed="true">{{ t.pricing.monthly }}</button>
+              <button type="button" data-billing-set="annual" aria-pressed="false">{{ t.pricing.annual }} <small>{{ t.pricing.annualHint }}</small></button>
             </div>
-            <p class="plan__price when-monthly"><b data-price="monthly">{{ price.monthly }}</b><span>/bulan</span></p>
-            <p class="plan__price when-annual"><b data-price="annual">{{ price.annual }}</b><span>/tahun</span></p>
-            <p class="plan__note when-monthly">Atau <span data-price="annual">{{ price.annual }}</span>/tahun. Bayar tahunan: 2 bulan gratis.</p>
-            <p class="plan__note when-annual">12 bulan, bayar 10. Hemat <span data-price="saving">{{ price.annualSaving }}</span>.</p>
-            <p class="plan__highlight">Tanpa lencana, warna sendiri, menu dan cabang tanpa batas, statistik {{ limits.proStatsDays }} hari. Insights dan promo segera.</p>
+            <p class="plan__price when-monthly"><b>{{ price.monthly }}</b><span>{{ t.pricing.perMonth }}</span></p>
+            <p class="plan__price when-annual"><b>{{ price.annual }}</b><span>{{ t.pricing.perYear }}</span></p>
+            <p class="plan__note when-monthly">{{ t.pricing.noteMonthly }}</p>
+            <p class="plan__note when-annual">{{ t.pricing.noteAnnual }}</p>
+            <p class="plan__highlight">{{ t.pricing.proHighlight }}</p>
             <ul class="plan__list" role="list">
-              <li><b>Semua di paket Gratis</b>, plus:</li>
-              <li>Lencana bisa dihilangkan · semua tema + warna sendiri</li>
-              <li>Menu, link, dan cabang tanpa batas (wajar)</li>
-              <li>Statistik {{ limits.proStatsDays }} hari terakhir</li>
-              <li>Insights: sumber pengunjung, perangkat, jam ramai, klik per menu <span class="soon">segera</span></li>
-              <li>Harga promo dan label “Baru” / “Promo” di menu <span class="soon">segera</span></li>
+              <li><b>{{ t.pricing.proPlus }}</b>{{ t.pricing.proPlusTail }}</li>
+              {{#each t.pricing.proFeatures}}<li>{{ text }}{{#if soon}} <span class="soon">{{ t.pricing.soon }}</span>{{/if}}</li>
+              {{/each}}
             </ul>
-            <a class="btn btn--accent btn--block" href="#uji-coba" data-sheet-open="uji-coba">Pilih Pro</a>
-            <p class="plan__pay">Bayar pakai QRIS atau transfer. Tanpa potong otomatis.</p>
+            <a class="btn btn--accent btn--block" href="{{ app.register }}" data-app-link>{{ t.pricing.proCta }}</a>
+            <p class="plan__pay">{{ t.pricing.proPay }}</p>
           </article>
         </div>
-        <p class="plans__foot"><svg aria-hidden="true"><use href="#i-check"/></svg>Tanpa komisi dari penjualanmu. Tanpa iklan di semua paket.</p>
+        <p class="plans__foot"><svg aria-hidden="true"><use href="#i-check"/></svg>{{ t.pricing.foot }}</p>
 
         <details class="matrix">
-          <summary>Bandingkan semua fitur</summary>
-          <div class="table-wrap" tabindex="0" role="region" aria-label="Perbandingan paket Gratis dan Pro">
+          <summary>{{ t.pricing.compare }}</summary>
+          <div class="table-wrap" tabindex="0" role="region" aria-label="{{ t.pricing.tableLabel }}">
             <table>
-              <thead><tr><th scope="col">Fitur</th><th scope="col">Gratis</th><th scope="col">Pro</th></tr></thead>
+              <thead><tr><th scope="col">{{ t.pricing.colFeature }}</th><th scope="col">{{ t.pricing.free }}</th><th scope="col">{{ t.pricing.pro }}</th></tr></thead>
               <tbody>
-                <tr><th scope="row">Halaman usaha, kode QR, tombol bagikan</th><td>✓</td><td>✓</td></tr>
-                <tr><th scope="row">Menu atau produk yang tampil</th><td>sampai {{ limits.freeItems }}</td><td>tanpa batas (wajar)</td></tr>
-                <tr><th scope="row">Tombol dan kartu link</th><td>sampai {{ limits.freeLinks }}</td><td>tanpa batas</td></tr>
-                <tr><th scope="row">Cabang (alamat, jam buka, sampai 6 kontak)</th><td>✓, dihitung sebagai link</td><td>tanpa batas</td></tr>
-                <tr><th scope="row">Ikon media sosial, judul bagian, atur urutan blok</th><td>✓ (sampai {{ limits.socialIcons }} ikon)</td><td>✓ (sampai {{ limits.socialIcons }} ikon)</td></tr>
-                <tr><th scope="row">Tombol “Tanya via WhatsApp” per menu</th><td>✓</td><td>✓</td></tr>
-                <tr><th scope="row">Statistik: kunjungan, klik WhatsApp, klik per link dan cabang</th><td>{{ limits.freeStatsDays }} hari terakhir</td><td>{{ limits.proStatsDays }} hari terakhir</td></tr>
-                <tr><th scope="row">Insights: sumber pengunjung, perangkat, jam ramai, klik per menu</th><td>pratinjau</td><td>✓ (segera)</td></tr>
-                <tr><th scope="row">Harga promo dan label “Baru” / “Promo”</th><td><span aria-label="tidak">–</span></td><td>✓ (segera)</td></tr>
-                <tr><th scope="row">Iklan di halaman</th><td>tidak ada</td><td>tidak ada</td></tr>
-                <tr><th scope="row">Lencana “Dibuat dengan {{ brandName }}”</th><td>tampil</td><td>bisa dihilangkan</td></tr>
-                <tr><th scope="row">Tema</th><td>dasar</td><td>semua + warna sendiri</td></tr>
-                <tr><th scope="row">Harga</th><td>Rp0</td><td><span data-price="monthly">{{ price.monthly }}</span> / bulan</td></tr>
+                {{#each t.pricing.rows}}<tr><th scope="row">{{ f }}</th><td>{{ free }}</td><td>{{ pro }}</td></tr>
+                {{/each}}
               </tbody>
             </table>
           </div>
@@ -319,34 +358,32 @@
     <section class="section" id="mulai" aria-labelledby="mulai-title">
       <div class="wrap">
         <div class="section__head">
-          <p class="eyebrow">Sebelum beta dibuka {{ betaOpensText }}</p>
-          <h2 class="h2" id="mulai-title">Mau punya halaman lebih cepat?</h2>
+          <p class="eyebrow">{{ t.early.eyebrow }}</p>
+          <h2 class="h2" id="mulai-title">{{ t.early.title }}</h2>
         </div>
         <div class="offers">
           {{#if concierge.enabled}}
           <article class="offer" id="dibuatkan">
-            <p class="offer__tag">Gratis</p>
-            <h3 class="offer__title">Coba dulu: halamanmu kami buatkan</h3>
-            <p class="offer__text">Kirim menu, cabang, dan link-mu lewat WhatsApp. Kami siapkan halamannya, kamu cek dan setujui isinya dulu, lalu pasang di bio. Bisa minta diturunkan kapan saja.</p>
+            <p class="offer__tag">{{ t.early.concierge.tag }}</p>
+            <h3 class="offer__title">{{ t.early.concierge.title }}</h3>
+            <p class="offer__text">{{ t.early.concierge.text }}</p>
             <ul class="offer__facts" role="list">
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Gratis, tanpa deposit</li>
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Tayang hanya setelah kamu setuju</li>
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Untuk usaha di {{ concierge.area }}, selama masa uji coba</li>
+              {{#each t.early.concierge.facts}}<li><svg aria-hidden="true"><use href="#i-check"/></svg>{{ this }}</li>
+              {{/each}}
             </ul>
-            <a class="btn btn--wa btn--lg btn--block" href="{{ wa.concierge }}"><svg aria-hidden="true"><use href="#i-wa"/></svg>Minta dibuatkan halaman</a>
+            <a class="btn btn--wa btn--lg btn--block" href="{{ wa.concierge }}"><svg aria-hidden="true"><use href="#i-wa"/></svg>{{ t.early.concierge.cta }}</a>
           </article>
           {{/if}}
           {{#if founding.enabled}}
           <article class="offer offer--dark" id="anggota-pendiri">
-            <p class="offer__tag">Anggota pendiri</p>
-            <h3 class="offer__title">{{ founding.proMonths }} bulan Pro, dibuatkan sebelum Ramadan</h3>
-            <p class="offer__text">Deposit {{ founding.deposit }} untuk {{ founding.proMonths }} bulan Pro, dan halamanmu kami buatkan sebelum Ramadan. Masa Pro mulai saat halamanmu tayang. Uang kembali penuh kalau kami belum meluncur sampai {{ founding.refundText }}.</p>
+            <p class="offer__tag">{{ t.early.founding.tag }}</p>
+            <h3 class="offer__title">{{ t.early.founding.title }}</h3>
+            <p class="offer__text">{{ t.early.founding.text }}</p>
             <ul class="offer__facts" role="list">
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg><b>{{ founding.deposit }}</b> deposit</li>
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg>{{ founding.proMonths }} bulan Pro, mulai saat halamanmu tayang</li>
-              <li><svg aria-hidden="true"><use href="#i-check"/></svg>Uang kembali kalau belum meluncur {{ founding.refundText }}</li>
+              {{#each t.early.founding.facts}}<li><svg aria-hidden="true"><use href="#i-check"/></svg>{{ this }}</li>
+              {{/each}}
             </ul>
-            <a class="btn btn--accent btn--lg btn--block" href="{{ wa.founding }}"><svg aria-hidden="true"><use href="#i-wa"/></svg>Daftar lewat WhatsApp</a>
+            <a class="btn btn--accent btn--lg btn--block" href="{{ wa.founding }}"><svg aria-hidden="true"><use href="#i-wa"/></svg>{{ t.early.founding.cta }}</a>
           </article>
           {{/if}}
         </div>
@@ -358,14 +395,12 @@
     <section class="section section--tint" id="aman" aria-labelledby="aman-title">
       <div class="wrap">
         <div class="section__head">
-          <p class="eyebrow">Kepercayaan</p>
-          <h2 class="h2" id="aman-title">Aman dan menghargai privasi</h2>
+          <p class="eyebrow">{{ t.trust.eyebrow }}</p>
+          <h2 class="h2" id="aman-title">{{ t.trust.title }}</h2>
         </div>
         <ul class="trust" role="list">
-          <li><span class="trust__icon" aria-hidden="true"><svg><use href="#i-eye-off"/></svg></span>Halaman tanpa iklan, tanpa cookie, dan tanpa pelacak pihak ketiga.</li>
-          <li><span class="trust__icon" aria-hidden="true"><svg><use href="#i-chart"/></svg></span>Statistik berupa hitungan anonim. Kami tidak mengumpulkan data pribadi pengunjung halamanmu.</li>
-          <li><span class="trust__icon" aria-hidden="true"><svg><use href="#i-shield"/></svg></span>Setiap halaman ditinjau sebelum tayang selama masa beta. Tidak ada tempat untuk judi online dan penipuan; siapa pun bisa melaporkan halaman.</li>
-          <li><span class="trust__icon" aria-hidden="true"><svg><use href="#i-server"/></svg></span>Data disimpan di server Singapura.</li>
+          {{#each t.trust.items}}<li><span class="trust__icon" aria-hidden="true"><svg><use href="#{{ icon }}"/></svg></span>{{ text }}</li>
+          {{/each}}
         </ul>
       </div>
     </section>
@@ -374,23 +409,13 @@
     <section class="section" id="faq" aria-labelledby="faq-title">
       <div class="wrap wrap--narrow">
         <div class="section__head">
-          <p class="eyebrow">FAQ</p>
-          <h2 class="h2" id="faq-title">Pertanyaan yang sering ditanyakan</h2>
+          <p class="eyebrow">{{ t.faq.eyebrow }}</p>
+          <h2 class="h2" id="faq-title">{{ t.faq.title }}</h2>
         </div>
         <div class="faq">
-          <details><summary>Apakah benar-benar gratis?</summary><p>Ya. Paket Gratis bisa dipakai selamanya: sampai {{ limits.freeItems }} menu, {{ limits.freeLinks }} link atau cabang, ikon media sosial, dan tombol “Tanya via WhatsApp”. Tanpa iklan. Bayar hanya kalau butuh fitur Pro.</p></details>
-          <details><summary>Apa bedanya dengan Linktree atau link bio lain?</summary><p>{{ brandName }} dibuat untuk usaha, bukan kreator: ada menu dengan harga, cabang dengan alamat dan kontaknya, dan tombol tanya per menu. Tidak ada iklan di halamanmu, dan Pro dibayar dalam rupiah pakai QRIS. Link ke GoFood, marketplace, dan media sosial tetap bisa dipasang.</p></details>
-          <details><summary>Saya sudah ada di Google Maps dan GoFood. Perlu apa lagi?</summary><p>Itu tetap dipakai, dan link-nya bisa dipasang di halamanmu. Bedanya, halaman {{ brandName }} milikmu sendiri: menu, promo, dan info cabang kamu atur sendiri, dengan tampilan usahamu, dan satu link-nya bisa ditaruh di mana saja.</p></details>
-          <details><summary>Bisakah tamu pesan atau bayar lewat halaman ini?</summary><p>Tidak. Tamu melihat menu lalu menghubungimu lewat “Tanya via WhatsApp”, dengan nama menu dan harganya sudah tertulis. Pesanan dan pembayaran tetap kamu urus sendiri di chat, seperti biasa. Kami tidak menyentuh uang tamu dan tidak mengambil komisi.</p></details>
-          <details><summary>Usaha saya punya beberapa cabang. Bisa?</summary><p>Bisa. Setiap cabang punya alamat, jam buka, peta, dan sampai 6 kontak (WhatsApp atau media sosial). Di paket Gratis, setiap cabang dihitung sebagai satu dari {{ limits.freeLinks }} link. Di Pro tanpa batas.</p></details>
-          <details><summary>Saya belum punya foto menu yang bagus.</summary><p>Tidak apa-apa. Menu tanpa foto tetap tampil rapi dengan nama dan harganya, dan foto bisa ditambahkan kapan saja.</p></details>
-          <details><summary>Menu saya lebih dari {{ limits.freeItems }}.</summary><p>Paket Gratis menampilkan sampai {{ limits.freeItems }} menu. Menu lainnya tetap tersimpan sebagai tersembunyi. Dengan Pro, semua menu tampil tanpa batas.</p></details>
-          <details><summary>Apakah {{ brandName }} ambil komisi?</summary><p>Tidak. Tamu dan pembeli membayar langsung ke kamu.</p></details>
-          <details><summary>Bagaimana cara bayar Pro?</summary><p>Pakai QRIS atau transfer bank, bulanan atau tahunan. Tidak ada potong otomatis.</p></details>
-          <details><summary>Kalau saya berhenti bayar Pro?</summary><p>Fitur Pro tetap jalan 7 hari, lalu akun kembali ke Gratis. Data tidak dihapus; menu dan link di atas batas Gratis hanya disembunyikan.</p></details>
-          <details><summary>Perlu aplikasi?</summary><p>Tidak. Semua lewat browser di HP, dan dasbornya bisa dipasang di layar utama seperti aplikasi.</p></details>
-          <details><summary>Saya jualan kue dari rumah, atau cuma di Shopee. Bisa?</summary><p>Bisa. Halamanmu bisa berisi katalog produk, link saja, atau keduanya. Tambah katalog kapan pun.</p></details>
-          <details><summary>Kapan bisa mulai?</summary><p>Masa beta dibuka {{ betaOpensText }}.{{#if earlyStart}} Mau lebih cepat? <a href="#mulai">Lihat cara mulai sebelum beta</a>.{{/if}}</p></details>
+          {{#each t.faq.items}}<details><summary>{{ q }}</summary><p>{{{ aHtml }}}</p></details>
+          {{/each}}
+          {{#if earlyStart}}<details><summary>{{ t.faq.when.q }}</summary><p>{{{ t.faq.when.aHtml }}}</p></details>{{/if}}
         </div>
       </div>
     </section>
@@ -398,10 +423,10 @@
     <!-- ============ CTA AKHIR ============ -->
     <section class="final" aria-labelledby="final-title">
       <div class="wrap center">
-        <h2 class="final__title" id="final-title">Halaman bisnismu di internet, <span class="hl">cukup satu link.</span></h2>
+        <h2 class="final__title" id="final-title">{{ t.tagline.lead }}<span class="hl">{{ t.tagline.hl }}</span></h2>
         <div class="btn-row">
-          <a class="btn btn--accent btn--lg" href="#uji-coba" data-sheet-open="uji-coba">Ganti link bio kamu</a>
-          <a class="btn btn--ghost btn--lg" href="{{ base }}contoh/warungsari/">Lihat contoh halaman</a>
+          <a class="btn btn--accent btn--lg" href="{{ app.register }}" data-app-link>{{ t.ctaStart }}</a>
+          <a class="btn btn--ghost btn--lg" href="{{ home }}contoh/warungsari/">{{ t.ctaExample }}</a>
         </div>
       </div>
     </section>

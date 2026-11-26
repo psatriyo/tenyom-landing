@@ -17,6 +17,9 @@ html:not([data-plan="pro"]) .pro-only { display: none !important; }
 .demo-bar__home svg { width: 20px; height: 20px; }
 .demo-bar__text { flex: 1; min-width: 0; line-height: 1.3; color: var(--soft-on-dark); }
 .demo-bar__text b { color: #fff; }
+.lang-switch--demo { flex: none; margin: 0; font-size: .8rem; }
+.lang-switch--demo a { min-width: 36px; }
+@media (max-width: 380px) { .lang-switch--demo .lang-switch__on, .lang-switch--demo .lang-switch__sep { display: none; } }
 .plan-switch { flex: none; display: flex; padding: 3px; border-radius: 999px; background: rgba(255, 255, 255, .1); }
 .plan-switch button { min-width: 58px; min-height: 38px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: var(--soft-on-dark); font-weight: 800; font-size: .85rem; cursor: pointer; }
 .plan-switch button[aria-pressed="true"] { background: #fff; color: var(--navy-950); }

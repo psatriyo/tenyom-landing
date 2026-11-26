@@ -3,8 +3,10 @@
 // values. Edit here, then run `node scripts/build.mjs`.
 //
 // Source of truth: the requirement documents (2027-project-requirement-documents,
-// 20 Nov 2026, commit b58a8c4, decisions up to D-78). IDs in comments (D-xx
-// decided, P-xx proposed, Q-xx open) point to its decision log (114).
+// 20 Nov 2026, commit b58a8c4, decisions up to D-78), with the copy, price and
+// audiences of the product's landing page (psatriyo/satupage, D-97 to D-103).
+// IDs in comments (D-xx decided, P-xx proposed, Q-xx open) point to the
+// decision log.
 // Values marked OPEN are undecided: the default is used until they are.
 // ---------------------------------------------------------------------------
 
@@ -13,24 +15,25 @@ export default {
   brandName: "SatuPage",
   // Merchant pages live at /[slug] on this domain, e.g. satupage.com/warungsari.
   domain: "satupage.com",
-  // The merchant app lives on an app. subdomain (D-70). Not linked during the
-  // demo: "Masuk" and "Coba gratis" open the "uji coba" sheet instead.
-  appDomain: "app.satupage.com",
+  // The merchant app (D-70). "Masuk" opens <appUrl>/login and every sign-up
+  // button opens <appUrl>/register, passing on utm_* and ref (F-01-FR9).
+  // No trailing slash.
+  appUrl: "https://app.satupage.com",
 
   // Where THIS site is served: canonical URLs, Open Graph, sitemap.
-  // No trailing slash. basePath is "/" on a custom domain; use
-  // "/tenyom-landing/" if served from psatriyo.github.io/tenyom-landing/.
-  siteUrl: "https://satupage.com",
-  basePath: "/",
+  // No trailing slash on siteUrl. basePath is "/" on a custom domain (then
+  // add a CNAME file at the repository root); "/tenyom-landing/" on the
+  // GitHub Pages default address psatriyo.github.io/tenyom-landing/.
+  siteUrl: "https://psatriyo.github.io",
+  basePath: "/tenyom-landing/",
 
   // OPEN: founder's WhatsApp number, international format without "+" or
-  // spaces, e.g. "6281234567890". Used by "Hubungi kami", the "uji coba" sheet
-  // and the concierge and founding-member buttons. Empty = the placeholder: wa.me opens
+  // spaces, e.g. "6281234567890". Used by "Hubungi kami" and the concierge
+  // and founding-member buttons. Empty = the placeholder: wa.me opens
   // WhatsApp's "choose a chat" screen with the message filled in.
   // Do not put an invented number here.
   founderWhatsApp: "6281212345678",
-  // OPEN: support email. Empty = not shown (the legal drafts keep their own
-  // [EMAIL DUKUNGAN] placeholders, which are never replaced automatically).
+  // OPEN: support email. Empty = not shown in the footer.
   supportEmail: "",
   // Number the example page "Warung Sari" sends its WhatsApp messages to
   // ("Tanya via WhatsApp", branch contacts, reservation link).
@@ -39,12 +42,8 @@ export default {
   demoMerchantWhatsApp: "",
 
   pricing: {
-    // OPEN (Q-03, D-14, D-38): Pro is tested at Rp49.000 vs Rp99.000 a month,
-    // decided at Gate 1 (29 Mar 2027). The founder switches the price shown
-    // per interview with ?harga=49 or ?harga=99 (kept for the browser tab).
-    proMonthlyOptions: { 49: 49000, 99: 99000 },
-    proMonthlyDefault: 99,
-    priceParam: "harga",
+    // Interim Pro price shown everywhere, the same as the product (D-79).
+    proMonthly: 69000,
     // Annual = 12 months for the price of 10 ("2 bulan gratis").
     annualMonthsPaid: 10,
   },
@@ -56,6 +55,10 @@ export default {
     socialIcons: 8,
     freeStatsDays: 7,
     proStatsDays: 90,
+    // Pro keeps working this many days after it ends (F-10).
+    graceDays: 7,
+    // Contacts per branch block (F-04).
+    branchContacts: 6,
   },
 
   // Free concierge page for Phase 0 (D-71): the founder builds the page from
@@ -81,10 +84,11 @@ export default {
     refundIfNoLaunchBy: "2027-02-15",
   },
 
+  // Shown in the "Mulai sebelum beta" section and the FAQ.
   dates: {
     betaOpens: "2027-02-15",
   },
 
-  // Footer: "© 2026 SatuPage · prototipe untuk riset".
+  // Footer: "© 2026 SatuPage · prototipe untuk riset" ("research prototype").
   copyrightYear: 2026,
 };

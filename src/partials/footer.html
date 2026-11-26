@@ -1,19 +1,19 @@
 <footer class="footer">
   <div class="wrap">
     <div class="footer__top">
-      <a class="brand brand--footer" href="{{ base }}">
+      <a class="brand brand--footer" href="{{ home }}">
         <svg class="brand__mark" aria-hidden="true"><use href="#i-logo"/></svg>
         <span>{{ brandName }}</span>
       </a>
-      <p class="footer__tag">Halaman bisnismu di internet, cukup satu link.</p>
+      <p class="footer__tag">{{ t.tagline.full }}</p>
     </div>
-    <nav class="footer__links" aria-label="Tautan kaki halaman">
-      <a href="{{ base }}syarat-layanan/">Syarat Layanan</a>
-      <a href="{{ base }}kebijakan-privasi/">Kebijakan Privasi</a>
-      <a href="{{ base }}kebijakan-konten/">Kebijakan Konten dan Tautan</a>
-      <a href="{{ wa.contact }}">Hubungi kami</a>
+    <nav class="footer__links" aria-label="{{ t.footer.label }}">
+      <a href="{{ home }}syarat-layanan/">{{ t.footer.terms }}</a>
+      <a href="{{ home }}kebijakan-privasi/">{{ t.footer.privacy }}</a>
+      <a href="{{ home }}kebijakan-konten/">{{ t.footer.contentPolicy }}</a>
+      <a href="{{ wa.contact }}">{{ t.footer.contact }}</a>
       {{#if hasSupportEmail}}<a href="mailto:{{ supportEmail }}">{{ supportEmail }}</a>{{/if}}
     </nav>
-    <p class="footer__copy">© {{ copyrightYear }} {{ brandName }} · prototipe untuk riset</p>
+    <p class="footer__copy">© {{ copyrightYear }} {{ brandName }} · {{ t.footer.note }}</p>
   </div>
 </footer>
