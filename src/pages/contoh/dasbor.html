@@ -1,16 +1,18 @@
 ---
 {
-  "title": "Contoh dasbor: Warung Sari · {{ brandName }}",
-  "description": "Contoh dasbor pemilik usaha di {{ brandName }}: ringkasan halaman, statistik, dan Insights. Data contoh.",
+  "title": "{{{ t.dash.title }}}",
+  "description": "{{{ t.dash.description }}}",
   "noindex": true,
   "demo": true,
-  "demoLabel": "<b>Contoh dasbor</b> · data contoh"
+  "demoLabel": "{{{ t.dash.barHtml }}}"
 }
 ---
 {{!-- Phone-sized mockups of the dashboard home (activation checklist,
       F-02-FR6 with D-78; plan usage, 204), stats (F-11) and Insights (F-20).
       Static mock data, labelled "contoh". No order log: the order flow is P2
-      (D-73). --}}
+      (D-73). WhatsApp is optional (D-103), so the checklist marks it
+      "disarankan". Upgrade buttons go to the pricing on the landing page.
+      Interface text comes from src/i18n/<lang>.mjs (t.dash). --}}
   {{> demo-bar }}
 
   <main id="main" class="dash" data-dash>
@@ -18,99 +20,97 @@
       <span class="dash__logo" aria-hidden="true">{{ demo.business.initial }}</span>
       <span class="dash__shop">
         <b>{{ demo.business.name }}</b>
-        <a href="{{ base }}contoh/warungsari/">{{ exampleUrl }}</a>
+        <a href="{{ home }}contoh/warungsari/">{{ exampleUrl }}</a>
       </span>
-      <span class="plan-pill pro-only">Pro</span>
-      <span class="plan-pill plan-pill--free pro-hide">Gratis</span>
+      <span class="plan-pill pro-only">{{ t.demoBar.pro }}</span>
+      <span class="plan-pill plan-pill--free pro-hide">{{ t.demoBar.free }}</span>
     </header>
 
-    <nav class="dash__tabs js-only" aria-label="Bagian dasbor" data-dash-tabs>
-      <a href="#ringkasan" data-dash-tab="ringkasan"><svg aria-hidden="true"><use href="#i-home"/></svg>Ringkasan</a>
-      <a href="#statistik" data-dash-tab="statistik"><svg aria-hidden="true"><use href="#i-chart"/></svg>Statistik</a>
-      <a href="#insights" data-dash-tab="insights"><svg aria-hidden="true"><use href="#i-compass"/></svg>Insights</a>
+    <nav class="dash__tabs js-only" aria-label="{{ t.dash.tabsLabel }}" data-dash-tabs>
+      <a href="#ringkasan" data-dash-tab="ringkasan"><svg aria-hidden="true"><use href="#i-home"/></svg>{{ t.dash.tabHome }}</a>
+      <a href="#statistik" data-dash-tab="statistik"><svg aria-hidden="true"><use href="#i-chart"/></svg>{{ t.dash.tabStats }}</a>
+      <a href="#insights" data-dash-tab="insights"><svg aria-hidden="true"><use href="#i-compass"/></svg>{{ t.dash.tabInsights }}</a>
     </nav>
 
     <!-- Home: share, checklist, plan usage -->
     <section class="panel" id="ringkasan" data-panel="ringkasan" aria-labelledby="ringkasan-title">
       <div class="panel__head">
-        <h1 class="panel__title" id="ringkasan-title">Halamanmu sudah tayang</h1>
-        <span class="chip">contoh</span>
+        <h1 class="panel__title" id="ringkasan-title">{{ t.dash.live }}</h1>
+        <span class="chip">{{ t.dash.chip }}</span>
       </div>
 
       <div class="card-box share-box">
         <p class="share-box__url"><svg aria-hidden="true"><use href="#i-link"/></svg>{{ exampleUrl }}</p>
         <div class="share-box__actions">
-          <button type="button" class="btn btn--dark btn--sm" data-demo-action="Contoh: di dasbor asli, link langsung tersalin untuk bio Instagram dan TikTok."><svg aria-hidden="true"><use href="#i-copy"/></svg>Salin link</button>
-          <button type="button" class="btn btn--outline btn--sm" data-demo-action="Contoh: di dasbor asli, kode QR bisa diunduh untuk dicetak di meja, kasir, dan kemasan."><svg aria-hidden="true"><use href="#i-qr"/></svg>Unduh QR</button>
-          <button type="button" class="btn btn--outline btn--sm" data-demo-action="Contoh: di dasbor asli, ini membuka menu bagikan HP, misalnya ke Status WhatsApp."><svg aria-hidden="true"><use href="#i-share"/></svg>Bagikan</button>
+          <button type="button" class="btn btn--dark btn--sm" data-demo-action="{{ t.dash.copyToast }}"><svg aria-hidden="true"><use href="#i-copy"/></svg>{{ t.dash.copy }}</button>
+          <button type="button" class="btn btn--outline btn--sm" data-demo-action="{{ t.dash.qrToast }}"><svg aria-hidden="true"><use href="#i-qr"/></svg>{{ t.dash.qr }}</button>
+          <button type="button" class="btn btn--outline btn--sm" data-demo-action="{{ t.dash.shareToast }}"><svg aria-hidden="true"><use href="#i-share"/></svg>{{ t.dash.share }}</button>
         </div>
       </div>
 
       <div class="card-box">
-        <h2 class="card-box__title">Langkah awal</h2>
+        <h2 class="card-box__title">{{ t.dash.checklistTitle }}</h2>
         <ul class="checklist" role="list">
-          <li class="is-done"><svg aria-hidden="true"><use href="#i-check"/></svg>Nomor WhatsApp terisi</li>
-          <li class="is-done"><svg aria-hidden="true"><use href="#i-check"/></svg>Minimal 3 menu atau 1 cabang</li>
-          <li class="is-done"><svg aria-hidden="true"><use href="#i-check"/></svg>Halaman diterbitkan</li>
-          <li><svg aria-hidden="true"><use href="#i-link"/></svg>Pasang link di bio Instagram dan TikTok</li>
+          {{#each t.dash.checklist}}<li{{#if done}} class="is-done"{{/if}}><svg aria-hidden="true"><use href="#{{#if done}}i-check{{else}}i-link{{/if}}"/></svg>{{ text }}</li>
+          {{/each}}
         </ul>
       </div>
 
       <div class="card-box">
-        <h2 class="card-box__title">Pemakaian paket</h2>
+        <h2 class="card-box__title">{{ t.dash.usageTitle }}</h2>
         <ul class="usage" role="list">
           <li>
-            <span class="usage__top"><b>Menu tampil</b><span class="pro-hide">{{ demo.usage.items }} dari {{ limits.freeItems }}</span><span class="pro-only">{{ demo.usage.items }} · tanpa batas</span></span>
+            <span class="usage__top"><b>{{ t.dash.usageItems }}</b><span class="pro-hide">{{ demo.usage.items }} {{ t.dash.of }} {{ limits.freeItems }}</span><span class="pro-only">{{ demo.usage.items }} · {{ t.dash.unlimited }}</span></span>
             <span class="usage__track pro-hide"><span class="usage__fill" style="width:{{ demo.usage.itemsPct }}%"></span></span>
           </li>
           <li>
-            <span class="usage__top"><b>Link dan cabang</b><span class="pro-hide">{{ demo.usage.linkBlocks }} dari {{ limits.freeLinks }}</span><span class="pro-only">{{ demo.usage.linkBlocks }} · tanpa batas</span></span>
+            <span class="usage__top"><b>{{ t.dash.usageLinks }}</b><span class="pro-hide">{{ demo.usage.linkBlocks }} {{ t.dash.of }} {{ limits.freeLinks }}</span><span class="pro-only">{{ demo.usage.linkBlocks }} · {{ t.dash.unlimited }}</span></span>
             <span class="usage__track pro-hide"><span class="usage__fill" style="width:{{ demo.usage.linksPct }}%"></span></span>
           </li>
         </ul>
-        <p class="panel__note">Setiap cabang dihitung sebagai satu link. Ikon media sosial dan judul bagian tidak dihitung.</p>
+        <p class="panel__note">{{ t.dash.usageNote }}</p>
       </div>
 
       <div class="upgrade pro-hide">
-        <p class="upgrade__title">Menu lebih dari {{ limits.freeItems }}? Mau tampil dengan merekmu?</p>
-        <p class="upgrade__text">Pro: menu, link dan cabang tanpa batas, tanpa lencana, semua tema dan warna sendiri, statistik {{ limits.proStatsDays }} hari.</p>
-        <a class="btn btn--accent btn--block" href="#uji-coba" data-sheet-open="uji-coba"><span>Upgrade ke Pro · <span data-price="monthly">{{ price.monthly }}</span>/bulan</span></a>
+        <p class="upgrade__title">{{ t.dash.upgradeTitle }}</p>
+        <p class="upgrade__text">{{ t.dash.upgradeText }}</p>
+        <a class="btn btn--accent btn--block" href="{{ home }}#harga">{{ t.dash.upgradeCta }}</a>
       </div>
     </section>
 
     <!-- Stats (Free 7 days, Pro 90 days) -->
     <section class="panel" id="statistik" data-panel="statistik" aria-labelledby="statistik-title">
       <div class="panel__head">
-        <h2 class="panel__title" id="statistik-title">Statistik</h2>
-        <span class="chip pro-hide">{{ limits.freeStatsDays }} hari terakhir</span>
-        <span class="chip pro-only">{{ limits.proStatsDays }} hari terakhir</span>
+        <h2 class="panel__title" id="statistik-title">{{ t.dash.statsTitle }}</h2>
+        <span class="chip pro-hide">{{ t.dash.freeDays }}</span>
+        <span class="chip pro-only">{{ t.dash.proDays }}</span>
       </div>
       <ul class="counters" role="list">
-        {{#each demo.stats.counters}}<li><b>{{ value }}</b><span>{{ label }}</span></li>{{/each}}
+        {{#each demo.counters}}<li><b>{{ value }}</b><span>{{ label }}</span></li>{{/each}}
       </ul>
       <div class="card-box">
-        <h3 class="card-box__title">Paling sering diklik</h3>
+        <h3 class="card-box__title">{{ t.dash.topTitle }}</h3>
         <ul class="bars" role="list">
           {{#each demo.topLinks}}
           <li class="bars__row"><span class="bars__label">{{ label }}</span><span class="bars__track"><span class="bars__fill" style="width:{{ pct }}%"></span></span><span class="bars__value">{{ valueText }}</span></li>
           {{/each}}
         </ul>
       </div>
-      <p class="panel__note pro-hide">Paket Gratis menyimpan statistik {{ limits.freeStatsDays }} hari terakhir. Pro sampai {{ limits.proStatsDays }} hari. <a href="#uji-coba" data-sheet-open="uji-coba">Upgrade</a></p>
-      <p class="panel__note pro-only">Paket Pro menyimpan statistik sampai {{ limits.proStatsDays }} hari terakhir.</p>
-      <p class="panel__note">{{ demo.insights.privacyNote }} Tanpa cookie, tanpa melacak pengunjung.</p>
+      <p class="panel__note pro-hide">{{ t.dash.freeNote }} <a href="{{ home }}#harga">{{ t.dash.upgradeLink }}</a></p>
+      <p class="panel__note pro-only">{{ t.dash.proNote }}</p>
+      <p class="panel__note">{{ t.dash.privacyNote }} {{ t.dash.noTracking }}</p>
     </section>
 
     <!-- Insights (Pro, coming soon) -->
     <section class="panel" id="insights" data-panel="insights" aria-labelledby="insights-title">
       <div class="panel__head">
         <h2 class="panel__title" id="insights-title">Insights</h2>
-        <span class="badge badge--soon">Pro · segera</span>
+        <span class="badge badge--soon">{{ t.dash.insightsBadge }}</span>
       </div>
       <div class="lockable">
         <div class="lockable__content">
           <div class="card-box">
-            <h3 class="card-box__title">Sumber pengunjung</h3>
+            <h3 class="card-box__title">{{ t.insights.cardTitle }}</h3>
             <ul class="bars" role="list">
               {{#each demo.sources}}
               <li class="bars__row"><span class="bars__label">{{ label }}</span><span class="bars__track"><span class="bars__fill" style="width:{{ pct }}%"></span></span><span class="bars__value">{{ valueText }}</span></li>
@@ -118,19 +118,19 @@
             </ul>
           </div>
           <div class="card-box card-box--split">
-            <div><h3 class="card-box__title">Jam paling ramai</h3><p class="big">{{ demo.insights.busiestHours }}</p></div>
+            <div><h3 class="card-box__title">{{ t.dash.busiest }}</h3><p class="big">{{ t.insights.busiestValue }}</p></div>
             <div>
-              <h3 class="card-box__title">Menu paling sering dilihat</h3>
+              <h3 class="card-box__title">{{ t.dash.topItems }}</h3>
               <ol class="rank">{{#each demo.insights.topItems}}<li>{{ this }}</li>{{/each}}</ol>
             </div>
           </div>
-          <p class="panel__note">{{ demo.insights.privacyNote }}</p>
+          <p class="panel__note">{{ t.dash.privacyNote }}</p>
         </div>
         <div class="lock pro-hide">
           <span class="lock__icon" aria-hidden="true"><svg><use href="#i-lock"/></svg></span>
-          <p class="lock__title">Tahu tamu datang dari mana</p>
-          <p class="lock__text">Insights ada di paket Pro: sumber pengunjung (Instagram, Google, QR di meja…), jam ramai, dan menu yang paling sering dilihat.</p>
-          <a class="btn btn--accent btn--block" href="#uji-coba" data-sheet-open="uji-coba"><span>Upgrade ke Pro · <span data-price="monthly">{{ price.monthly }}</span>/bulan</span></a>
+          <p class="lock__title">{{ t.dash.lockTitle }}</p>
+          <p class="lock__text">{{ t.dash.lockText }}</p>
+          <a class="btn btn--accent btn--block" href="{{ home }}#harga">{{ t.dash.upgradeCta }}</a>
         </div>
       </div>
     </section>

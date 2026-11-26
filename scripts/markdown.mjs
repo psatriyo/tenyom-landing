@@ -6,7 +6,7 @@
 // Extra rules for the drafts:
 //   - Text in square brackets that is not a link, e.g. [NIB], is a placeholder
 //     and is wrapped in <mark class="ph"> so it reads as unfinished.
-//   - The first blockquote that starts with "**DRAF" becomes the draft banner.
+//   - The first blockquote that starts with "**DRAF" or "**Draf" becomes the draft banner.
 //   - ## and ### headings get ids; ## headings feed the table of contents.
 
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -95,7 +95,7 @@ export function renderMarkdown(src, { base = "/" } = {}) {
       while (i < lines.length && lines[i].startsWith(">")) quote.push(lines[i++].replace(/^>\s?/, ""));
       i--;
       const html = quote.join("\n").split(/\n\s*\n/).map((p) => `<p>${p.split("\n").map((l) => inline(l, base)).join("<br>\n")}</p>`).join("\n");
-      if (!banner && /^\*\*DRAF/.test(quote[0])) banner = html;
+      if (!banner && /^\*\*draf/i.test(quote[0])) banner = html;
       else out.push(`<blockquote>${html}</blockquote>`);
       continue;
     }

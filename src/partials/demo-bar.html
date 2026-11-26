@@ -1,8 +1,9 @@
 <div class="demo-bar">
-  <a class="demo-bar__home" href="{{ base }}" aria-label="Kembali ke beranda {{ brandName }}"><svg aria-hidden="true"><use href="#i-back"/></svg></a>
+  <a class="demo-bar__home" href="{{ home }}" aria-label="{{ t.demoBar.homeLabel }}"><svg aria-hidden="true"><use href="#i-back"/></svg></a>
   <p class="demo-bar__text">{{{ page.demoLabel }}}</p>
-  <div class="plan-switch" role="group" aria-label="Lihat versi paket">
-    <button type="button" data-plan-set="free" aria-pressed="true">Gratis</button>
-    <button type="button" data-plan-set="pro" aria-pressed="false">Pro</button>
+  {{> lang-switch }}
+  <div class="plan-switch" role="group" aria-label="{{ t.demoBar.plansLabel }}">
+    <button type="button" data-plan-set="free" aria-pressed="true">{{ t.demoBar.free }}</button>
+    <button type="button" data-plan-set="pro" aria-pressed="false">{{ t.demoBar.pro }}</button>
   </div>
 </div>

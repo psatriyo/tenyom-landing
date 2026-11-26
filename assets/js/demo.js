@@ -7,7 +7,7 @@
 
   var BB = window.BB;
   if (!BB) return;
-  var $ = BB.$, $$ = BB.$$, rupiah = BB.rupiah;
+  var $ = BB.$, $$ = BB.$$, text = BB.text;
   var d = document;
   var root = d.documentElement;
   var data = {};
@@ -32,9 +32,9 @@
     b.addEventListener("click", function () {
       setPlan(b.getAttribute("data-plan-set"));
       if (isStore) {
-        BB.toast(isPro() ? "Versi Pro: tanpa lencana, warna sendiri, promo dan label (segera)" : "Versi Gratis: semua fitur halaman, dengan lencana");
+        BB.toast(isPro() ? text.storePro : text.storeFree);
       } else {
-        BB.toast(isPro() ? "Versi Pro: tanpa batas, statistik 90 hari, Insights (segera)" : "Versi Gratis: statistik 7 hari, Insights pratinjau");
+        BB.toast(isPro() ? text.dashPro : text.dashFree);
       }
     });
   });
@@ -46,7 +46,7 @@
     if (!t) return;
     e.preventDefault();
     if (t.hasAttribute("data-demo-action")) BB.toast(t.getAttribute("data-demo-action"));
-    else BB.toast(t.hasAttribute("data-report") ? "Contoh: di halaman asli, tombol ini membuka formulir laporan." : "Contoh link");
+    else BB.toast(t.hasAttribute("data-report") ? text.report : text.demoLink);
   });
 
   if (isStore) initStore();
@@ -79,10 +79,17 @@
       if (img) { imgEl.src = img.src; imgEl.alt = img.alt; }
       $("[data-item-name]", sheetEl).textContent = it.name;
       var priceEl = $("[data-item-price]", sheetEl);
-      priceEl.classList.toggle("is-ask", !it.price);
-      if (!it.price) priceEl.textContent = "Tanya harga";
-      else if (isPro() && it.promoPrice) priceEl.innerHTML = "<s>" + rupiah(it.price) + "</s> " + rupiah(it.promoPrice) + ' <span class="tag tag--promo">Promo · segera</span>';
-      else priceEl.textContent = rupiah(it.price);
+      priceEl.classList.toggle("is-ask", !it.priceLabel);
+      priceEl.textContent = "";
+      if (!it.priceLabel) priceEl.textContent = text.askPrice;
+      else if (isPro() && it.promoLabel) {
+        var old = d.createElement("s");
+        old.textContent = it.priceLabel;
+        var tag = d.createElement("span");
+        tag.className = "tag tag--promo";
+        tag.textContent = text.promoSoon;
+        priceEl.append(old, " " + it.promoLabel + " ", tag);
+      } else priceEl.textContent = it.priceLabel;
       $("[data-item-desc]", sheetEl).textContent = it.description;
       $("[data-item-ask]", sheetEl).href = $("[data-ask-href]", card).getAttribute("data-ask-href");
       BB.sheet.open("item", from);

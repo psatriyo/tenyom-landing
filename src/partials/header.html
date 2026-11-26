@@ -1,21 +1,21 @@
 <header class="header" data-header>
   <div class="wrap header__inner">
-    <a class="brand" href="{{ base }}" aria-label="{{ brandName }}, beranda">
+    <a class="brand" href="{{ home }}" aria-label="{{ t.homeLabel }}">
       <svg class="brand__mark" aria-hidden="true"><use href="#i-logo"/></svg>
       <span>{{ brandName }}</span>
     </a>
-    {{#if page.isHome}}
-    <nav class="header__links" aria-label="Bagian halaman">
-      <a href="#cara-kerja">Cara kerja</a>
-      <a href="{{ base }}contoh/warungsari/">Contoh</a>
-      <a href="#pro">Pro</a>
-      <a href="#harga">Harga</a>
-      <a href="#faq">FAQ</a>
+    <nav class="header__links" aria-label="{{ t.nav.label }}">
+      <a href="{{#unless page.isHome}}{{ home }}{{/unless}}#cara-kerja">{{ t.nav.how }}</a>
+      <a href="{{ home }}contoh/warungsari/">{{ t.nav.example }}</a>
+      <a href="{{#unless page.isHome}}{{ home }}{{/unless}}#pro">{{ t.nav.pro }}</a>
+      <a href="{{#unless page.isHome}}{{ home }}{{/unless}}#harga">{{ t.nav.pricing }}</a>
+      <a href="{{#unless page.isHome}}{{ home }}{{/unless}}#faq">{{ t.nav.faq }}</a>
     </nav>
-    {{/if}}
     <div class="header__actions">
-      <a class="header__login" href="#uji-coba" data-sheet-open="uji-coba">Masuk</a>
-      <a class="btn btn--accent btn--sm" href="#uji-coba" data-sheet-open="uji-coba">Coba gratis</a>
+      {{!-- D-70: this site cannot see the app's session, so it always shows "Masuk". --}}
+      <a class="header__login" href="{{ app.login }}" data-app-link>{{ t.signIn }}</a>
+      <a class="btn btn--accent btn--sm header__cta" href="{{ app.register }}" data-app-link>{{ t.ctaStart }}</a>
+      {{> lang-switch }}
     </div>
   </div>
 </header>

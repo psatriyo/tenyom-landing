@@ -1,0 +1,4 @@
+{{!-- ID | EN switch: a plain link to the same page in the other language. --}}
+<p class="lang-switch{{#if page.demo}} lang-switch--demo{{/if}}">
+  <span class="lang-switch__on">{{ lang }}</span><span class="lang-switch__sep" aria-hidden="true">|</span><a href="{{ page.otherHref }}" hreflang="{{ page.otherLang }}" lang="{{ page.otherLang }}" aria-label="{{ t.langSwitch.switchTo }}">{{ t.langSwitch.otherCode }}</a>
+</p>

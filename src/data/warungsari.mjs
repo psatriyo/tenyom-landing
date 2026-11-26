@@ -96,12 +96,14 @@ export const links = {
 
 // Dashboard mock data (labelled "contoh" on the page). Stats as in F-11:
 // views, WhatsApp clicks, link clicks; clicks per link, social icon and
-// branch contact ("{branch} · {platform}", F-04-FR36).
+// branch contact ("{branch} · {platform}", F-04-FR36). Counter labels are
+// interface text, so they come from src/i18n/*.mjs (dash.counters.<key>);
+// the link labels are the merchant's own and stay Indonesian.
 export const stats = {
   counters: [
-    { label: "Kunjungan", value: 612 },
-    { label: "Klik WhatsApp", value: 48 },
-    { label: "Klik link", value: 131 },
+    { key: "views", value: 612 },
+    { key: "waClicks", value: 48 },
+    { key: "linkClicks", value: 131 },
   ],
   topLinks: [
     { label: "Pesan di GoFood", value: 41 },
@@ -113,17 +115,16 @@ export const stats = {
   ],
 };
 
-// Insights (P1, Pro, F-20): anonymous aggregate counts only (D-44).
+// Insights (P1, Pro, F-20): anonymous aggregate counts only (D-44), in
+// percent. Source labels come from src/i18n/*.mjs (insights.sources.<key>).
 export const insights = {
   sources: [
-    { label: "Instagram", value: 36 },
-    { label: "Google", value: 22 },
-    { label: "QR di meja", value: 17 },
-    { label: "WhatsApp", value: 13 },
-    { label: "TikTok", value: 8 },
-    { label: "Lainnya", value: 4 },
+    { key: "instagram", value: 36 },
+    { key: "google", value: 22 },
+    { key: "qr", value: 17 },
+    { key: "whatsapp", value: 13 },
+    { key: "tiktok", value: 8 },
+    { key: "other", value: 4 },
   ],
-  busiestHours: "11.00–13.00 WIB",
   topItems: ["Nasi goreng spesial", "Paket makan siang", "Es kopi susu"],
-  privacyNote: "Hanya hitungan anonim. Angka di bawah 5 ditampilkan sebagai \"<5\".",
 };
